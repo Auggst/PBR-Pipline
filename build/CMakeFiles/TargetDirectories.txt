@@ -1,0 +1,3 @@
+D:/C++Pro/vscode/LearnOpenGL/build/CMakeFiles/edit_cache.dir
+D:/C++Pro/vscode/LearnOpenGL/build/CMakeFiles/main.dir
+D:/C++Pro/vscode/LearnOpenGL/build/CMakeFiles/rebuild_cache.dir
