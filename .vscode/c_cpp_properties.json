@@ -3,7 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/imgui"
             ],
             "defines": [
                 "_DEBUG",
@@ -11,11 +13,11 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.19041.0",
-            "compilerPath": "E:/新建文件夹/VC/Tools/MSVC/14.28.29910/bin/Hostx64/x64/cl.exe",
+            "compilerPath": "D:/C++Pro/env/MinGW-w64/mingw64/bin/g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64",
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "intelliSenseMode": "windows-gcc-x64",
+            //"configurationProvider": "ms-vscode.cmake-tools"
         },
         {
             "name": "OpenGL",

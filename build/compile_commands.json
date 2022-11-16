@@ -1,47 +1,67 @@
 [
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe  @CMakeFiles/main.dir/includes_C.rsp -g -o CMakeFiles\\main.dir\\src\\glad.c.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\glad.c",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\engine.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\engine.cpp",
+  "file": "D:/C++Pro/vscode/LearnOpenGL/src/engine.cpp"
+},
+{
+  "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe  @CMakeFiles/main.dir/includes_C.rsp -g -o CMakeFiles\\main.dir\\src\\glad.c.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\glad.c",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/glad.c"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui_demo.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_demo.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui_demo.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_demo.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui_demo.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui_draw.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_draw.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui_draw.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_draw.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui_draw.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui_impl_glfw.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_impl_glfw.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui_impl_glfw.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_impl_glfw.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui_impl_glfw.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui_impl_opengl3.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_impl_opengl3.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui_impl_opengl3.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_impl_opengl3.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui_impl_opengl3.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui_tables.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_tables.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui_tables.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_tables.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui_tables.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\imgui_widgets.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_widgets.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\imgui_widgets.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\imgui_widgets.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/imgui_widgets.cpp"
 },
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
-  "command": "D:\\C++Pro\\env\\MinGW-w64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -g -o CMakeFiles\\main.dir\\src\\main.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\main.cpp",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\main.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\main.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/main.cpp"
+},
+{
+  "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\model.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\model.cpp",
+  "file": "D:/C++Pro/vscode/LearnOpenGL/src/model.cpp"
+},
+{
+  "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\myutils.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\myutils.cpp",
+  "file": "D:/C++Pro/vscode/LearnOpenGL/src/myutils.cpp"
+},
+{
+  "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\pipeline.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\pipeline.cpp",
+  "file": "D:/C++Pro/vscode/LearnOpenGL/src/pipeline.cpp"
 }
 ]

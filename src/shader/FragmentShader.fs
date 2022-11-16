@@ -46,8 +46,8 @@ vec3 getNormalFromMap()
 // ----------------------------------------------------------------------------
 float DistributionGGX(vec3 N, vec3 H, float roughness)
 {
-   float a = roughness * roughness;
-   float a2 = a*a;
+   float a2 = roughness * roughness;
+   //float a2 = a*a;
    float NdotH = max(dot(N, H), 0.0);
    float NdotH2 = NdotH * NdotH;
 
@@ -108,22 +108,20 @@ void main()
    vec3 V = normalize(camPos - WorldPos);
    vec3 R = reflect(-V, N);
 
-    // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0 
-    // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)
-
+   // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0 
+   // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)
    vec3 F0 = vec3(0.04);
    F0 = mix(F0, albedo, metallic);
 
-    // reflectance equation
-
+   // reflectance equation
    vec3 Lo = vec3(0.0);
    for(int i = 0; i < 4; ++i) 
    {
       // calculate per-light radiance
       vec3 L = normalize(lightPositions[i] - WorldPos);
       vec3 H = normalize(V + L);
-      float distance = length(lightPositions[i] - WorldPos);
-      float attenuation = 1.0 /(distance * distance);
+      float dis = length(lightPositions[i] - WorldPos);
+      float attenuation = 1.0 /(dis * dis);
       vec3 radiance = lightColors[i] * attenuation;
 
       // Cook-Torrance BRDF
@@ -132,8 +130,8 @@ void main()
       vec3 F = fresnelSchlick(clamp(dot(H, V) , 0.0, 1.0) , F0);
 
       vec3 numerator = NDF * G * F;
-      float denominator = 4.0 * max(dot(N, V) , 0.0) * max(dot(N, L) , 0.0) + 0.0001; // + 0.0001 to prevent divide by zero
-      vec3 specular = numerator / denominator;
+      float denominator = 4.0 * max(dot(N, V) , 0.0) * max(dot(N, L), 0.0) + 0.0001; // + 0.0001 to prevent divide by zero
+      vec3 specular = numerator / denominator + 0.0001;
         
         // kS is equal to Fresnel
 

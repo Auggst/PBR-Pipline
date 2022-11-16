@@ -16,6 +16,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/include/
 # link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++17")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexec-charset=GBK")
 
 #set(SOURCE_FILES src)
 aux_source_directory(${PROJECT_SOURCE_DIR}/src SOURCE_FILES)

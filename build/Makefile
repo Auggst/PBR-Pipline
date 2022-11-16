@@ -128,6 +128,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/engine.obj: src/engine.cpp.obj
+.PHONY : src/engine.obj
+
+# target to build an object file
+src/engine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/engine.cpp.obj
+.PHONY : src/engine.cpp.obj
+
+src/engine.i: src/engine.cpp.i
+.PHONY : src/engine.i
+
+# target to preprocess a source file
+src/engine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/engine.cpp.i
+.PHONY : src/engine.cpp.i
+
+src/engine.s: src/engine.cpp.s
+.PHONY : src/engine.s
+
+# target to generate assembly for a file
+src/engine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/engine.cpp.s
+.PHONY : src/engine.cpp.s
+
 src/glad.obj: src/glad.c.obj
 .PHONY : src/glad.obj
 
@@ -344,6 +368,78 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/model.obj: src/model.cpp.obj
+.PHONY : src/model.obj
+
+# target to build an object file
+src/model.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/model.cpp.obj
+.PHONY : src/model.cpp.obj
+
+src/model.i: src/model.cpp.i
+.PHONY : src/model.i
+
+# target to preprocess a source file
+src/model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/model.cpp.i
+.PHONY : src/model.cpp.i
+
+src/model.s: src/model.cpp.s
+.PHONY : src/model.s
+
+# target to generate assembly for a file
+src/model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/model.cpp.s
+.PHONY : src/model.cpp.s
+
+src/myutils.obj: src/myutils.cpp.obj
+.PHONY : src/myutils.obj
+
+# target to build an object file
+src/myutils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/myutils.cpp.obj
+.PHONY : src/myutils.cpp.obj
+
+src/myutils.i: src/myutils.cpp.i
+.PHONY : src/myutils.i
+
+# target to preprocess a source file
+src/myutils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/myutils.cpp.i
+.PHONY : src/myutils.cpp.i
+
+src/myutils.s: src/myutils.cpp.s
+.PHONY : src/myutils.s
+
+# target to generate assembly for a file
+src/myutils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/myutils.cpp.s
+.PHONY : src/myutils.cpp.s
+
+src/pipeline.obj: src/pipeline.cpp.obj
+.PHONY : src/pipeline.obj
+
+# target to build an object file
+src/pipeline.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/pipeline.cpp.obj
+.PHONY : src/pipeline.cpp.obj
+
+src/pipeline.i: src/pipeline.cpp.i
+.PHONY : src/pipeline.i
+
+# target to preprocess a source file
+src/pipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/pipeline.cpp.i
+.PHONY : src/pipeline.cpp.i
+
+src/pipeline.s: src/pipeline.cpp.s
+.PHONY : src/pipeline.s
+
+# target to generate assembly for a file
+src/pipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/pipeline.cpp.s
+.PHONY : src/pipeline.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -353,6 +449,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... main
+	@echo ... src/engine.obj
+	@echo ... src/engine.i
+	@echo ... src/engine.s
 	@echo ... src/glad.obj
 	@echo ... src/glad.i
 	@echo ... src/glad.s
@@ -380,6 +479,15 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/model.obj
+	@echo ... src/model.i
+	@echo ... src/model.s
+	@echo ... src/myutils.obj
+	@echo ... src/myutils.i
+	@echo ... src/myutils.s
+	@echo ... src/pipeline.obj
+	@echo ... src/pipeline.i
+	@echo ... src/pipeline.s
 .PHONY : help
 
 
