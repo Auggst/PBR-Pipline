@@ -19,10 +19,19 @@ PBR::PBR() {
 void PBR::init() {
     this->cube_screen = Cube();
     this->quad_screen = Quad();
-    this->spheres = Sphere();
+    this->spheres = std::make_shared<Sphere>();
     this->nums += 1;
     this->spacing = 10;
     genFramebuffer(this->fbo, this->rbo, 512, 512);
+    glGenTextures(1, &(this->res_tex));
+
+    glBindTexture(GL_TEXTURE_2D, this->res_tex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 512, 512, 0, GL_RGBA, GL_FLOAT, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
     this->hdr_tex = loadHDR("D:\\C++Pro\\vscode\\LearnOpenGL\\texture\\HS-Cave-Room\\Mt-Washington-Cave-Room_Ref.hdr");
     genCubeMap(this->env_cubemap, 512, 512);
     genCubeMap(this->irradiance_cubemap, 32, 32);
@@ -193,6 +202,8 @@ void PBR::BRDFInit() {
 
 void PBR::render()
 {
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
     // Rendering
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -220,9 +231,9 @@ void PBR::render()
     for (auto i = 0; i < this->nums; i++) {
         model = glm::translate(model, glm::vec3((float)(i - (this->nums / 2)) * spacing, (float)(i - (this->nums / 2)) * spacing, -2.0));
         this->PBR_SH->setMat4("model", model);
-        this->PBR_SH->setFloat("metal", this->spheres.mental);
-        this->PBR_SH->setFloat("rough", this->spheres.rough);
-        this->spheres.draw();
+        this->PBR_SH->setFloat("metal", this->spheres->mental);
+        this->PBR_SH->setFloat("rough", this->spheres->rough);
+        this->spheres->draw();
     }
 
     //TODO:实例化优化
@@ -238,7 +249,7 @@ void PBR::render()
         model = glm::translate(model, newPos);
         model = glm::scale(model, glm::vec3(0.5f));
         this->PBR_SH->setMat4("model", model);
-        this->spheres.draw();
+        this->spheres->draw();
     }
 
     glDepthFunc(GL_LEQUAL);
@@ -249,6 +260,7 @@ void PBR::render()
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
     this->cube_screen.draw();
     //glDepthFunc(GL_LESS);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void PBR::renderUI() {
@@ -258,16 +270,29 @@ void PBR::renderUI() {
     ImGui::NewFrame();
     // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
     {
-
-        ImGui::Begin("Model parameters"); // Create a window called "Hello, world!" and append into it.
-
-        ImGui::Text("adjust model parameters");            // Display some text (you can use a format strings too)
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Begin(u8"PBR渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整PBR渲染管线对应参数");
+        if (this->spheres != nullptr) {
+            ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
+            ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
+        }
+        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
     }
 
-    // Rendering
+    // ImVec2 pos = ImGui::GetCursorScreenPos();
+    // glViewport(0, 0, 512, 512);
+    //渲染场景的窗口
+    {
+        ImGui::Begin(u8"渲染窗口");
+        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(700, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(700, 700), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+    }
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

@@ -31,7 +31,7 @@ void Engine::InitOpenGL()
 {
   //初始化glfw，确保glfw版本和core模式
   glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -47,7 +47,7 @@ void Engine::InitOpenGL()
   glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
   glfwSetCursorPosCallback(this->window, mouse_callback);
   glfwSetScrollCallback(this->window, scroll_callback);
-  glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
   //利用glad函数加载当前系统的OpenGL函数指针
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -64,8 +64,12 @@ void Engine::InitGUI() {
   // IMGUI初始化
   ImGui::CreateContext();                     // Setup Dear ImGui context
   ImGui::StyleColorsDark();                   // Setup Dear ImGui style
+  ImGuiIO &io = ImGui::GetIO();               // 设置中文字体
+  
+  io.Fonts->AddFontFromFileTTF("c:/windows/fonts/simhei.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+  // io.Fonts->AddFontFromFileTTF("c:/windows/fonts/STXIHEI.TTF", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
   ImGui_ImplGlfw_InitForOpenGL(this->window, true); // Setup Platform/Renderer backends
-  ImGui_ImplOpenGL3_Init("#version 330");
+  ImGui_ImplOpenGL3_Init("#version 430");
 }
 
 void Engine::Init() {

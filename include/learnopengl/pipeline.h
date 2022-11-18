@@ -34,12 +34,14 @@ class PBR : public Pipeline {
   void BRDFInit();
   void render();
   void renderUI();
+  unsigned int getRendered() {return this->res_tex;}
+  
 
 public:
-  unsigned int fbo, rbo, hdr_tex, env_cubemap, irradiance_cubemap, prefilter_cubemap, brdf_tex, nums, spacing;
+  unsigned int fbo, rbo, res_tex, hdr_tex, env_cubemap, irradiance_cubemap, prefilter_cubemap, brdf_tex, nums, spacing;
   Cube cube_screen;
   Quad quad_screen;
-  Sphere spheres;
+  std::shared_ptr<Sphere> spheres;
   std::shared_ptr<Shader> HDR_SH;
   std::shared_ptr<Shader> IBL_SH;
   std::shared_ptr<Shader> Prefilter_SH;
