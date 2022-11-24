@@ -27,6 +27,11 @@ void Engine::CreatePBR() {
   this->pipeline->init();
 }
 
+void Engine::CreateForwardS() {
+  this->pipeline = std::make_shared<ForwardShading>();
+  this->pipeline->init();
+}
+
 void Engine::InitOpenGL()
 {
   //初始化glfw，确保glfw版本和core模式
@@ -69,7 +74,7 @@ void Engine::InitGUI() {
   io.Fonts->AddFontFromFileTTF("c:/windows/fonts/simhei.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
   // io.Fonts->AddFontFromFileTTF("c:/windows/fonts/STXIHEI.TTF", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
   ImGui_ImplGlfw_InitForOpenGL(this->window, true); // Setup Platform/Renderer backends
-  ImGui_ImplOpenGL3_Init("#version 430");
+  ImGui_ImplOpenGL3_Init("#version 430 core");
 }
 
 void Engine::Init() {

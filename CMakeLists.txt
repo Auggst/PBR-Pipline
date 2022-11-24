@@ -21,5 +21,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexec-charset=GBK")
 #set(SOURCE_FILES src)
 aux_source_directory(${PROJECT_SOURCE_DIR}/src SOURCE_FILES)
 add_executable(main ${SOURCE_FILES})    #源文件
+
 # target_link_libraries(main libimgui.a)
+target_link_libraries(main assimp)
 target_link_libraries(main glfw3)

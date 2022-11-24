@@ -5,6 +5,7 @@ in vec3 WorldPos;
 in vec3 Normal;
 
 //material parameters
+uniform sampler2D texture_diffuse1;
 uniform sampler2D albedoMap;
 uniform sampler2D normalMap;
 uniform sampler2D metallicMap;
@@ -97,7 +98,8 @@ vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 
 void main()
 {
-   vec3 albedo = pow(texture(albedoMap, TexCoords).rgb, vec3(2.2));
+   vec3 albedo = pow(texture(texture_diffuse1, TexCoords).rgb, vec3(2.2));
+   // vec3 albedo = pow(texture(albedoMap, TexCoords).rgb, vec3(2.2));
    //float metallic = texture(metallicMap, TexCoords).r;
    float metallic = metal;
    //float roughness = texture(roughnessMap, TexCoords).r;

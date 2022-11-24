@@ -26,6 +26,7 @@ class Engine {
      return moon;
    }
    void CreatePBR();
+   void CreateForwardS();
    void InitOpenGL();
    void InitGUI();
    void Init();

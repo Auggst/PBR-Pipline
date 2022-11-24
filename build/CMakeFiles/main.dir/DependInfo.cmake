@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/C++Pro/vscode/LearnOpenGL/src/imgui_tables.cpp" "CMakeFiles/main.dir/src/imgui_tables.cpp.obj" "gcc" "CMakeFiles/main.dir/src/imgui_tables.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/imgui_widgets.cpp" "CMakeFiles/main.dir/src/imgui_widgets.cpp.obj" "gcc" "CMakeFiles/main.dir/src/imgui_widgets.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/main.cpp" "CMakeFiles/main.dir/src/main.cpp.obj" "gcc" "CMakeFiles/main.dir/src/main.cpp.obj.d"
+  "D:/C++Pro/vscode/LearnOpenGL/src/mesh.cpp" "CMakeFiles/main.dir/src/mesh.cpp.obj" "gcc" "CMakeFiles/main.dir/src/mesh.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/model.cpp" "CMakeFiles/main.dir/src/model.cpp.obj" "gcc" "CMakeFiles/main.dir/src/model.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/myutils.cpp" "CMakeFiles/main.dir/src/myutils.cpp.obj" "gcc" "CMakeFiles/main.dir/src/myutils.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/pipeline.cpp" "CMakeFiles/main.dir/src/pipeline.cpp.obj" "gcc" "CMakeFiles/main.dir/src/pipeline.cpp.obj.d"

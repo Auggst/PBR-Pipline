@@ -388,7 +388,44 @@ CMakeFiles/main.dir/src/engine.cpp.obj: ../src/engine.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/fstream.tcc \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc \
+  ../include/learnopengl/mesh.h \
+  ../include/learnopengl/myutils.h \
+  ../include/assimp/Importer.hpp \
+  ../include/assimp/types.h \
+  ../include/assimp/defs.h \
+  ../include/assimp/config.h \
+  ../include/assimp/vector2.h \
+  ../include/assimp/vector3.h \
+  ../include/assimp/color4.h \
+  ../include/assimp/matrix3x3.h \
+  ../include/assimp/matrix4x4.h \
+  ../include/assimp/quaternion.h \
+  ../include/assimp/vector2.inl \
+  ../include/assimp/vector3.inl \
+  ../include/assimp/color4.inl \
+  ../include/assimp/matrix3x3.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+  ../include/assimp/matrix4x4.inl \
+  ../include/assimp/MathFunctions.h \
+  ../include/assimp/quaternion.inl \
+  ../include/assimp/scene.h \
+  ../include/assimp/texture.h \
+  ../include/assimp/Compiler/pushpack1.h \
+  ../include/assimp/Compiler/poppack1.h \
+  ../include/assimp/mesh.h \
+  ../include/assimp/aabb.h \
+  ../include/assimp/light.h \
+  ../include/assimp/camera.h \
+  ../include/assimp/material.h \
+  ../include/assimp/material.inl \
+  ../include/assimp/anim.h \
+  ../include/assimp/metadata.h \
+  ../include/assimp/postprocess.h
 
 CMakeFiles/main.dir/src/glad.c.obj: ../src/glad.c \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdio.h \
@@ -2134,6 +2171,441 @@ CMakeFiles/main.dir/src/main.cpp.obj: ../src/main.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/fstream.tcc \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc \
+  ../include/learnopengl/mesh.h \
+  ../include/learnopengl/myutils.h \
+  ../include/assimp/Importer.hpp \
+  ../include/assimp/types.h \
+  ../include/assimp/defs.h \
+  ../include/assimp/config.h \
+  ../include/assimp/vector2.h \
+  ../include/assimp/vector3.h \
+  ../include/assimp/color4.h \
+  ../include/assimp/matrix3x3.h \
+  ../include/assimp/matrix4x4.h \
+  ../include/assimp/quaternion.h \
+  ../include/assimp/vector2.inl \
+  ../include/assimp/vector3.inl \
+  ../include/assimp/color4.inl \
+  ../include/assimp/matrix3x3.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+  ../include/assimp/matrix4x4.inl \
+  ../include/assimp/MathFunctions.h \
+  ../include/assimp/quaternion.inl \
+  ../include/assimp/scene.h \
+  ../include/assimp/texture.h \
+  ../include/assimp/Compiler/pushpack1.h \
+  ../include/assimp/Compiler/poppack1.h \
+  ../include/assimp/mesh.h \
+  ../include/assimp/aabb.h \
+  ../include/assimp/light.h \
+  ../include/assimp/camera.h \
+  ../include/assimp/material.h \
+  ../include/assimp/material.inl \
+  ../include/assimp/anim.h \
+  ../include/assimp/metadata.h \
+  ../include/assimp/postprocess.h
+
+CMakeFiles/main.dir/src/mesh.cpp.obj: ../src/mesh.cpp \
+  ../include/learnopengl/mesh.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/string \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stringfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/memoryfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/char_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algobase.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/functexcept.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/exception_defines.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/cpp_type_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/type_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/numeric_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_pair.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/move.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/concept_check.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/type_traits \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_iterator_base_types.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_iterator_base_funcs.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/debug/assertions.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_iterator.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ptr_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/debug/debug.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/predefined_ops.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/postypes.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cwchar \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/wchar.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_directx.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_print_push.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_stat64.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_print_pop.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstdint \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stdint.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdint.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stddef.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stddef.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/allocator.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/new_allocator.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/new \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/exception \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/exception.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/exception_ptr.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/cxxabi_init_exception.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/typeinfo \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/hash_bytes.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/nested_exception.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/localefwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/clocale \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/locale.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdio.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iosfwd \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cctype \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/ctype.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream_insert.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/cxxabi_forced.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_function.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward/binders.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/range_access.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/initializer_list \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_string.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/atomicity.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pthread.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/errno.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sys/types.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/process.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/limits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/syslimits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/limits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/signal.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pthread_signal.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sys/timeb.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pthread_compat.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/alloc_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/alloc_traits.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/string_view \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/limits \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/functional_hash.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/string_view.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/string_conversions.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstdlib \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdlib.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/stdlib.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/malloc.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/std_abs.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstdio \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cerrno \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_string.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/vector \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_construct.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_uninitialized.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/utility \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_relops.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_vector.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_bvector.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/vector.tcc \
+  ../include/learnopengl/myutils.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iostream \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ostream \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ios \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ios_base.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_classes.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_classes.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/system_error \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/stdexcept \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/streambuf \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/streambuf.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_ios.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_facets.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cwctype \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/wctype.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/streambuf_iterator.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_facets.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_ios.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/istream \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc \
+  ../include/glad/glad.h \
+  ../include/KHR/khrplatform.h \
+  ../include/GLFW/glfw3.h \
+  ../include/glm/glm.hpp \
+  ../include/glm/detail/_fixes.hpp \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cmath \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/math.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/specfun.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/gamma.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/special_function_util.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/bessel_function.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/special_function_util.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/beta_function.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/ell_integral.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/exp_integral.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/hypergeometric.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/legendre_function.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/modified_bessel_func.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/poly_hermite.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/poly_laguerre.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/riemann_zeta.tcc \
+  ../include/glm/detail/setup.hpp \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cassert \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/assert.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstddef \
+  ../include/glm/simd/platform.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/climits \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cfloat \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/float.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/float.h \
+  ../include/glm/fwd.hpp \
+  ../include/glm/detail/qualifier.hpp \
+  ../include/glm/detail/setup.hpp \
+  ../include/glm/vec2.hpp \
+  ../include/glm/ext/vector_bool2.hpp \
+  ../include/glm/detail/type_vec2.hpp \
+  ../include/glm/detail/type_vec2.inl \
+  ../include/glm/detail/compute_vector_relational.hpp \
+  ../include/glm/ext/vector_bool2_precision.hpp \
+  ../include/glm/ext/vector_float2.hpp \
+  ../include/glm/ext/vector_float2_precision.hpp \
+  ../include/glm/ext/vector_double2.hpp \
+  ../include/glm/ext/vector_double2_precision.hpp \
+  ../include/glm/ext/vector_int2.hpp \
+  ../include/glm/ext/vector_int2_sized.hpp \
+  ../include/glm/ext/scalar_int_sized.hpp \
+  ../include/glm/detail/setup.hpp \
+  ../include/glm/ext/vector_uint2.hpp \
+  ../include/glm/ext/vector_uint2_sized.hpp \
+  ../include/glm/ext/scalar_uint_sized.hpp \
+  ../include/glm/vec3.hpp \
+  ../include/glm/ext/vector_bool3.hpp \
+  ../include/glm/detail/type_vec3.hpp \
+  ../include/glm/detail/type_vec3.inl \
+  ../include/glm/ext/vector_bool3_precision.hpp \
+  ../include/glm/ext/vector_float3.hpp \
+  ../include/glm/ext/vector_float3_precision.hpp \
+  ../include/glm/ext/vector_double3.hpp \
+  ../include/glm/ext/vector_double3_precision.hpp \
+  ../include/glm/ext/vector_int3.hpp \
+  ../include/glm/ext/vector_int3_sized.hpp \
+  ../include/glm/ext/vector_uint3.hpp \
+  ../include/glm/ext/vector_uint3_sized.hpp \
+  ../include/glm/vec4.hpp \
+  ../include/glm/ext/vector_bool4.hpp \
+  ../include/glm/detail/type_vec4.hpp \
+  ../include/glm/detail/type_vec4.inl \
+  ../include/glm/ext/vector_bool4_precision.hpp \
+  ../include/glm/ext/vector_float4.hpp \
+  ../include/glm/ext/vector_float4_precision.hpp \
+  ../include/glm/ext/vector_double4.hpp \
+  ../include/glm/ext/vector_double4_precision.hpp \
+  ../include/glm/ext/vector_int4.hpp \
+  ../include/glm/ext/vector_int4_sized.hpp \
+  ../include/glm/ext/vector_uint4.hpp \
+  ../include/glm/ext/vector_uint4_sized.hpp \
+  ../include/glm/mat2x2.hpp \
+  ../include/glm/ext/matrix_double2x2.hpp \
+  ../include/glm/detail/type_mat2x2.hpp \
+  ../include/glm/detail/type_mat2x2.inl \
+  ../include/glm/matrix.hpp \
+  ../include/glm/mat2x3.hpp \
+  ../include/glm/ext/matrix_double2x3.hpp \
+  ../include/glm/detail/type_mat2x3.hpp \
+  ../include/glm/detail/type_mat2x3.inl \
+  ../include/glm/ext/matrix_double2x3_precision.hpp \
+  ../include/glm/ext/matrix_float2x3.hpp \
+  ../include/glm/ext/matrix_float2x3_precision.hpp \
+  ../include/glm/mat2x4.hpp \
+  ../include/glm/ext/matrix_double2x4.hpp \
+  ../include/glm/detail/type_mat2x4.hpp \
+  ../include/glm/detail/type_mat2x4.inl \
+  ../include/glm/ext/matrix_double2x4_precision.hpp \
+  ../include/glm/ext/matrix_float2x4.hpp \
+  ../include/glm/ext/matrix_float2x4_precision.hpp \
+  ../include/glm/mat3x2.hpp \
+  ../include/glm/ext/matrix_double3x2.hpp \
+  ../include/glm/detail/type_mat3x2.hpp \
+  ../include/glm/detail/type_mat3x2.inl \
+  ../include/glm/ext/matrix_double3x2_precision.hpp \
+  ../include/glm/ext/matrix_float3x2.hpp \
+  ../include/glm/ext/matrix_float3x2_precision.hpp \
+  ../include/glm/mat3x3.hpp \
+  ../include/glm/ext/matrix_double3x3.hpp \
+  ../include/glm/detail/type_mat3x3.hpp \
+  ../include/glm/detail/type_mat3x3.inl \
+  ../include/glm/ext/matrix_double3x3_precision.hpp \
+  ../include/glm/ext/matrix_float3x3.hpp \
+  ../include/glm/ext/matrix_float3x3_precision.hpp \
+  ../include/glm/mat3x4.hpp \
+  ../include/glm/ext/matrix_double3x4.hpp \
+  ../include/glm/detail/type_mat3x4.hpp \
+  ../include/glm/detail/type_mat3x4.inl \
+  ../include/glm/ext/matrix_double3x4_precision.hpp \
+  ../include/glm/ext/matrix_float3x4.hpp \
+  ../include/glm/ext/matrix_float3x4_precision.hpp \
+  ../include/glm/mat4x2.hpp \
+  ../include/glm/ext/matrix_double4x2.hpp \
+  ../include/glm/detail/type_mat4x2.hpp \
+  ../include/glm/detail/type_mat4x2.inl \
+  ../include/glm/ext/matrix_double4x2_precision.hpp \
+  ../include/glm/ext/matrix_float4x2.hpp \
+  ../include/glm/ext/matrix_float4x2_precision.hpp \
+  ../include/glm/mat4x3.hpp \
+  ../include/glm/ext/matrix_double4x3.hpp \
+  ../include/glm/detail/type_mat4x3.hpp \
+  ../include/glm/detail/type_mat4x3.inl \
+  ../include/glm/ext/matrix_double4x3_precision.hpp \
+  ../include/glm/ext/matrix_float4x3.hpp \
+  ../include/glm/ext/matrix_float4x3_precision.hpp \
+  ../include/glm/mat4x4.hpp \
+  ../include/glm/ext/matrix_double4x4.hpp \
+  ../include/glm/detail/type_mat4x4.hpp \
+  ../include/glm/detail/type_mat4x4.inl \
+  ../include/glm/ext/matrix_double4x4_precision.hpp \
+  ../include/glm/ext/matrix_float4x4.hpp \
+  ../include/glm/ext/matrix_float4x4_precision.hpp \
+  ../include/glm/detail/func_matrix.inl \
+  ../include/glm/geometric.hpp \
+  ../include/glm/detail/func_geometric.inl \
+  ../include/glm/exponential.hpp \
+  ../include/glm/detail/type_vec1.hpp \
+  ../include/glm/detail/type_vec1.inl \
+  ../include/glm/detail/func_exponential.inl \
+  ../include/glm/vector_relational.hpp \
+  ../include/glm/detail/func_vector_relational.inl \
+  ../include/glm/detail/_vectorize.hpp \
+  ../include/glm/common.hpp \
+  ../include/glm/detail/func_common.inl \
+  ../include/glm/detail/compute_common.hpp \
+  ../include/glm/ext/matrix_double2x2_precision.hpp \
+  ../include/glm/ext/matrix_float2x2.hpp \
+  ../include/glm/ext/matrix_float2x2_precision.hpp \
+  ../include/glm/trigonometric.hpp \
+  ../include/glm/detail/func_trigonometric.inl \
+  ../include/glm/packing.hpp \
+  ../include/glm/detail/func_packing.inl \
+  ../include/glm/detail/type_half.hpp \
+  ../include/glm/detail/type_half.inl \
+  ../include/glm/integer.hpp \
+  ../include/glm/detail/func_integer.inl \
+  ../include/glm/gtc/matrix_transform.hpp \
+  ../include/glm/ext/matrix_projection.hpp \
+  ../include/glm/gtc/constants.hpp \
+  ../include/glm/ext/scalar_constants.hpp \
+  ../include/glm/ext/scalar_constants.inl \
+  ../include/glm/gtc/constants.inl \
+  ../include/glm/ext/matrix_projection.inl \
+  ../include/glm/ext/matrix_clip_space.hpp \
+  ../include/glm/ext/matrix_clip_space.inl \
+  ../include/glm/ext/matrix_transform.hpp \
+  ../include/glm/ext/matrix_transform.inl \
+  ../include/glm/gtc/matrix_transform.inl \
+  ../include/glm/gtc/type_ptr.hpp \
+  ../include/glm/gtc/quaternion.hpp \
+  ../include/glm/ext/vector_relational.hpp \
+  ../include/glm/ext/vector_relational.inl \
+  ../include/glm/detail/type_float.hpp \
+  ../include/glm/ext/quaternion_common.hpp \
+  ../include/glm/ext/quaternion_geometric.hpp \
+  ../include/glm/ext/quaternion_geometric.inl \
+  ../include/glm/ext/quaternion_common.inl \
+  ../include/glm/ext/quaternion_float.hpp \
+  ../include/glm/detail/type_quat.hpp \
+  ../include/glm/ext/quaternion_relational.hpp \
+  ../include/glm/ext/quaternion_relational.inl \
+  ../include/glm/detail/type_quat.inl \
+  ../include/glm/ext/quaternion_float_precision.hpp \
+  ../include/glm/ext/quaternion_double.hpp \
+  ../include/glm/ext/quaternion_double_precision.hpp \
+  ../include/glm/ext/quaternion_trigonometric.hpp \
+  ../include/glm/ext/quaternion_trigonometric.inl \
+  ../include/glm/ext/quaternion_transform.hpp \
+  ../include/glm/ext/quaternion_transform.inl \
+  ../include/glm/gtc/quaternion.inl \
+  ../include/glm/gtc/epsilon.hpp \
+  ../include/glm/detail/setup.hpp \
+  ../include/glm/gtc/epsilon.inl \
+  ../include/glm/gtc/vec1.hpp \
+  ../include/glm/ext/vector_bool1.hpp \
+  ../include/glm/ext/vector_bool1_precision.hpp \
+  ../include/glm/ext/vector_float1.hpp \
+  ../include/glm/ext/vector_float1_precision.hpp \
+  ../include/glm/ext/vector_double1.hpp \
+  ../include/glm/ext/vector_double1_precision.hpp \
+  ../include/glm/ext/vector_int1.hpp \
+  ../include/glm/ext/vector_int1_sized.hpp \
+  ../include/glm/ext/vector_uint1.hpp \
+  ../include/glm/ext/vector_uint1_sized.hpp \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstring \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/string.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+  ../include/glm/gtc/type_ptr.inl \
+  ../include/assimp/Importer.hpp \
+  ../include/assimp/types.h \
+  ../include/assimp/defs.h \
+  ../include/assimp/config.h \
+  ../include/assimp/vector2.h \
+  ../include/assimp/vector3.h \
+  ../include/assimp/color4.h \
+  ../include/assimp/matrix3x3.h \
+  ../include/assimp/matrix4x4.h \
+  ../include/assimp/quaternion.h \
+  ../include/assimp/vector2.inl \
+  ../include/assimp/vector3.inl \
+  ../include/assimp/color4.inl \
+  ../include/assimp/matrix3x3.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_tempbuf.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+  ../include/assimp/matrix4x4.inl \
+  ../include/assimp/MathFunctions.h \
+  ../include/assimp/quaternion.inl \
+  ../include/assimp/scene.h \
+  ../include/assimp/texture.h \
+  ../include/assimp/Compiler/pushpack1.h \
+  ../include/assimp/Compiler/poppack1.h \
+  ../include/assimp/mesh.h \
+  ../include/assimp/aabb.h \
+  ../include/assimp/light.h \
+  ../include/assimp/camera.h \
+  ../include/assimp/material.h \
+  ../include/assimp/material.inl \
+  ../include/assimp/anim.h \
+  ../include/assimp/metadata.h \
+  ../include/assimp/postprocess.h \
+  ../include/learnopengl/shader_s.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/fstream \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/codecvt.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/fstream.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc
 
 CMakeFiles/main.dir/src/model.cpp.obj: ../src/model.cpp \
@@ -2507,9 +2979,41 @@ CMakeFiles/main.dir/src/model.cpp.obj: ../src/model.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/string.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
   ../include/glm/gtc/type_ptr.inl \
-  ../include/glut/glut.h \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/gl.h \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/glu.h
+  ../include/assimp/Importer.hpp \
+  ../include/assimp/types.h \
+  ../include/assimp/defs.h \
+  ../include/assimp/config.h \
+  ../include/assimp/vector2.h \
+  ../include/assimp/vector3.h \
+  ../include/assimp/color4.h \
+  ../include/assimp/matrix3x3.h \
+  ../include/assimp/matrix4x4.h \
+  ../include/assimp/quaternion.h \
+  ../include/assimp/vector2.inl \
+  ../include/assimp/vector3.inl \
+  ../include/assimp/color4.inl \
+  ../include/assimp/matrix3x3.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+  ../include/assimp/matrix4x4.inl \
+  ../include/assimp/MathFunctions.h \
+  ../include/assimp/quaternion.inl \
+  ../include/assimp/scene.h \
+  ../include/assimp/texture.h \
+  ../include/assimp/Compiler/pushpack1.h \
+  ../include/assimp/Compiler/poppack1.h \
+  ../include/assimp/mesh.h \
+  ../include/assimp/aabb.h \
+  ../include/assimp/light.h \
+  ../include/assimp/camera.h \
+  ../include/assimp/material.h \
+  ../include/assimp/material.inl \
+  ../include/assimp/anim.h \
+  ../include/assimp/metadata.h \
+  ../include/assimp/postprocess.h
 
 CMakeFiles/main.dir/src/myutils.cpp.obj: ../src/myutils.cpp \
   ../include/learnopengl/myutils.h \
@@ -2642,6 +3146,14 @@ CMakeFiles/main.dir/src/myutils.cpp.obj: ../src/myutils.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream.tcc \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/istream \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/vector \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_construct.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_uninitialized.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/utility \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_relops.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_vector.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_bvector.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/vector.tcc \
   ../include/glad/glad.h \
   ../include/KHR/khrplatform.h \
   ../include/GLFW/glfw3.h \
@@ -2855,9 +3367,42 @@ CMakeFiles/main.dir/src/myutils.cpp.obj: ../src/myutils.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/string.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
   ../include/glm/gtc/type_ptr.inl \
-  ../include/glut/glut.h \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/gl.h \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/glu.h \
+  ../include/assimp/Importer.hpp \
+  ../include/assimp/types.h \
+  ../include/assimp/defs.h \
+  ../include/assimp/config.h \
+  ../include/assimp/vector2.h \
+  ../include/assimp/vector3.h \
+  ../include/assimp/color4.h \
+  ../include/assimp/matrix3x3.h \
+  ../include/assimp/matrix4x4.h \
+  ../include/assimp/quaternion.h \
+  ../include/assimp/vector2.inl \
+  ../include/assimp/vector3.inl \
+  ../include/assimp/color4.inl \
+  ../include/assimp/matrix3x3.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_tempbuf.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+  ../include/assimp/matrix4x4.inl \
+  ../include/assimp/MathFunctions.h \
+  ../include/assimp/quaternion.inl \
+  ../include/assimp/scene.h \
+  ../include/assimp/texture.h \
+  ../include/assimp/Compiler/pushpack1.h \
+  ../include/assimp/Compiler/poppack1.h \
+  ../include/assimp/mesh.h \
+  ../include/assimp/aabb.h \
+  ../include/assimp/light.h \
+  ../include/assimp/camera.h \
+  ../include/assimp/material.h \
+  ../include/assimp/material.inl \
+  ../include/assimp/anim.h \
+  ../include/assimp/metadata.h \
+  ../include/assimp/postprocess.h \
   ../include/stb/stb_image.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stdarg.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdarg.h \
@@ -3247,11 +3792,44 @@ CMakeFiles/main.dir/src/pipeline.cpp.obj: ../src/pipeline.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iostream \
   ../include/learnopengl/model.h \
   ../include/learnopengl/camera.h \
+  ../include/learnopengl/mesh.h \
   ../include/learnopengl/myutils.h \
   ../include/GLFW/glfw3.h \
-  ../include/glut/glut.h \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/gl.h \
-  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/glu.h \
+  ../include/assimp/Importer.hpp \
+  ../include/assimp/types.h \
+  ../include/assimp/defs.h \
+  ../include/assimp/config.h \
+  ../include/assimp/vector2.h \
+  ../include/assimp/vector3.h \
+  ../include/assimp/color4.h \
+  ../include/assimp/matrix3x3.h \
+  ../include/assimp/matrix4x4.h \
+  ../include/assimp/quaternion.h \
+  ../include/assimp/vector2.inl \
+  ../include/assimp/vector3.inl \
+  ../include/assimp/color4.inl \
+  ../include/assimp/matrix3x3.inl \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+  ../include/assimp/matrix4x4.inl \
+  ../include/assimp/MathFunctions.h \
+  ../include/assimp/quaternion.inl \
+  ../include/assimp/scene.h \
+  ../include/assimp/texture.h \
+  ../include/assimp/Compiler/pushpack1.h \
+  ../include/assimp/Compiler/poppack1.h \
+  ../include/assimp/mesh.h \
+  ../include/assimp/aabb.h \
+  ../include/assimp/light.h \
+  ../include/assimp/camera.h \
+  ../include/assimp/material.h \
+  ../include/assimp/material.inl \
+  ../include/assimp/anim.h \
+  ../include/assimp/metadata.h \
+  ../include/assimp/postprocess.h \
   ../include/learnopengl/engine.h \
   ../include/imgui/imgui.h \
   ../include/imgui/imconfig.h \
@@ -3284,19 +3862,17 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/debug/debug.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/ktmtypes.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/crtdefs.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/codecvt.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/ktmtypes.h:
 
 ../include/learnopengl/pipeline.h:
 
 ../include/learnopengl/engine.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_vector.h:
-
-../include/glut/glut.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/concept_check.h:
 
@@ -3322,6 +3898,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/glm/ext/vector_int2.hpp:
 
+../include/assimp/vector3.h:
+
 ../include/KHR/khrplatform.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/cpp_type_traits.h:
@@ -3333,6 +3911,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/memory:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw.h:
+
+../include/assimp/Importer.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h:
 
@@ -3359,6 +3939,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/limits.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/stddef.h:
 
@@ -3394,11 +3976,15 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 ../include/imgui/imgui_impl_glfw.h:
 
+../include/assimp/texture.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/float.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avxintrin.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winbase.h:
+
+../include/assimp/matrix3x3.inl:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avxintrin.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/memory.h:
 
@@ -3420,15 +4006,15 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/string.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/assert.h:
-
-../include/glm/ext/vector_uint2_sized.hpp:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/heapapi.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h:
 
 ../include/glm/ext/matrix_float4x2.hpp:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/heapapi.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/assert.h:
+
+../include/glm/ext/vector_uint2_sized.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstdlib:
 
@@ -3444,17 +4030,17 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/stb/stb_image.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/ioapiset.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdlib.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/limits.h:
 
-../include/glm/ext/matrix_double2x2_precision.hpp:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/processthreadsapi.h:
+
+../include/glm/ext/matrix_double2x2_precision.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/syslimits.h:
 
@@ -3487,8 +4073,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_iterator_base_funcs.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/ammintrin.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/threadpoollegacyapiset.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/debug/assertions.h:
 
@@ -3526,8 +4110,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/alloc_traits.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/errhandlingapi.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_uninitialized.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/utility:
@@ -3539,6 +4121,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/math.h:
 
 ../include/glm/ext/scalar_int_sized.hpp:
+
+../include/assimp/vector2.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_tempbuf.h:
 
@@ -3620,6 +4204,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pthread_compat.h:
 
+../include/assimp/quaternion.inl:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h:
 
 ../include/glm/ext/vector_int3.hpp:
@@ -3680,19 +4266,21 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/systemtopologyapi.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cctype:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512vnniintrin.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/systemtopologyapi.h:
-
 ../include/glm/gtc/type_ptr.inl:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/ctype.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstring:
+
+../include/assimp/anim.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream_insert.h:
 
@@ -3713,8 +4301,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/string_view.tcc:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/string_conversions.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/securitybaseapi.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/objidlbase.h:
 
@@ -3748,9 +4334,11 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/xsaveoptintrin.h:
 
-../include/glm/ext/vector_int1_sized.hpp:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward/auto_ptr.h:
+
+../include/assimp/vector3.inl:
+
+../include/glm/ext/vector_int1_sized.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/vector:
 
@@ -3770,9 +4358,11 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/learnopengl/model.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/bemapiset.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_classes.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/bemapiset.h:
+../include/assimp/camera.h:
 
 ../include/imgui/imgui_internal.h:
 
@@ -3789,8 +4379,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 ../include/glm/ext/matrix_float2x3_precision.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_ios.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/interlockedapi.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/locale_facets.h:
 
@@ -3822,9 +4410,9 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/istream:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/fileapi.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc:
+
+../include/assimp/matrix4x4.h:
 
 ../include/glm/glm.hpp:
 
@@ -3864,9 +4452,9 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/legendre_function.tcc:
 
-../include/glm/ext/matrix_transform.inl:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/apisetcconv.h:
+
+../include/glm/ext/matrix_transform.inl:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/poly_hermite.tcc:
 
@@ -3878,9 +4466,11 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1/riemann_zeta.tcc:
 
-../include/glm/ext/matrix_double4x2.hpp:
-
 ../include/glm/detail/setup.hpp:
+
+../include/assimp/matrix4x4.inl:
+
+../include/glm/ext/matrix_double4x2.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cassert:
 
@@ -3920,6 +4510,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/glm/detail/type_mat3x2.hpp:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h:
+
 ../include/glm/ext/vector_int2_sized.hpp:
 
 ../include/glm/ext/vector_uint2.hpp:
@@ -3935,6 +4527,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 ../include/glm/vec3.hpp:
 
 ../include/glm/ext/vector_bool3.hpp:
+
+../include/assimp/scene.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512fintrin.h:
 
@@ -3994,6 +4588,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc:
 
+../include/assimp/types.h:
+
 ../include/glm/ext/vector_int4_sized.hpp:
 
 ../include/glm/ext/quaternion_relational.hpp:
@@ -4006,11 +4602,13 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/glm/ext/matrix_double2x2.hpp:
 
-../include/glm/detail/type_mat2x2.inl:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/libloaderapi.h:
 
+../include/glm/detail/type_mat2x2.inl:
+
 ../include/glm/matrix.hpp:
+
+../include/assimp/aabb.h:
 
 ../include/glm/mat2x3.hpp:
 
@@ -4044,6 +4642,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/glm/mat3x2.hpp:
 
+../include/assimp/light.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512vpopcntdqvlintrin.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pshpack8.h:
@@ -4068,6 +4668,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 ../include/glm/mat3x3.hpp:
 
+../include/assimp/postprocess.h:
+
 ../include/glm/detail/type_mat3x3.inl:
 
 ../include/glm/ext/matrix_double3x3_precision.hpp:
@@ -4077,8 +4679,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 ../include/glm/ext/matrix_double3x4.hpp:
 
 ../include/glm/detail/type_mat3x4.hpp:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/namespaceapi.h:
 
 ../include/glm/detail/type_mat3x4.inl:
 
@@ -4126,15 +4726,17 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 ../include/glm/ext/matrix_double4x4_precision.hpp:
 
-../include/glm/ext/matrix_float4x4.hpp:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winerror.h:
+../include/assimp/material.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/rpcnterr.h:
 
 ../include/glm/gtc/epsilon.inl:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512ifmaintrin.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winerror.h:
+
+../include/glm/ext/matrix_float4x4.hpp:
 
 ../include/glm/detail/func_matrix.inl:
 
@@ -4156,11 +4758,13 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../include/glm/detail/_vectorize.hpp:
 
-../include/glm/common.hpp:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/pshpack1.h:
 
+../include/glm/common.hpp:
+
 ../include/glm/detail/compute_common.hpp:
+
+../include/learnopengl/mesh.h:
 
 ../include/glm/ext/matrix_float2x2.hpp:
 
@@ -4181,6 +4785,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 ../include/glm/detail/type_half.hpp:
 
 ../include/glm/detail/type_half.inl:
+
+../include/assimp/metadata.h:
 
 ../include/glm/integer.hpp:
 
@@ -4214,6 +4820,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/popcntintrin.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h:
+
 ../include/glm/ext/vector_relational.hpp:
 
 ../include/glm/ext/vector_relational.inl:
@@ -4231,6 +4839,8 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 ../include/glm/ext/quaternion_float_precision.hpp:
 
 ../src/glad.c:
+
+../include/assimp/Compiler/poppack1.h:
 
 ../include/glm/ext/quaternion_double.hpp:
 
@@ -4252,21 +4862,57 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/excpt.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/synchapi.h:
-
 ../include/glm/ext/vector_double1_precision.hpp:
 
 ../include/glm/ext/vector_int1.hpp:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream:
 
+../include/learnopengl/myutils.h:
+
+../include/assimp/defs.h:
+
+../include/assimp/config.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512vbmivlintrin.h:
+
+../include/assimp/color4.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/psdk_inc/_ip_types.h:
+
+../include/assimp/matrix3x3.h:
+
+../include/assimp/material.inl:
+
+../include/assimp/quaternion.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/profileapi.h:
+
+../include/assimp/vector2.inl:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx2intrin.h:
+
+../include/assimp/color4.inl:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winnetwk.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/tbmintrin.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h:
+
+../include/assimp/MathFunctions.h:
+
+../include/assimp/Compiler/pushpack1.h:
+
+../include/assimp/mesh.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/minwindef.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winapifamily.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/specstrings.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/processtopologyapi.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winnt.h:
 
@@ -4284,8 +4930,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/immintrin.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx2intrin.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512pfintrin.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512dqintrin.h:
@@ -4296,8 +4940,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512vbmiintrin.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512vbmivlintrin.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx5124fmapsintrin.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/xsavesintrin.h:
@@ -4307,8 +4949,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512vbmi2vlintrin.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/avx512bitalgintrin.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/utilapiset.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/shaintrin.h:
 
@@ -4330,10 +4970,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/mm3dnow.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/winnetwk.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/tbmintrin.h:
-
 ../include/imgui/imstb_truetype.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/xsaveintrin.h:
@@ -4346,13 +4982,17 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/minwinbase.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/realtimeapiset.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/debugapi.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/errhandlingapi.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/fibersapi.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/fileapi.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/handleapi.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/interlockedapi.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/jobapi.h:
 
@@ -4360,17 +5000,29 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/namedpipeapi.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/namespaceapi.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/processenv.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/profileapi.h:
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/processtopologyapi.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/realtimeapiset.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/securityappcontainer.h:
 
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/securitybaseapi.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/synchapi.h:
+
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/sysinfoapi.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/fltwinerror.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/threadpoolapiset.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/fltwinerror.h:
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/threadpoollegacyapiset.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/utilapiset.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/wow64apiset.h:
 
@@ -4393,8 +5045,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/wnnc.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/virtdisk.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/GL/glu.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/ddeml.h:
 
@@ -4421,8 +5071,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_bsd_types.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/psdk_inc/_socket_types.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/psdk_inc/_ip_types.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/psdk_inc/_wsadata.h:
 
@@ -4478,6 +5126,6 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 ../src/imgui_tables.cpp:
 
-../include/learnopengl/myutils.h:
+../src/mesh.cpp:
 
 ../src/pipeline.cpp:

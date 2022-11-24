@@ -6,14 +6,14 @@
 
 class Renderable
 {
-    virtual void draw() = 0;
+    virtual void Draw() = 0;
 };
 
 class Quad : public Renderable {
  public:
     Quad();
 
-    void draw();
+    void Draw();
  public:
     unsigned int VAO;
 };
@@ -22,7 +22,7 @@ class Sphere : public Renderable {
  public:
     Sphere();
 
-    void draw();
+    void Draw();
 
  public:
     unsigned int VAO, count, albedo_tex, normal_tex, metallic_tex, rough_tex, ao_tex;
@@ -33,7 +33,7 @@ class Cube : public Renderable {
  public:
     Cube();
 
-    void draw();
+    void Draw();
  public:
     unsigned int VAO;
 };

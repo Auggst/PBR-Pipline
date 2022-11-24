@@ -27,7 +27,7 @@ Quad::Quad()
     glBindVertexArray(0);
 }
 
-void Quad::draw() {
+void Quad::Draw() {
     glBindVertexArray(this->VAO);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindVertexArray(0);
@@ -130,7 +130,7 @@ Sphere::Sphere() {
     this->rough = 0.0f;
 }
 
-void Sphere::draw() {
+void Sphere::Draw() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->albedo_tex);
     glActiveTexture(GL_TEXTURE1);
@@ -210,7 +210,7 @@ Cube::Cube() {
     glBindVertexArray(0);
 }
 
-void Cube::draw() {
+void Cube::Draw() {
     // render Cube
     glBindVertexArray(this->VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);

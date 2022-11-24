@@ -5,7 +5,8 @@
 int main() {
     std::shared_ptr<Engine> instance = Engine::getInstance();
     instance->Init();
-    instance->CreatePBR();
+    //instance->CreatePBR();
+    instance->CreateForwardS();
     instance->Update();
     return 0;
 }

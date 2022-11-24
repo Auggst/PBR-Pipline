@@ -387,4 +387,41 @@ CMakeFiles/main.dir/src/main.cpp.obj: \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/fstream.tcc \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
- D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/mesh.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/myutils.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/Importer.hpp \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/types.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/defs.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/config.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/vector2.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/vector3.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/color4.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/matrix3x3.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/matrix4x4.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/quaternion.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/vector2.inl \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/vector3.inl \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/color4.inl \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/matrix3x3.inl \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/matrix4x4.inl \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/MathFunctions.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/quaternion.inl \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/scene.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/texture.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/Compiler/pushpack1.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/Compiler/poppack1.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/mesh.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/aabb.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/light.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/camera.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/material.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/material.inl \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/anim.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/metadata.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/assimp/postprocess.h
