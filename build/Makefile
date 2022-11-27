@@ -344,6 +344,30 @@ src/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/imgui_widgets.cpp.s
 .PHONY : src/imgui_widgets.cpp.s
 
+src/light.obj: src/light.cpp.obj
+.PHONY : src/light.obj
+
+# target to build an object file
+src/light.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/light.cpp.obj
+.PHONY : src/light.cpp.obj
+
+src/light.i: src/light.cpp.i
+.PHONY : src/light.i
+
+# target to preprocess a source file
+src/light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/light.cpp.i
+.PHONY : src/light.cpp.i
+
+src/light.s: src/light.cpp.s
+.PHONY : src/light.s
+
+# target to generate assembly for a file
+src/light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/light.cpp.s
+.PHONY : src/light.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -500,6 +524,9 @@ help:
 	@echo ... src/imgui_widgets.obj
 	@echo ... src/imgui_widgets.i
 	@echo ... src/imgui_widgets.s
+	@echo ... src/light.obj
+	@echo ... src/light.i
+	@echo ... src/light.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

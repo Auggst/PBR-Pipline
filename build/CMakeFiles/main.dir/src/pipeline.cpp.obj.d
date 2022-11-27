@@ -380,6 +380,18 @@ CMakeFiles/main.dir/src/pipeline.cpp.obj: \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/camera.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/mesh.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/myutils.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/random \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/random.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/pmmintrin.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/emmintrin.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/xmmintrin.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/mmintrin.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/mm_malloc.h \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/random.tcc \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/numeric \
+ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_numeric.h \
  D:/C++Pro/vscode/LearnOpenGL/include/GLFW/glfw3.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/Importer.hpp \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/types.h \
@@ -399,7 +411,6 @@ CMakeFiles/main.dir/src/pipeline.cpp.obj: \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/algorithmfwd.h \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_heap.h \
- D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uniform_int_dist.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/matrix4x4.inl \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/MathFunctions.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/quaternion.inl \
@@ -416,6 +427,7 @@ CMakeFiles/main.dir/src/pipeline.cpp.obj: \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/anim.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/metadata.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/postprocess.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/light.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/engine.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imgui.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imconfig.h \

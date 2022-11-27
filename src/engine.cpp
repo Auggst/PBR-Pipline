@@ -2,6 +2,14 @@
 
 std::shared_ptr<Engine> Engine::moon;
 
+static float lastX = 1280.0f / 2.0;
+static float lastY = 720.0f / 2.0;
+static bool firstMouse = true;
+
+//时间设置
+static float deltaTime = 0.0f;
+static float lastFrame = 0.0f;
+
 Engine::Engine() {
   this->width = 1280;
   this->height = 720;
@@ -20,7 +28,6 @@ Engine::~Engine() {
   //清除缓存
   glfwTerminate();
 }
-
 
 void Engine::CreatePBR() {
   this->pipeline = std::make_shared<PBR>();
@@ -99,6 +106,7 @@ void Engine::Update() {
     processInput(this->window);
 
     // Rendering
+    //RenderGUI();
     this->pipeline->render();
     this->pipeline->renderUI();
 
@@ -106,6 +114,28 @@ void Engine::Update() {
     glfwSwapBuffers(this->window);
     glfwPollEvents();
   }
+}
+
+void Engine::RenderGUI() {
+  /* Swap front and back buffers */
+  ImGui_ImplOpenGL3_NewFrame();
+  ImGui_ImplGlfw_NewFrame();
+  ImGui::NewFrame();
+
+  {
+    ImGui::Begin(u8"Moon引擎全局设置");
+    ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+    ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+    //主窗口
+    ImGui::Text(u8"用于调整全局设置");
+    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), u8"相机参数:");
+    ImGui::InputFloat3(u8"位置", &(moon->cam->Position[0]));
+    ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    ImGui::End();
+  }
+
+  ImGui::Render();
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)

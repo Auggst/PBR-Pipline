@@ -33,12 +33,12 @@ struct SpotLight{
     vec3 position;
     vec3 direction;
 
-    float cutOff;
-    float outerCutOff;
-
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
+    float cutOff;
+    float outerCutOff;
 
     float kc;
     float kl;
@@ -51,30 +51,36 @@ in VS_OUT {
     vec3 Normal;
 } fs_in;
 
-uniform int plNums;
-uniform int dlNums;
-uniform int slNums;
 uniform vec3 viewPos;
 uniform Material material;
-uniform PointLight plLight[4];
-uniform DirectionLight dlLight[4];
-uniform SpotLight spLight[4];
+uniform DirectionLight dtLight[4];
+uniform PointLight ptLight[4];
+uniform SpotLight spLight[1];
 
-vec3 CalculatePL(vec3 position, vec3 normal);
-vec3 CalculateDL(vec3 position, vec3 normal);
-vec3 CalculateSL(vec3 position, vec3 normal);
+
+vec3 CalculateDL(DirectionLight light, vec3 position, vec3 normal);
+vec3 CalculatePL(PointLight light, vec3 position, vec3 normal);
+vec3 CalculateSL(SpotLight light, vec3 position, vec3 normal);
 
 void main() {
     vec3 norm = normalize(fs_in.Normal);
 
-    // 点光源
-    vec3 color = CalculatePL(fs_in.Position, norm);
-
     // 方向光
-    color += CalculateDL(fs_in.Position, norm);
+    vec3 color = vec3(0.0);
+    vec3 tempColor = vec3(0.0);
+    for (int i = 0; i < 4; i++)
+        tempColor = tempColor + CalculateDL(dtLight[i], fs_in.Position, norm);
+    tempColor /= 4.0f;
+    color += tempColor;
 
+    // 点光源
+    tempColor = vec3(0.0);
+    for (int i = 0; i< 4; i++)
+        tempColor = tempColor + CalculatePL(ptLight[i], fs_in.Position, norm);
+    tempColor /= 4.0f;
+    color += tempColor;
     // 聚光灯
-    color += CalculateSL(fs_in.Position, norm);
+    color = color + CalculateSL(spLight[0], fs_in.Position, norm);
 
     // HDR tonemapping
     color = color / (color + vec3(1.0));
@@ -84,90 +90,91 @@ void main() {
 }
 
 // 计算点光源
-vec3 CalculatePL(vec3 position, vec3 normal) {
+vec3 CalculatePL(PointLight light, vec3 position, vec3 normal) {
     vec3 result = vec3(0.0);
-    for (int i = 0; i < plNums; i++) {
-        // ambient
-        vec3 ambient = plLight[i].ambient * texture(material.texture_diffuse1, fs_in.TexCoords).rgb;
 
-        // diffuse
-        vec3 lightDir = normalize(plLight[i].position - position);
-        float diff = max(dot(normal, lightDir), 0.0);
-        vec3 diffuse = plLight[i].diffuse * diff * texture(material.texture_diffuse1, TexCoords).rgb;
+    // ambient
+    vec3 ambient = light.ambient * pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
 
-        // specular
-        vec3 viewDir = normalize(viewPos - fs_in.FragPos);
-        vec3 h = normalize(viewDir + lightDir);
-        float spec = pow(max(dot(normal, h), 0.0), material.shininess);
-        vec3 specular = plLight[i].specular * spec * texture(material.specular, fs_in.TexCoords).rgb;
+    // diffuse
+    vec3 lightDir = normalize(light.position - position);
+    float diff = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * diff * pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
 
-        // attenuation
-        float dis = length(plLight[i].position - FragPos);
-        float attenuation = 1.0 / (plLight[i].kc + plLight[i].kl * dis + plLight[i].kq * (dis * dis));
+    // specular
+    vec3 viewDir = normalize(viewPos - position);
+    vec3 h = normalize(viewDir + lightDir);
+    float spec = pow(max(dot(normal, h), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).rgb;
 
-        ambient *= attenuation;
-        diffuse *= attenuation;
-        specular *= attenuation;
+    // attenuation
+    float dis = length(light.position - position);
+    float attenuation = 1.0 / (light.kc + light.kl * dis + light.kq * (dis * dis));
 
-        result += (ambient + diffuse + specular);
-    }
+    ambient *= attenuation;
+    diffuse *= attenuation;
+    specular *= attenuation;
+
+    result += (ambient + diffuse + specular);
+
     return result;
 }
 
 // 计算方向光
-vec3 CalculateDL(vec3 position, vec3 normal) {
+vec3 CalculateDL(DirectionLight light, vec3 position, vec3 normal) {
     vec3 result = vec3(0.0);
-    for (int i = 0; i < dlNums; i++) {
-        // ambient
-        vec3 ambient = dlLight[i].ambient * texture(material.texture_diffuse1, fs_in.TexCoords).rgb;
+    
+    // ambient
+    vec3 ambient = pow(light.ambient * texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
 
-        // diffuse
-        float diff = max(dot(normal, dlLight[i].direction), 0.0);
-        vec3 diffuse = dlLight[i].diffuse * diff * texture(material.texture_diffuse1, TexCoords).rgb;
+    // diffuse
+    float diff = max(dot(normal, -light.direction), 0.0);
+    vec3 diffuse = light.diffuse * diff * pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
 
-        // specular
-        vec3 viewDir = normalize(viewPos - fs_in.FragPos);
-        vec3 h = normalize(viewDir + dlLight[i].direction);
-        float spec = pow(max(dot(normal, h), 0.0), material.shininess);
-        vec3 specular = dlLight[i].specular * spec * texture(material.specular, fs_in.TexCoords).rgb;
+    // specular
+    vec3 viewDir = normalize(viewPos - position);
+    vec3 h = normalize(viewDir - light.direction);
+    float spec = pow(max(dot(normal, h), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).rgb;
 
-        result += ambient + diffuse + specular;
-    }
+    result += (ambient + diffuse + specular);
+    
     return result;
 }
 
 // 计算聚光灯
-vec3 CalculateSL(vec3 position, vec3 normal) {
+vec3 CalculateSL(SpotLight light, vec3 position, vec3 normal) {
     vec3 result = vec3(0.0);
-    for (int i = 0; i < slNums; i++) {
-        vec3 lightDir = normalize(spLight[i].position - position);
-        float theta = dot(lightDir, normalize(-spLight[i].direction));
-        float epsilon = spLight[i].cutOff - spLight[i].outerCutOff;
-        float intensity = clamp((theta - spLight[i].outerCutOff) / epsilon, 0.0, 1.0);
+    vec3 lightDir = normalize(light.position - position);
+    float theta = dot(lightDir, normalize(-light.direction));
+    float epsilon = light.cutOff - light.outerCutOff;
+    float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
 
-        // ambient
-        vec3 ambient = spLight.ambient * texture(material.texture_diffuse1, TexCoords).rgb;
+    // ambient
+    vec3 ambient = light.ambient * pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
 
-        // diffuse
-        float diff = max(dot(normal, lightDir), 0.0);
-        vec3 diffuse = spLight[i].diffuse * diff * texture(material.texture_diffuse1, TexCoords).rgb;
+    // diffuse
+    float diff = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * diff * pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
 
-        // specular
-        vec3 viewDir = normalize(viewPos - position);
-        vec3 h = viewDir + lightDir;
-        float spec = pow(max(dot(normal, h), 0.0), material.shininess);
-        vec3 specular = spLight[i].specular * spec * texture(material.texture_specular1, TexCoords).rgb;
+    // specular
+    vec3 viewDir = normalize(viewPos - position);
+    vec3 h = normalize(viewDir + lightDir);
+    float spec = pow(max(dot(normal, h), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).rgb;
 
-        // attenuation
-        float dis = length(spLight[i].position - position);
-        float attenuation = 1.0 / (spLight[i].kc + spLight[i].kl * dis + spLight[i].kq * (dis * dis));
-        
-        
+    ambient *= intensity;
+    diffuse *= intensity;
+    specular *= intensity;
 
-        diffuse *= (attenuation * intensity);
-        specular *= (attenuation * intensity);
+    // attenuation
+    float dis = length(light.position - position);
+    float attenuation = 1.0 / (light.kc + light.kl * dis + light.kq * (dis * dis));
+    
+    ambient *= attenuation;
+    diffuse *= attenuation;
+    specular *= attenuation;
 
-        result += (ambient + diffuse + specular);
-    }
+    result += (ambient + diffuse + specular);
     return result;
 }

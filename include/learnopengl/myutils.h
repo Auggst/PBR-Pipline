@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -29,5 +30,13 @@ unsigned int loadTexture(char const *path);
 // utility function for loading a HDR texture from file
 // ---------------------------------------------------
 unsigned int loadHDR(char const *path);
+
+// utility function for loading a Skybox texture from file
+// ---------------------------------------------------
+unsigned int loadSkybox(std::vector<std::string> &faces);
+
+// utility function for random float number
+// ---------------------------------------------------
+float random1f(float minf, float maxf); 
 
 #endif

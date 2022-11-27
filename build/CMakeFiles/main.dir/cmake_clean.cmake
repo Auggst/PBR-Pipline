@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/imgui_tables.cpp.obj.d"
   "CMakeFiles/main.dir/src/imgui_widgets.cpp.obj"
   "CMakeFiles/main.dir/src/imgui_widgets.cpp.obj.d"
+  "CMakeFiles/main.dir/src/light.cpp.obj"
+  "CMakeFiles/main.dir/src/light.cpp.obj.d"
   "CMakeFiles/main.dir/src/main.cpp.obj"
   "CMakeFiles/main.dir/src/main.cpp.obj.d"
   "CMakeFiles/main.dir/src/mesh.cpp.obj"

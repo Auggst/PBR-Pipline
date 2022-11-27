@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 #include <learnopengl/myutils.h>
 #include <learnopengl/engine.h>
@@ -10,27 +11,47 @@ ForwardShading::ForwardShading() {
     this->mpModel_SH = nullptr;
     this->mpLight_SH = nullptr;
     this->mpSkybox_SH = nullptr;
+    for (int i = 0; i < 4; i++) {
+        my_color[i] = 0.0f;
+    }
 }
 
 void ForwardShading::init() {
+    my_color[3] = 1.0f;
     initFBO(512, 512);
+
+    directionLight = std::make_shared<DirectionLight>();
+    pointLight = std::make_shared<PointLight>();
+    spotLight = std::make_shared<SpotLight>();
+
     this->cube = std::make_shared<Cube>();
+
+    std::vector<std::string> faces{
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/right.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/left.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/top.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/bottom.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/front.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/back.jpg"};
+    this->env_cubemap = loadSkybox(faces);
 
     std::string vsPath = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Forward\\model.vs";
     std::string fsPath = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Forward\\model.fs";
-    // this->mpModel_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
-    // this->mpModel_SH->use();
-    // this->mpModel_SH->setInt("material.shininess", 64.0);
+    this->mpModel_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    this->mpModel_SH->use();
+    this->mpModel_SH->setInt("material.shininess", 64.0);
 
     fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
     this->mpLight_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
-    this->light_tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/HS-Cave-Room/Mt-Washington-Cave-Room_Bg.jpg");
+    this->light_tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/rusted-steel-unity/rusted-steel_albedo.png");
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
 
-    // vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox.vs";
-    // fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox.fs";
-    // this->mpSkybox_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox.vs";
+    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox.fs";
+    this->mpSkybox_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setInt("environmentMap", 0);
 
     // 模型加载
     std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
@@ -44,7 +65,7 @@ void ForwardShading::render() {
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
     // Rendering
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(my_color[0], my_color[1], my_color[2], my_color[3]);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
@@ -54,47 +75,77 @@ void ForwardShading::render() {
     glm::mat4 projection = glm::perspective(glm::radians(moon->cam->Zoom), (float)moon->width / (float)moon->height, 0.1f, 100.0f);
 
     // 光照模型渲染
-    this->mpSkybox_SH->use();
-    this->mpSkybox_SH->setMat4("view", view);
-    this->mpSkybox_SH->setMat4("projection", projection);
+    this->mpLight_SH->use();
+    this->mpLight_SH->setMat4("view", view);
+    this->mpLight_SH->setMat4("projection", projection);
     const float pi = 3.1415926;
     for (int i = 0; i < 4; i++) {
-        model = glm::mat4(1.0);
+        model = glm::mat4(0.5);
         float coff_pi = pi * i;
-        glm::vec3 newPos = glm::vec3(10.0f * cos(-pi * 0.5 + coff_pi), 10.0f * (i < 2 ? 1.0 : -1.0), 10.0f);
+        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), -10.0f);
         model = glm::translate(model, newPos);
-        this->mpSkybox_SH->setMat4("model", model);
+        this->mpLight_SH->setMat4("model", model);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->light_tex);
         this->cube->Draw();
     }
 
-    // // 模型渲染
-    // this->mpModel_SH->use();
-    // this->mpModel_SH->setMat4("view", view);
-    // this->mpModel_SH->setMat4("projection", projection);
-    // this->mpModel_SH->setVec3("viewPos", moon->cam->Position);
-    // this->mpModel_SH->setInt("plNums", 4);
-    // this->mpModel_SH->setInt("dlNums", 0);
-    // this->mpModel_SH->setInt("slNums", 0);
-    // for (int i = 0; i < 4; i++) {
-    //     model = glm::mat4(1.0);
-    //     float coff_pi = pi * i;
-    //     glm::vec3 newPos = glm::vec3(10.0f * cos(-pi * 0.5 + coff_pi), 10.0f * (i < 2 ? 1.0 : -1.0), 10.0f);
-    //     this->mpModel_SH->setVec3("plLight[" + std::to_string(i) + "].position", newPos);
-    //     glm::vec3 am(0.05 * cos(-pi * 0.5 * i));
-    //     glm::vec3 diff(0.8 * cos(-pi * 0.5 * i));
-    //     glm::vec3 spec(1.0 * cos(-pi * 0.5 * i));
-    //     this->mpModel_SH->setVec3("plLight[" + std::to_string(i) + "].ambient", am);
-    //     this->mpModel_SH->setVec3("plLight[" + std::to_string(i) + "].diffuse", diff);
-    //     this->mpModel_SH->setVec3("plLight[" + std::to_string(i) + "].specular", spec);
+    // 模型渲染
+    this->mpModel_SH->use();
+    this->mpModel_SH->setMat4("view", view);
+    this->mpModel_SH->setMat4("projection", projection);
+    this->mpModel_SH->setVec3("viewPos", moon->cam->Position);
 
-    //     this->mpModel_SH->setFloat("plLight[" + std::to_string(i) + "].kc", 1.0f);
-    //     this->mpModel_SH->setFloat("plLight[" + std::to_string(i) + "].kl", 0.009f);
-    //     this->mpModel_SH->setFloat("plLight[" + std::to_string(i) + "].kq", 0.032f);
-    // }
-    // this->mpModel_SH->setMat4("model", model);
-    // this->models->Draw(*(this->mpModel_SH));
+    // 光照参数
+    float timeVal = glfwGetTime();
+    float greenVal = (sinf(timeVal) / 2) + 0.5f;    // 约束到[0, 1]
+    float redVal = (cosf(timeVal) / 2) + 0.5f;
+    float blueVal = (cosf(timeVal * pi) / 2) + 0.5f;
+    glm::vec3 am(0.05f, 0.01f, 0.01f);
+    glm::vec3 diff(redVal, greenVal, blueVal);
+    glm::vec3 spec(0.5f, 0.5f, 0.5f);
+
+    for (int i = 0; i < 4; i++) {
+        model = glm::mat4(1.0);
+        float coff_pi = pi * i;
+        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), -10.0f);
+
+        /* 方向光加载 */
+        directionLight->direction = glm::vec3(0.0f) - newPos;
+        directionLight->diffuse = diff;
+        directionLight->SendToShader(this->mpModel_SH, i);
+
+        /* 点光源加载 */
+        pointLight->position = glm::vec3(0.0f, 20.0f, 0.0f);
+        pointLight->diffuse = diff;
+        pointLight->SendToShader(this->mpModel_SH, i);
+
+    }
+
+    /* 聚光灯加载 */
+    spotLight->position = moon->cam->Position;
+    spotLight->position = moon->cam->Front;
+    spotLight->diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
+    spotLight->specular = glm::vec3(0.0f, 0.0f, 1.0f);
+    spotLight->SendToShader(mpModel_SH, 0);
+
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
+    for (int i = 0; i < 2; i++) {
+        this->mpModel_SH->setMat4("model", glm::scale(model, glm::vec3(0.5f)));
+        this->models->Draw(*(this->mpModel_SH));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
+    }
+    
+
+    // 天空盒渲染
+    glDepthFunc(GL_LEQUAL);
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setMat4("view", view);
+    this->mpSkybox_SH->setMat4("projection", projection);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
+    this->cube->Draw();
+    glDepthFunc(GL_LESS);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -104,25 +155,23 @@ void ForwardShading::renderUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-    {
-        ImGui::Begin(u8"前向渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整前向渲染管线对应参数");
-        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
 
-    // ImVec2 pos = ImGui::GetCursorScreenPos();
-    // glViewport(0, 0, 512, 512);
     //渲染场景的窗口
     {
         ImGui::Begin(u8"渲染窗口");
         ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(700, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(700, 700), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+    }
+    {
+        ImGui::Begin(u8"前向渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整前向渲染管线对应参数");
+        // 编辑颜色 (stored as ~4 floats)
+        ImGui::ColorEdit4("Color", my_color);
         ImGui::End();
     }
     ImGui::Render();
@@ -409,29 +458,27 @@ void PBR::renderUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-    {
-        ImGui::Begin(u8"PBR渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整PBR渲染管线对应参数");
-        if (this->spheres != nullptr) {
-            ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
-            ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
-        }
-        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
-
-    // ImVec2 pos = ImGui::GetCursorScreenPos();
-    // glViewport(0, 0, 512, 512);
     //渲染场景的窗口
     {
         ImGui::Begin(u8"渲染窗口");
         ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(700, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(700, 700), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(600, 600), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+    }
+    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+    {
+        ImGui::Begin(u8"PBR渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整PBR渲染管线对应参数");
+        if (this->spheres != nullptr)
+        {
+            ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
+            ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
+        }
+        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
     }
     ImGui::Render();

@@ -172,3 +172,13 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType texTy
     }
     return textures;
 }
+
+vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType texType, string typeName, const aiScene* scene) {
+    // vector<Texture> textures;
+
+    // for (auto i = 0; i < mat->GetTextureCount(texType); ++i) {
+    //     aiString name;
+    //     mat->GetTexture(texType, i, &name);
+    //     auto toFind = texture_loaded.find(name.C_Str());
+    // }
+}

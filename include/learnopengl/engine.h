@@ -31,6 +31,7 @@ class Engine {
    void InitGUI();
    void Init();
    void Update();
+   void RenderGUI();
  public:
    int width, height;
    std::string window_name;
@@ -41,14 +42,6 @@ class Engine {
  private:
    static std::shared_ptr<Engine> moon;
 };
-
-static float lastX = 1280.0f / 2.0;
-static float lastY = 720.0f / 2.0;
-static bool firstMouse = true;
-
-//时间设置
-static float deltaTime = 0.0f;
-static float lastFrame = 0.0f;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);

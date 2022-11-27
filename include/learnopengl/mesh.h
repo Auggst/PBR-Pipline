@@ -52,6 +52,8 @@ class Model {
    Mesh processMesh(aiMesh *mesh, const aiScene *scene);
    vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType texType, string typeName);
 
+   vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType texType, string typeName, const aiScene *scene);
+
    /* 模型数据 */
    vector<Mesh> meshes;
    vector<Texture> texture_loaded;

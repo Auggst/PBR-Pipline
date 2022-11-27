@@ -9,6 +9,7 @@
 #include <learnopengl/model.h>
 #include <learnopengl/camera.h>
 #include <learnopengl/mesh.h>
+#include <learnopengl/light.h>
 
 class Pipeline {
  public:
@@ -26,7 +27,11 @@ class ForwardShading : public Pipeline {
     void initFBO(GLsizei width, GLsizei height);
     unsigned int getRendered() { return this->res_tex; }
   public:
-    unsigned int res_tex, fbo, rbo, light_tex;
+    unsigned int res_tex, fbo, rbo, light_tex, env_cubemap;
+    float my_color[4];
+    std::shared_ptr<DirectionLight> directionLight;
+    std::shared_ptr<PointLight> pointLight;
+    std::shared_ptr<SpotLight> spotLight;
     std::shared_ptr<Cube> cube;
     std::shared_ptr<Shader> mpModel_SH;
     std::shared_ptr<Shader> mpLight_SH;
