@@ -7,6 +7,8 @@
 #include <learnopengl/myutils.h>
 #include <learnopengl/engine.h>
 
+/* 前向着色 */
+// -----------------------------------------------------
 ForwardShading::ForwardShading() {
     this->mpModel_SH = nullptr;
     this->mpLight_SH = nullptr;
@@ -18,13 +20,16 @@ ForwardShading::ForwardShading() {
 
 void ForwardShading::init() {
     my_color[3] = 1.0f;
-    initFBO(512, 512);
+    InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
 
     directionLight = std::make_shared<DirectionLight>();
     pointLight = std::make_shared<PointLight>();
     spotLight = std::make_shared<SpotLight>();
 
     this->cube = std::make_shared<Cube>();
+    // 模型加载
+    std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
+    this->models = std::make_shared<Model>(modelPath);
 
     std::vector<std::string> faces{
         "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/right.jpg",
@@ -47,17 +52,11 @@ void ForwardShading::init() {
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
 
-    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox.vs";
-    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox.fs";
+    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
+    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
     this->mpSkybox_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
     this->mpSkybox_SH->use();
     this->mpSkybox_SH->setInt("environmentMap", 0);
-
-    // 模型加载
-    std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
-    this->models = std::make_shared<Model>(modelPath);
-
-    // 灯光加载
 }
 
 void ForwardShading::render() {
@@ -178,18 +177,211 @@ void ForwardShading::renderUI() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void ForwardShading::initFBO(GLsizei width, GLsizei height) {
-    genFramebuffer(this->fbo, this->rbo, width, height);
-    glGenTextures(1, &(this->res_tex));
-
-    glBindTexture(GL_TEXTURE_2D, this->res_tex);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_FLOAT, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+/* 延迟着色 */
+// -----------------------------------------------------
+DeferredShading::DeferredShading() {
+    this->mpGeometry_SH = nullptr;
+    this->mpLight_SH = nullptr;
+    this->mpSkybox_SH = nullptr;
+    this->mpModel_SH = nullptr;
 }
 
+static std::vector<glm::vec3> objectPos;
+static std::vector<glm::vec3> lightPos;
+static std::vector<glm::vec3> lightCol;
+
+void DeferredShading::init() {
+    /* 初始化FBO 和 RT */
+    InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
+    InitBaseGBuffer(this->gBuffer, 512, 512);
+
+    /* 创建灯光和模型 */
+    // 灯光加载
+    this->directionLight = std::make_shared<DirectionLight>();
+    this->pointLight = std::make_shared<PointLight>();
+    this->spotLight = std::make_shared<SpotLight>();
+
+    // 模型加载
+    this->cube = std::make_shared<Cube>();
+    this->quad = std::make_shared<Quad>();
+    std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
+    this->models = std::make_shared<Model>(modelPath);
+
+    // 光照为位置偏移
+    objectPos.push_back(glm::vec3(-3.0, -3.0, -3.0));
+    objectPos.push_back(glm::vec3(0.0, -3.0, -3.0));
+    objectPos.push_back(glm::vec3(3.0, -3.0, -3.0));
+    objectPos.push_back(glm::vec3(-3.0, -3.0, 0.0));
+    objectPos.push_back(glm::vec3(0.0, -3.0, 0.0));
+    objectPos.push_back(glm::vec3(-3.0, -3.0, 3.0));
+    objectPos.push_back(glm::vec3(0.0, -3.0, 3.0));
+    objectPos.push_back(glm::vec3(3.0, -3.0, 3.0));
+
+    std::random_device seed;
+    std::mt19937 eng(seed());
+    std::uniform_real_distribution<> distrib(0.0f, 1.0f);
+    for (size_t i = 0; i < 32; i++)
+    {
+        // 光照位置
+        GLfloat xPos = distrib(eng) * 6.0f - 3.0f;
+        GLfloat yPos = distrib(eng) * 6.0f - 3.0f;
+        GLfloat zPos = distrib(eng) * 6.0f - 3.0f;
+        lightPos.push_back(glm::vec3(xPos, yPos, zPos));
+
+        // 光照颜色
+        GLfloat rCol = distrib(eng);
+        GLfloat gCol = distrib(eng);
+        GLfloat bCol = distrib(eng);
+        lightCol.push_back(glm::vec3(rCol, gCol, bCol));
+    }
+
+    // 天空盒加载
+    std::vector<std::string> faces{
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/right.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/left.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/top.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/bottom.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/front.jpg",
+        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/back.jpg"};
+    this->env_cubemap = loadSkybox(faces);
+
+    /* 着色器加载 */
+    std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/geometry.vs";
+    std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/geometry.fs";
+    mpGeometry_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+
+    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/light.vs";
+    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/light.fs";
+    mpLight_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    mpLight_SH->use();
+    mpLight_SH->setInt("gPosition", 0);
+    mpLight_SH->setInt("gNormal", 1);
+    mpLight_SH->setInt("gColorSpec", 2);
+
+    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
+    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
+    mpSkybox_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setInt("environmentMap", 0);
+
+    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
+    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
+    mpModel_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+}
+
+void DeferredShading::render() {
+    // Rendering
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // 1. 几何阶段
+    glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.gBuffer);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = moon->cam->GetViewMatrix();
+    glm::mat4 projection = glm::perspective(moon->cam->Zoom, 1.0f, 0.1f, 100.0f);
+
+    this->mpGeometry_SH->use();
+    this->mpGeometry_SH->setMat4("projection", projection);
+    this->mpGeometry_SH->setMat4("view", view);
+    for (size_t i = 0; i < 32; i++) {
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, objectPos[i]);
+        model = glm::scale(model, glm::vec3(0.25f));
+        this->mpGeometry_SH->setMat4("model", model);
+        this->models->Draw(*(this->mpGeometry_SH));
+    }
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+
+    // 2. 光照阶段
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    this->mpLight_SH->use();
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, gBuffer.gPosition);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, gBuffer.gNormal);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, gBuffer.gColor);
+
+    // 光照参数
+    for (size_t i = 0; i < 32; i++) {
+        this->mpLight_SH->setVec3("ptLight[" + std::to_string(i) + "].position", lightPos[i]);
+        this->mpLight_SH->setVec3("ptLight[" + std::to_string(i) + "].diffuse",lightCol[i]);
+        this->mpLight_SH->setVec3("ptLight[" + std::to_string(i) + "].specular", lightCol[i]);
+        const GLfloat kc = 1.0f;
+        const GLfloat kl = 0.7f;
+        const GLfloat kq = 1.8f;
+        this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kc", kc);
+        this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kl", kl);
+        this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kq", kq);
+    }
+    this->mpLight_SH->setVec3("viewPos", moon->cam->Position);
+    this->quad->Draw();
+
+    // 2.5 将几何的深度缓冲复制到fbo中
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer.gBuffer);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->fbo);
+    glBlitFramebuffer(0, 0, 512, 512, 0, 0, 512, 512, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
+
+    // 3.0 前向渲染发光物
+    this->mpModel_SH->use();
+    this->mpModel_SH->setMat4("projection", projection);
+    this->mpModel_SH->setMat4("view", view);
+    for (size_t i = 0; i < lightPos.size(); i++) {
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos[i]);
+        model = glm::scale(model, glm::vec3(0.25f));
+        this->mpModel_SH->setMat4("model", model);
+        this->mpModel_SH->setVec3("lightColor", lightCol[i]);
+        this->cube->Draw();
+    }
+
+    // 天空盒渲染
+    glDepthFunc(GL_LEQUAL);
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setMat4("view", view);
+    this->mpSkybox_SH->setMat4("projection", projection);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
+    this->cube->Draw();
+    glDepthFunc(GL_LESS);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void DeferredShading::renderUI() {
+    /* Swap front and back buffers */
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    //渲染场景的窗口
+    {
+        ImGui::Begin(u8"渲染窗口");
+        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+    }
+    {
+        ImGui::Begin(u8"延迟渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整延迟渲染管线对应参数");
+        ImGui::End();
+    }
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+/* 基于物理的着色 */
+// -----------------------------------------------------
 PBR::PBR(){
     this->nums = 0;
     // TODO:设置默认着色器
@@ -207,15 +399,8 @@ void PBR::init() {
     this->spheres = std::make_shared<Sphere>();
     this->nums += 1;
     this->spacing = 10;
-    genFramebuffer(this->fbo, this->rbo, 512, 512);
-    glGenTextures(1, &(this->res_tex));
 
-    glBindTexture(GL_TEXTURE_2D, this->res_tex);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 512, 512, 0, GL_RGBA, GL_FLOAT, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
 
     this->hdr_tex = loadHDR("D:\\C++Pro\\vscode\\LearnOpenGL\\texture\\HS-Cave-Room\\Mt-Washington-Cave-Room_Ref.hdr");
     genCubeMap(this->env_cubemap, 512, 512);
@@ -483,4 +668,67 @@ void PBR::renderUI() {
     }
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+/* 全局功能函数 */
+// ---------------------------------------------------------------
+// 初始化FBO和RT
+void InitFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height)
+{
+    genFramebuffer(fbo, rbo, width, height);
+    glGenTextures(1, &(tex));
+
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+// 初始化GBuffer
+void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height) {
+    glGenFramebuffers(1, &(gbuffer.gBuffer));
+    glBindFramebuffer(GL_FRAMEBUFFER, gbuffer.gBuffer);
+
+    // 位置颜色附件
+    glGenTextures(1, &(gbuffer.gPosition));
+    glBindTexture(GL_TEXTURE_2D, gbuffer.gPosition);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gbuffer.gPosition, 0);
+
+    // 法线颜色附件
+    glGenTextures(1, &(gbuffer.gNormal));
+    glBindTexture(GL_TEXTURE_2D, gbuffer.gNormal);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gbuffer.gNormal, 0);
+
+    // 颜色 + 镜面颜色附件
+    glGenTextures(1, &(gbuffer.gColor));
+    glBindTexture(GL_TEXTURE_2D, gbuffer.gColor);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gbuffer.gColor, 0);
+
+    // 将颜色附件加入帧缓冲
+    GLuint attachments[3] = { GL_COLOR_ATTACHMENT0,
+                              GL_COLOR_ATTACHMENT1,
+                              GL_COLOR_ATTACHMENT2 };
+    glDrawBuffers(3, attachments);
+
+    // 深度缓冲
+    glGenRenderbuffers(1, &(gbuffer.gDepthRBO));
+    glBindRenderbuffer(GL_RENDERBUFFER, gbuffer.gDepthRBO);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, gbuffer.gDepthRBO);
+
+    // 检查framebuffer是否完整
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cout << "Framebuffer not complete!" << std::endl;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

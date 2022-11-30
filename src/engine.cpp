@@ -39,6 +39,11 @@ void Engine::CreateForwardS() {
   this->pipeline->init();
 }
 
+void Engine::CreateDeferredS() {
+  this->pipeline = std::make_shared<DeferredShading>();
+  this->pipeline->init();
+}
+
 void Engine::InitOpenGL()
 {
   //初始化glfw，确保glfw版本和core模式
@@ -106,9 +111,9 @@ void Engine::Update() {
     processInput(this->window);
 
     // Rendering
-    //RenderGUI();
     this->pipeline->render();
     this->pipeline->renderUI();
+    RenderGUI();
 
     //检查及调用事件和交换内容
     glfwSwapBuffers(this->window);

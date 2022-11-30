@@ -105,7 +105,7 @@ vec3 CalculatePL(PointLight light, vec3 position, vec3 normal) {
     vec3 viewDir = normalize(viewPos - position);
     vec3 h = normalize(viewDir + lightDir);
     float spec = pow(max(dot(normal, h), 0.0), material.shininess);
-    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).rgb;
+    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).r;
 
     // attenuation
     float dis = length(light.position - position);
@@ -135,7 +135,7 @@ vec3 CalculateDL(DirectionLight light, vec3 position, vec3 normal) {
     vec3 viewDir = normalize(viewPos - position);
     vec3 h = normalize(viewDir - light.direction);
     float spec = pow(max(dot(normal, h), 0.0), material.shininess);
-    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).rgb;
+    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).r;
 
     result += (ambient + diffuse + specular);
     
@@ -161,7 +161,7 @@ vec3 CalculateSL(SpotLight light, vec3 position, vec3 normal) {
     vec3 viewDir = normalize(viewPos - position);
     vec3 h = normalize(viewDir + lightDir);
     float spec = pow(max(dot(normal, h), 0.0), material.shininess);
-    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).rgb;
+    vec3 specular = light.specular * spec * texture(material.texture_specular1, fs_in.TexCoords).r;
 
     ambient *= intensity;
     diffuse *= intensity;

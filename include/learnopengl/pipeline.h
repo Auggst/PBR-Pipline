@@ -11,6 +11,14 @@
 #include <learnopengl/mesh.h>
 #include <learnopengl/light.h>
 
+struct GBuffer {
+  GLuint gBuffer;
+  GLuint gPosition;
+  GLuint gNormal;
+  GLuint gColor;
+  GLuint gDepthRBO;
+};
+
 class Pipeline {
  public:
    virtual void init() = 0;
@@ -24,7 +32,6 @@ class ForwardShading : public Pipeline {
     void init() override;
     void render() override;
     void renderUI() override;
-    void initFBO(GLsizei width, GLsizei height);
     unsigned int getRendered() { return this->res_tex; }
   public:
     unsigned int res_tex, fbo, rbo, light_tex, env_cubemap;
@@ -40,10 +47,25 @@ class ForwardShading : public Pipeline {
 };
 
 class DeferredShading : public Pipeline {
-public:
-  void init() override;
-  void render() override;
-  void renderUI() override;
+ public:
+   DeferredShading();
+   void init() override;
+   void render() override;
+   void renderUI() override;
+   unsigned int getRendered() { return this->res_tex; }
+ public:
+   unsigned int res_tex, fbo, rbo, env_cubemap;
+   GBuffer gBuffer;
+   std::shared_ptr<DirectionLight> directionLight;
+   std::shared_ptr<PointLight> pointLight;
+   std::shared_ptr<SpotLight> spotLight;
+   std::shared_ptr<Cube> cube;
+   std::shared_ptr<Quad> quad;
+   std::shared_ptr<Shader> mpGeometry_SH;
+   std::shared_ptr<Shader> mpLight_SH;
+   std::shared_ptr<Shader> mpSkybox_SH;
+   std::shared_ptr<Shader> mpModel_SH;
+   std::shared_ptr<Model> models;
 };
 
 class PBR : public Pipeline {
@@ -59,7 +81,6 @@ class PBR : public Pipeline {
   void renderUI() override;
   unsigned int getRendered() {return this->res_tex;}
   
-
 public:
   unsigned int fbo, rbo, res_tex, hdr_tex, env_cubemap, irradiance_cubemap, prefilter_cubemap, brdf_tex, nums, spacing;
   Cube cube_screen;
@@ -74,4 +95,7 @@ public:
   std::shared_ptr<Model> models;
 };
 
+void InitFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height);
+
+void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height);
 #endif

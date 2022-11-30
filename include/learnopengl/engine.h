@@ -27,6 +27,7 @@ class Engine {
    }
    void CreatePBR();
    void CreateForwardS();
+   void CreateDeferredS();
    void InitOpenGL();
    void InitGUI();
    void Init();
