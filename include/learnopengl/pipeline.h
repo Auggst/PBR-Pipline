@@ -95,6 +95,7 @@ public:
   std::shared_ptr<Model> models;
 };
 
+
 void InitFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height);
 
 void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height);
