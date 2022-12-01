@@ -19,6 +19,6 @@ uniform Material material;
 void main() {
     gPosition = fs_in.Position;
     gNormal = normalize(fs_in.Normal);
-    gColorSpec.rgb = texture(material.texture_diffuse1, fs_in.TexCoords).rgb;
+    gColorSpec.rgb = pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
     gColorSpec.a = texture(material.texture_specular1, fs_in.TexCoords).r;
 }

@@ -12,7 +12,7 @@ uniform vec3 lightColor;
 uniform sampler2D diffuse;
 
 void main() {
-    // vec3 albedo = vec3(0.001) + pow(texture(diffuse, fs_in.TexCoords).rgb, vec3(2.2));
+    // vec3 albedo = vec3(0.001) + pow(texture(diffuse, fs_in.TexCoords).rgb, vec3(2.2)) + lightColor;
 
     vec3 albedo = lightColor;
 

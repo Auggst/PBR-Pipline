@@ -15,7 +15,7 @@ Engine::Engine() {
   this->height = 720;
   this->window_name = "Moon";
   this->window = nullptr;
-  this->cam = std::make_shared<Camera>();
+  this->cam = std::make_shared<Camera>(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
   this->models.clear();
 }
 
@@ -74,7 +74,8 @@ void Engine::InitOpenGL()
   }
 
   glEnable(GL_DEPTH_TEST);
-  glEnable(GL_LEQUAL);
+  glDepthFunc(GL_LESS);
+  glEnable(GL_LESS);
 }
 
 void Engine::InitGUI() {
@@ -126,7 +127,6 @@ void Engine::RenderGUI() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
-
   {
     ImGui::Begin(u8"Moon引擎全局设置");
     ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
@@ -135,6 +135,7 @@ void Engine::RenderGUI() {
     ImGui::Text(u8"用于调整全局设置");
     ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), u8"相机参数:");
     ImGui::InputFloat3(u8"位置", &(moon->cam->Position[0]));
+    ImGui::InputFloat(u8"相机移动速度: ", &(moon->cam->MovementSpeed));
     ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::End();
   }

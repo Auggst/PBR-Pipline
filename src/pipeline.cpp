@@ -213,6 +213,7 @@ void DeferredShading::init() {
     objectPos.push_back(glm::vec3(3.0, -3.0, -3.0));
     objectPos.push_back(glm::vec3(-3.0, -3.0, 0.0));
     objectPos.push_back(glm::vec3(0.0, -3.0, 0.0));
+    objectPos.push_back(glm::vec3(3.0, -3.0, 0.0));
     objectPos.push_back(glm::vec3(-3.0, -3.0, 3.0));
     objectPos.push_back(glm::vec3(0.0, -3.0, 3.0));
     objectPos.push_back(glm::vec3(3.0, -3.0, 3.0));
@@ -225,6 +226,7 @@ void DeferredShading::init() {
         // 光照位置
         GLfloat xPos = distrib(eng) * 6.0f - 3.0f;
         GLfloat yPos = distrib(eng) * 6.0f - 3.0f;
+        // GLfloat yPos = 5.0f;
         GLfloat zPos = distrib(eng) * 6.0f - 3.0f;
         lightPos.push_back(glm::vec3(xPos, yPos, zPos));
 
@@ -270,8 +272,6 @@ void DeferredShading::init() {
 }
 
 void DeferredShading::render() {
-    // Rendering
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // 1. 几何阶段
     glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.gBuffer);
@@ -286,18 +286,18 @@ void DeferredShading::render() {
     this->mpGeometry_SH->use();
     this->mpGeometry_SH->setMat4("projection", projection);
     this->mpGeometry_SH->setMat4("view", view);
-    for (size_t i = 0; i < 32; i++) {
+    for (size_t i = 0; i < 9; i++) {
         model = glm::mat4(1.0f);
         model = glm::translate(model, objectPos[i]);
         model = glm::scale(model, glm::vec3(0.25f));
         this->mpGeometry_SH->setMat4("model", model);
         this->models->Draw(*(this->mpGeometry_SH));
     }
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 
     // 2. 光照阶段
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+
     this->mpLight_SH->use();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, gBuffer.gPosition);
@@ -326,7 +326,7 @@ void DeferredShading::render() {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->fbo);
     glBlitFramebuffer(0, 0, 512, 512, 0, 0, 512, 512, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
+
 
     // 3.0 前向渲染发光物
     this->mpModel_SH->use();
@@ -340,7 +340,7 @@ void DeferredShading::render() {
         this->mpModel_SH->setVec3("lightColor", lightCol[i]);
         this->cube->Draw();
     }
-
+    
     // 天空盒渲染
     glDepthFunc(GL_LEQUAL);
     this->mpSkybox_SH->use();
@@ -351,6 +351,7 @@ void DeferredShading::render() {
     this->cube->Draw();
     glDepthFunc(GL_LESS);
 
+    // glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -684,6 +685,7 @@ void InitFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei wi
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
 }
 
 // 初始化GBuffer
@@ -724,7 +726,7 @@ void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height) {
     // 深度缓冲
     glGenRenderbuffers(1, &(gbuffer.gDepthRBO));
     glBindRenderbuffer(GL_RENDERBUFFER, gbuffer.gDepthRBO);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, gbuffer.gDepthRBO);
 
     // 检查framebuffer是否完整
