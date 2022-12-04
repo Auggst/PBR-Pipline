@@ -197,17 +197,29 @@ void DeferredShading::init() {
     InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
     InitBaseGBuffer(this->gBuffer, 512, 512);
 
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
     /* 创建灯光和模型 */
     // 灯光加载
-    this->directionLight = std::make_shared<DirectionLight>();
-    this->pointLight = std::make_shared<PointLight>();
-    this->spotLight = std::make_shared<SpotLight>();
+    DirectionLight* temp_dl = &(moon->assetManager.vec_DL[0]);
+    this->directionLight = std::shared_ptr<DirectionLight>(temp_dl);
+    temp_dl = nullptr;
+    PointLight* temp_pl = &(moon->assetManager.vec_PL[0]);
+    this->pointLight = std::shared_ptr<PointLight>(temp_pl);
+    temp_pl = nullptr;
+    SpotLight* temp_sl = &(moon->assetManager.vec_SL[0]);
+    this->spotLight = std::shared_ptr<SpotLight>(temp_sl);
+    temp_sl = nullptr;
 
     // 模型加载
-    this->cube = std::make_shared<Cube>();
-    this->quad = std::make_shared<Quad>();
-    std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
-    this->models = std::make_shared<Model>(modelPath);
+    Cube* temp_Cube = &(moon->assetManager.vec_Cube[0]);
+    this->cube = std::shared_ptr<Cube>(temp_Cube);
+    temp_Cube = nullptr;
+    Quad* temp_Quad = &(moon->assetManager.vec_Quad[0]);
+    this->quad = std::shared_ptr<Quad>(temp_Quad);
+    temp_Quad = nullptr;
+    Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
+    this->models = std::shared_ptr<Model>(nanosuit);
 
     // 光照为位置偏移
     objectPos.push_back(glm::vec3(-3.0, -3.0, -3.0));
@@ -240,37 +252,58 @@ void DeferredShading::init() {
     }
 
     // 天空盒加载
-    std::vector<std::string> faces{
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/right.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/left.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/top.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/bottom.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/front.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/back.jpg"};
-    this->env_cubemap = loadSkybox(faces);
+    this->env_cubemap = moon->assetManager.um_skyboxes.find("BlueSky")->second;
 
     /* 着色器加载 */
-    std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/geometry.vs";
-    std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/geometry.fs";
-    mpGeometry_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    if (moon->assetManager.um_shaders.find("Geometry_DS") == moon->assetManager.um_shaders.end()) {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/geometry.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/geometry.fs";
+        Shader temp_Geometry(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("Geometry_DS", temp_Geometry);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("Geometry_DS")->second);
+    this->mpGeometry_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
 
-    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/light.vs";
-    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/light.fs";
-    mpLight_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    if (moon->assetManager.um_shaders.find("Light_DS") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/light.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Deferred/light.fs";
+        Shader temp_Light(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("Light_DS", temp_Light);
+    }
+
+    temp_SH = &(moon->assetManager.um_shaders.find("Light_DS")->second);
+    this->mpLight_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
     mpLight_SH->use();
     mpLight_SH->setInt("gPosition", 0);
     mpLight_SH->setInt("gNormal", 1);
     mpLight_SH->setInt("gColorSpec", 2);
 
-    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
-    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
-    mpSkybox_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("SkyBox", temp_Skybox);
+    }
+    temp_SH = &(moon->assetManager.um_shaders.find("SkyBox")->second);
+    this->mpSkybox_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
     this->mpSkybox_SH->use();
     this->mpSkybox_SH->setInt("environmentMap", 0);
 
-    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
-    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
-    mpModel_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    if (moon->assetManager.um_shaders.find("LightModel") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
+        Shader temp_LM(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("LightModel", temp_LM);
+    }
+    temp_SH = &(moon->assetManager.um_shaders.find("LightModel")->second);
+    this->mpModel_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
 }
 
 void DeferredShading::render() {

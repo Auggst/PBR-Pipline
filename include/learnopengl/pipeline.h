@@ -35,6 +35,7 @@ class Pipeline {
    inline Pipeline_TYPE GetID() {return this->type;}
  public:
    Pipeline_TYPE type;
+   unsigned int res_tex;
 };
 
 class ForwardShading : public Pipeline {
@@ -45,7 +46,7 @@ class ForwardShading : public Pipeline {
     void renderUI() override;
     unsigned int getRendered() { return this->res_tex; }
   public:
-    unsigned int res_tex, fbo, rbo, light_tex, env_cubemap;
+    unsigned int fbo, rbo, light_tex, env_cubemap;
     float my_color[4];
     std::shared_ptr<DirectionLight> directionLight;
     std::shared_ptr<PointLight> pointLight;
@@ -65,7 +66,7 @@ class DeferredShading : public Pipeline {
    void renderUI() override;
    unsigned int getRendered() { return this->res_tex; }
  public:
-   unsigned int res_tex, fbo, rbo, env_cubemap;
+   unsigned int fbo, rbo, env_cubemap;
    GBuffer gBuffer;
    std::shared_ptr<DirectionLight> directionLight;
    std::shared_ptr<PointLight> pointLight;
@@ -93,7 +94,7 @@ class PBR : public Pipeline {
   unsigned int getRendered() {return this->res_tex;}
   
 public:
-  unsigned int fbo, rbo, res_tex, hdr_tex, env_cubemap, irradiance_cubemap, prefilter_cubemap, brdf_tex, nums, spacing;
+  unsigned int fbo, rbo, hdr_tex, env_cubemap, irradiance_cubemap, prefilter_cubemap, brdf_tex, nums, spacing;
   Cube cube_screen;
   Quad quad_screen;
   std::shared_ptr<Sphere> spheres;

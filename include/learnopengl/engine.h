@@ -15,6 +15,7 @@
 #include <learnopengl/camera.h>
 #include <learnopengl/model.h>
 #include <learnopengl/pipeline.h>
+#include <learnopengl/asset.h>
 
 class Engine {
  public:
@@ -30,6 +31,7 @@ class Engine {
    void CreateDeferredS();
    void InitOpenGL();
    void InitGUI();
+   void InitAsset();
    void Init();
    void Update();
    void RenderGUI();
@@ -37,9 +39,9 @@ class Engine {
    int width, height;
    std::string window_name;
    GLFWwindow *window;
-   std::shared_ptr<Camera> cam;
    std::shared_ptr<Pipeline> pipeline;
-   std::vector<std::shared_ptr<Renderable>> models;
+   Asset assetManager;
+   std::shared_ptr<Camera> cam;
  private:
    static std::shared_ptr<Engine> moon;
 };

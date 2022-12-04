@@ -15,8 +15,7 @@ Engine::Engine() {
   this->height = 720;
   this->window_name = "Moon";
   this->window = nullptr;
-  this->cam = std::make_shared<Camera>(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
-  this->models.clear();
+  this->cam = nullptr;
 }
 
 Engine::~Engine() {
@@ -89,9 +88,18 @@ void Engine::InitGUI() {
   ImGui_ImplOpenGL3_Init("#version 430 core");
 }
 
+void Engine::InitAsset() {
+  this->assetManager.Init();
+  Camera *temp_Cam = &(this->assetManager.um_cameras.find("Main")->second);
+  this->cam = std::shared_ptr<Camera>(temp_Cam);
+  temp_Cam = nullptr;
+}
+
 void Engine::Init() {
   this->InitOpenGL();
   this->InitGUI();
+  this->assetManager = Asset();
+  this->InitAsset();
 }
 
 void Engine::Update() {
@@ -112,7 +120,7 @@ void Engine::Update() {
 
     // Rendering
     this->pipeline->render();
-    this->pipeline->renderUI();
+    // this->pipeline->renderUI();
     RenderGUI();
 
     //检查及调用事件和交换内容
@@ -139,6 +147,28 @@ void Engine::RenderGUI() {
     ImGui::End();
     // TODO::抽象管线UI
     if (this->pipeline == nullptr) {}
+    else if (this->pipeline->type == Pipeline_TYPE::DEFERREDSHADING) {
+      //渲染场景的窗口
+      {
+        ImGui::Begin(u8"渲染窗口");
+        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+      }
+      {
+        ImGui::Begin(u8"延迟渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整延迟渲染管线对应参数");
+        ImGui::End();
+      }
+    }
+    else if (this->pipeline->type == Pipeline_TYPE::FORWARDSHADING) {
+    }
+    else if (this->pipeline->type == Pipeline_TYPE::PBRSHADING) {
+    }
   }
 
   ImGui::Render();
