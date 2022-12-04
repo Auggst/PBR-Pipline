@@ -1,14 +1,16 @@
 #include <learnopengl/asset.h>
 
+#include <learnopengl/myutils.h>
+
 Asset::Asset() {
     um_shaders = std::unordered_map<std::string, Shader>(5);
     um_models = std::unordered_map<std::string, Model>(5);
     um_skyboxes = std::unordered_map<std::string, unsigned int>(2);
+    um_tex = std::unordered_map<std::string, unsigned int>(2);
     um_cameras = std::unordered_map<std::string, Camera>(1);
     vec_DL = std::vector<DirectionLight>(1);
     vec_PL = std::vector<PointLight>(1);
     vec_SL = std::vector<SpotLight>(1);
-    
 }
 
 Asset::~Asset() {
@@ -35,6 +37,9 @@ void Asset::Init()
         "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/front.jpg",
         "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/back.jpg"};
     this->um_skyboxes.emplace(std::make_pair(std::string("BlueSky"), loadSkybox(faces)));
+
+    // 纹理加载
+    this->um_tex.emplace(std::make_pair(std::string("container"), loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/container2.png")));
 
     // Camera加载
     this->um_cameras.emplace(std::make_pair(std::string("Main"), Camera(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f)));

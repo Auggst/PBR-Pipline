@@ -30,17 +30,17 @@ Engine::~Engine() {
 
 void Engine::CreatePBR() {
   this->pipeline = std::make_shared<PBR>();
-  this->pipeline->init();
+  this->pipeline->Init();
 }
 
 void Engine::CreateForwardS() {
   this->pipeline = std::make_shared<ForwardShading>();
-  this->pipeline->init();
+  this->pipeline->Init();
 }
 
 void Engine::CreateDeferredS() {
   this->pipeline = std::make_shared<DeferredShading>();
-  this->pipeline->init();
+  this->pipeline->Init();
 }
 
 void Engine::InitOpenGL()
@@ -119,8 +119,8 @@ void Engine::Update() {
     processInput(this->window);
 
     // Rendering
-    this->pipeline->render();
-    // this->pipeline->renderUI();
+    this->pipeline->Render();
+    // this->pipeline->RenderUI();
     RenderGUI();
 
     //检查及调用事件和交换内容
@@ -166,8 +166,47 @@ void Engine::RenderGUI() {
       }
     }
     else if (this->pipeline->type == Pipeline_TYPE::FORWARDSHADING) {
+      {
+        ImGui::Begin(u8"渲染窗口");
+        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+      }
+      {
+        ImGui::Begin(u8"前向渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整前向渲染管线对应参数");
+        // 编辑颜色 (stored as ~4 floats)
+        // ImGui::ColorEdit4("Color", my_color);
+        ImGui::End();
+      }
     }
     else if (this->pipeline->type == Pipeline_TYPE::PBRSHADING) {
+      {
+        ImGui::Begin(u8"渲染窗口");
+        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(600, 600), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+      }
+      // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+      {
+        ImGui::Begin(u8"PBR渲染管线参数设置");
+        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        //主窗口
+        ImGui::Text(u8"用于调整PBR渲染管线对应参数");
+        // if (this->spheres != nullptr)
+        // {
+        //   ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
+        //   ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
+        // }
+        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::End();
+      }
     }
   }
 

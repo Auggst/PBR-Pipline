@@ -29,9 +29,9 @@ enum Pipeline_TYPE
 class Pipeline {
  public:
    Pipeline(Pipeline_TYPE _type) {type = _type;}
-   virtual void init() = 0;
-   virtual void render() = 0;
-   virtual void renderUI() = 0;
+   virtual void Init() = 0;
+   virtual void Render() = 0;
+   virtual void RenderUI() = 0;
    inline Pipeline_TYPE GetID() {return this->type;}
  public:
    Pipeline_TYPE type;
@@ -41,9 +41,9 @@ class Pipeline {
 class ForwardShading : public Pipeline {
   public:
     ForwardShading();
-    void init() override;
-    void render() override;
-    void renderUI() override;
+    void Init() override;
+    void Render() override;
+    void RenderUI() override;
     unsigned int getRendered() { return this->res_tex; }
   public:
     unsigned int fbo, rbo, light_tex, env_cubemap;
@@ -61,9 +61,9 @@ class ForwardShading : public Pipeline {
 class DeferredShading : public Pipeline {
  public:
    DeferredShading();
-   void init() override;
-   void render() override;
-   void renderUI() override;
+   void Init() override;
+   void Render() override;
+   void RenderUI() override;
    unsigned int getRendered() { return this->res_tex; }
  public:
    unsigned int fbo, rbo, env_cubemap;
@@ -84,13 +84,13 @@ class PBR : public Pipeline {
  public:
   PBR();
 
-  void init() override;
+  void Init() override;
   void HDRInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews);
   void IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews);
   void PrefilterInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews);
   void BRDFInit();
-  void render() override;
-  void renderUI() override;
+  void Render() override;
+  void RenderUI() override;
   unsigned int getRendered() {return this->res_tex;}
   
 public:

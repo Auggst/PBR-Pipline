@@ -22,6 +22,7 @@ class Asset{
    std::unordered_map<std::string, Shader> um_shaders;
    std::unordered_map<std::string, Model> um_models;
    std::unordered_map<std::string, unsigned int> um_skyboxes;
+   std::unordered_map<std::string, unsigned int> um_tex;
    std::unordered_map<std::string, Camera> um_cameras;
    std::vector<DirectionLight> vec_DL;
    std::vector<PointLight> vec_PL;

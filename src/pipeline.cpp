@@ -19,48 +19,86 @@ ForwardShading::ForwardShading() : Pipeline(Pipeline_TYPE::FORWARDSHADING)
     }
 }
 
-void ForwardShading::init() {
+void ForwardShading::Init() {
+    /* 初始化FBO和RT */
     my_color[3] = 1.0f;
     InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
 
-    directionLight = std::make_shared<DirectionLight>();
-    pointLight = std::make_shared<PointLight>();
-    spotLight = std::make_shared<SpotLight>();
+    std::shared_ptr<Engine> moon = Engine::getInstance();
 
-    this->cube = std::make_shared<Cube>();
+    /* 创建灯光和模型 */
+    // 灯光加载
+    DirectionLight *temp_dl = &(moon->assetManager.vec_DL[0]);
+    this->directionLight = std::shared_ptr<DirectionLight>(temp_dl);
+    temp_dl = nullptr;
+    PointLight *temp_pl = &(moon->assetManager.vec_PL[0]);
+    this->pointLight = std::shared_ptr<PointLight>(temp_pl);
+    temp_pl = nullptr;
+    SpotLight *temp_sl = &(moon->assetManager.vec_SL[0]);
+    this->spotLight = std::shared_ptr<SpotLight>(temp_sl);
+    temp_sl = nullptr;
+
     // 模型加载
-    std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
-    this->models = std::make_shared<Model>(modelPath);
+    Cube *temp_Cube = &(moon->assetManager.vec_Cube[0]);
+    this->cube = std::shared_ptr<Cube>(temp_Cube);
+    temp_Cube = nullptr;
+    Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
+    this->models = std::shared_ptr<Model>(nanosuit);
+    nanosuit = nullptr;
 
-    std::vector<std::string> faces{
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/right.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/left.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/top.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/bottom.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/front.jpg",
-        "D:/C++Pro/vscode/LearnOpenGL/texture/skybox/skybox/back.jpg"};
-    this->env_cubemap = loadSkybox(faces);
+    // 天空盒加载
+    this->env_cubemap = moon->assetManager.um_skyboxes.find("BlueSky")->second;
 
-    std::string vsPath = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Forward\\model.vs";
-    std::string fsPath = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Forward\\model.fs";
-    this->mpModel_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    /* 着色器加载 */
+    if (moon->assetManager.um_shaders.find("Model") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.fs";
+        Shader temp_Model(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("Model", temp_Model);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("Model")->second);
+    this->mpModel_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
     this->mpModel_SH->use();
     this->mpModel_SH->setInt("material.shininess", 64.0);
 
-    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
-    this->mpLight_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
-    this->light_tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/rusted-steel-unity/rusted-steel_albedo.png");
+    if (moon->assetManager.um_shaders.find("LightModelTex") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/lightTex.fs";
+        Shader temp_LM(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("LightModelTex", temp_LM);
+    }
+    temp_SH = &(moon->assetManager.um_shaders.find("LightModelTex")->second);
+    this->mpLight_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
+    
+    // 加载贴图
+    if (moon->assetManager.um_tex.find("container") == moon->assetManager.um_tex.end())
+    {
+        std::string texPath = "D:/C++Pro/vscode/LearnOpenGL/texture/container2.png";
+        moon->assetManager.um_tex.emplace(std::make_pair(std::string("container"), loadTexture(texPath.c_str())));
+    }
+    this->light_tex = moon->assetManager.um_tex.find("container")->second;
 
-    vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
-    fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
-    this->mpSkybox_SH = std::make_shared<Shader>(vsPath.c_str(), fsPath.c_str());
+    if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("SkyBox", temp_Skybox);
+    }
+    temp_SH = &(moon->assetManager.um_shaders.find("SkyBox")->second);
+    this->mpSkybox_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
     this->mpSkybox_SH->use();
     this->mpSkybox_SH->setInt("environmentMap", 0);
 }
 
-void ForwardShading::render() {
+void ForwardShading::Render() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
@@ -150,7 +188,7 @@ void ForwardShading::render() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void ForwardShading::renderUI() {
+void ForwardShading::RenderUI() {
     /* Swap front and back buffers */
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -192,7 +230,7 @@ static std::vector<glm::vec3> objectPos;
 static std::vector<glm::vec3> lightPos;
 static std::vector<glm::vec3> lightCol;
 
-void DeferredShading::init() {
+void DeferredShading::Init() {
     /* 初始化FBO 和 RT */
     InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
     InitBaseGBuffer(this->gBuffer, 512, 512);
@@ -306,7 +344,7 @@ void DeferredShading::init() {
     temp_SH = nullptr;
 }
 
-void DeferredShading::render() {
+void DeferredShading::Render() {
 
     glViewport(0, 0, 512, 512);
     // 1. 几何阶段
@@ -391,7 +429,7 @@ void DeferredShading::render() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void DeferredShading::renderUI() {
+void DeferredShading::RenderUI() {
     /* Swap front and back buffers */
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -431,7 +469,7 @@ PBR::PBR() : Pipeline(Pipeline_TYPE::PBRSHADING)
     this->PBR_SH = nullptr;
 }
 
-void PBR::init() {
+void PBR::Init() {
     this->cube_screen = Cube();
     this->quad_screen = Quad();
     this->spheres = std::make_shared<Sphere>();
@@ -612,7 +650,7 @@ void PBR::BRDFInit() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void PBR::render()
+void PBR::Render()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
@@ -676,7 +714,7 @@ void PBR::render()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void PBR::renderUI() {
+void PBR::RenderUI() {
     /* Swap front and back buffers */
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
