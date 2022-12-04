@@ -12,7 +12,7 @@ void genFramebuffer(unsigned int &caputreFBO, unsigned int &captureRBO, GLsizei 
 
     glBindFramebuffer(GL_FRAMEBUFFER, caputreFBO);
     glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, fb_width, fb_height);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, fb_width, fb_height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
 }
 

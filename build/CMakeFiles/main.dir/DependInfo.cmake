@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/C++Pro/vscode/LearnOpenGL/src/glad.c" "CMakeFiles/main.dir/src/glad.c.obj" "gcc" "CMakeFiles/main.dir/src/glad.c.obj.d"
+  "D:/C++Pro/vscode/LearnOpenGL/src/asset.cpp" "CMakeFiles/main.dir/src/asset.cpp.obj" "gcc" "CMakeFiles/main.dir/src/asset.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/engine.cpp" "CMakeFiles/main.dir/src/engine.cpp.obj" "gcc" "CMakeFiles/main.dir/src/engine.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/imgui.cpp" "CMakeFiles/main.dir/src/imgui.cpp.obj" "gcc" "CMakeFiles/main.dir/src/imgui.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/imgui_demo.cpp" "CMakeFiles/main.dir/src/imgui_demo.cpp.obj" "gcc" "CMakeFiles/main.dir/src/imgui_demo.cpp.obj.d"

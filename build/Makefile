@@ -128,6 +128,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/asset.obj: src/asset.cpp.obj
+.PHONY : src/asset.obj
+
+# target to build an object file
+src/asset.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/asset.cpp.obj
+.PHONY : src/asset.cpp.obj
+
+src/asset.i: src/asset.cpp.i
+.PHONY : src/asset.i
+
+# target to preprocess a source file
+src/asset.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/asset.cpp.i
+.PHONY : src/asset.cpp.i
+
+src/asset.s: src/asset.cpp.s
+.PHONY : src/asset.s
+
+# target to generate assembly for a file
+src/asset.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/asset.cpp.s
+.PHONY : src/asset.cpp.s
+
 src/engine.obj: src/engine.cpp.obj
 .PHONY : src/engine.obj
 
@@ -497,6 +521,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... main
+	@echo ... src/asset.obj
+	@echo ... src/asset.i
+	@echo ... src/asset.s
 	@echo ... src/engine.obj
 	@echo ... src/engine.i
 	@echo ... src/engine.s

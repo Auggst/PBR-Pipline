@@ -13,10 +13,11 @@
 #include <learnopengl/light.h>
 #include <learnopengl/shader_s.h>
 
-class asset{
+class Asset{
  public:
-   asset();
-   ~asset();
+   Asset();
+   ~Asset();
+   
  public:
    std::unordered_map<std::string, Shader> um_shaders;
    std::unordered_map<std::string, Model> um_models;

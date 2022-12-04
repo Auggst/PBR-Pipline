@@ -1,6 +1,11 @@
 [
 {
   "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
+  "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\asset.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\asset.cpp",
+  "file": "D:/C++Pro/vscode/LearnOpenGL/src/asset.cpp"
+},
+{
+  "directory": "D:/C++Pro/vscode/LearnOpenGL/build",
   "command": "D:\\C++Pro\\env\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp  -g -std=c++17 -Wall -fexec-charset=GBK -g -o CMakeFiles\\main.dir\\src\\engine.cpp.obj -c D:\\C++Pro\\vscode\\LearnOpenGL\\src\\engine.cpp",
   "file": "D:/C++Pro/vscode/LearnOpenGL/src/engine.cpp"
 },

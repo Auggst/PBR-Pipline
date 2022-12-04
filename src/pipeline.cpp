@@ -9,7 +9,8 @@
 
 /* 前向着色 */
 // -----------------------------------------------------
-ForwardShading::ForwardShading() {
+ForwardShading::ForwardShading() : Pipeline(Pipeline_TYPE::FORWARDSHADING)
+{
     this->mpModel_SH = nullptr;
     this->mpLight_SH = nullptr;
     this->mpSkybox_SH = nullptr;
@@ -179,7 +180,8 @@ void ForwardShading::renderUI() {
 
 /* 延迟着色 */
 // -----------------------------------------------------
-DeferredShading::DeferredShading() {
+DeferredShading::DeferredShading() : Pipeline(Pipeline_TYPE::DEFERREDSHADING)
+{
     this->mpGeometry_SH = nullptr;
     this->mpLight_SH = nullptr;
     this->mpSkybox_SH = nullptr;
@@ -273,6 +275,7 @@ void DeferredShading::init() {
 
 void DeferredShading::render() {
 
+    glViewport(0, 0, 512, 512);
     // 1. 几何阶段
     glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -282,6 +285,7 @@ void DeferredShading::render() {
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = moon->cam->GetViewMatrix();
     glm::mat4 projection = glm::perspective(moon->cam->Zoom, 1.0f, 0.1f, 100.0f);
+    glm::vec3 viewPos = moon->cam->Position;
 
     this->mpGeometry_SH->use();
     this->mpGeometry_SH->setMat4("projection", projection);
@@ -318,7 +322,7 @@ void DeferredShading::render() {
         this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kl", kl);
         this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kq", kq);
     }
-    this->mpLight_SH->setVec3("viewPos", moon->cam->Position);
+    this->mpLight_SH->setVec3("viewPos", viewPos);
     this->quad->Draw();
 
     // 2.5 将几何的深度缓冲复制到fbo中
@@ -351,7 +355,6 @@ void DeferredShading::render() {
     this->cube->Draw();
     glDepthFunc(GL_LESS);
 
-    // glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -383,7 +386,8 @@ void DeferredShading::renderUI() {
 
 /* 基于物理的着色 */
 // -----------------------------------------------------
-PBR::PBR(){
+PBR::PBR() : Pipeline(Pipeline_TYPE::PBRSHADING)
+{
     this->nums = 0;
     // TODO:设置默认着色器
     this->HDR_SH = nullptr;
@@ -677,10 +681,11 @@ void PBR::renderUI() {
 void InitFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height)
 {
     genFramebuffer(fbo, rbo, width, height);
+
     glGenTextures(1, &(tex));
 
     glBindTexture(GL_TEXTURE_2D, tex);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGBA, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -696,9 +701,11 @@ void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height) {
     // 位置颜色附件
     glGenTextures(1, &(gbuffer.gPosition));
     glBindTexture(GL_TEXTURE_2D, gbuffer.gPosition);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gbuffer.gPosition, 0);
 
     // 法线颜色附件
@@ -726,7 +733,7 @@ void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height) {
     // 深度缓冲
     glGenRenderbuffers(1, &(gbuffer.gDepthRBO));
     glBindRenderbuffer(GL_RENDERBUFFER, gbuffer.gDepthRBO);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, gbuffer.gDepthRBO);
 
     // 检查framebuffer是否完整

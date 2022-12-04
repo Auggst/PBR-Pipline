@@ -19,11 +19,22 @@ struct GBuffer {
   GLuint gDepthRBO;
 };
 
+enum Pipeline_TYPE
+{
+  FORWARDSHADING,
+  DEFERREDSHADING,
+  PBRSHADING
+};
+
 class Pipeline {
  public:
+   Pipeline(Pipeline_TYPE _type) {type = _type;}
    virtual void init() = 0;
    virtual void render() = 0;
    virtual void renderUI() = 0;
+   inline Pipeline_TYPE GetID() {return this->type;}
+ public:
+   Pipeline_TYPE type;
 };
 
 class ForwardShading : public Pipeline {

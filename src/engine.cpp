@@ -75,7 +75,6 @@ void Engine::InitOpenGL()
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
-  glEnable(GL_LESS);
 }
 
 void Engine::InitGUI() {
@@ -83,8 +82,8 @@ void Engine::InitGUI() {
   ImGui::CreateContext();                     // Setup Dear ImGui context
   ImGui::StyleColorsDark();                   // Setup Dear ImGui style
   ImGuiIO &io = ImGui::GetIO();               // 设置中文字体
-  
-  io.Fonts->AddFontFromFileTTF("c:/windows/fonts/simhei.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
+
+  io.Fonts->AddFontFromFileTTF("c:/windows/fonts/simhei.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
   // io.Fonts->AddFontFromFileTTF("c:/windows/fonts/STXIHEI.TTF", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
   ImGui_ImplGlfw_InitForOpenGL(this->window, true); // Setup Platform/Renderer backends
   ImGui_ImplOpenGL3_Init("#version 430 core");
@@ -138,6 +137,8 @@ void Engine::RenderGUI() {
     ImGui::InputFloat(u8"相机移动速度: ", &(moon->cam->MovementSpeed));
     ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::End();
+    // TODO::抽象管线UI
+    if (this->pipeline == nullptr) {}
   }
 
   ImGui::Render();

@@ -15,7 +15,7 @@ class Quad : public Renderable {
 
     void Draw();
  public:
-    unsigned int VAO;
+    unsigned int VAO, VBO;
 };
 
 class Sphere : public Renderable {
