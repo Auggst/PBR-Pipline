@@ -30,6 +30,7 @@ class Asset{
    std::vector<Quad> vec_Quad;
    std::vector<Cube> vec_Cube;
    std::vector<Sphere> vec_Sphere;
+   std::vector<Floor> vec_Floor;
 };
 
 #endif

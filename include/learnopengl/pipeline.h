@@ -52,6 +52,8 @@ class ForwardShading : public Pipeline {
     std::shared_ptr<PointLight> pointLight;
     std::shared_ptr<SpotLight> spotLight;
     std::shared_ptr<Cube> cube;
+    std::shared_ptr<Floor> floor;
+    std::shared_ptr<Shader> mpFloor_SH;
     std::shared_ptr<Shader> mpModel_SH;
     std::shared_ptr<Shader> mpLight_SH;
     std::shared_ptr<Shader> mpSkybox_SH;
@@ -98,15 +100,14 @@ public:
   Cube cube_screen;
   Quad quad_screen;
   std::shared_ptr<Sphere> spheres;
-  std::shared_ptr<Shader> HDR_SH;
-  std::shared_ptr<Shader> IBL_SH;
-  std::shared_ptr<Shader> Prefilter_SH;
-  std::shared_ptr<Shader> BRDF_SH;
-  std::shared_ptr<Shader> Skybox_SH;
-  std::shared_ptr<Shader> PBR_SH;
+  std::shared_ptr<Shader> mpHDR_SH;
+  std::shared_ptr<Shader> mpIBL_SH;
+  std::shared_ptr<Shader> mpPrefilter_SH;
+  std::shared_ptr<Shader> mpBRDF_SH;
+  std::shared_ptr<Shader> mpSkybox_SH;
+  std::shared_ptr<Shader> mpPBR_SH;
   std::shared_ptr<Model> models;
 };
-
 
 void InitFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height);
 

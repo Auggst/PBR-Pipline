@@ -1,6 +1,6 @@
 #include <learnopengl/light.h>
 
-DirectionLight::DirectionLight() {
+DirectionLight::DirectionLight() : AbstractLight(LIGHT_TYPE::DIRECTION) {
     this->direction = glm::vec3(0.0f, 0.0f, -1.0f);
     this->ambient = glm::vec3(random1f(0.0f, 0.001));
     this->diffuse = glm::vec3(random1f(0.1f, 0.5), random1f(0.1f, 0.5), random1f(0.1f, 0.5));
@@ -15,7 +15,7 @@ void DirectionLight::SendToShader(std::shared_ptr<Shader> sh, int index) {
     sh->setVec3("dtLight[" + std::to_string(index) + "].specular", this->specular);
 }
 
-PointLight::PointLight() {
+PointLight::PointLight() : AbstractLight(LIGHT_TYPE::POINTLIGHT) {
     this->position = glm::vec3(0.0f, 10.0f, 0.0f);
     this->ambient = glm::vec3(random1f(0.01f, 0.05f));
     this->diffuse = glm::vec3(random1f(0.2, 0.5));
@@ -36,7 +36,8 @@ void PointLight::SendToShader(std::shared_ptr<Shader> sh, int index) {
     sh->setFloat("ptLight[" + std::to_string(index) + "].kq", this->kq);
 }
 
-SpotLight::SpotLight() : kc(1.0f), kl(0.09f), kq(0.032f) {
+SpotLight::SpotLight() : AbstractLight(LIGHT_TYPE::SPOTLIGHT), kc(1.0f), kl(0.09f), kq(0.032f)
+{
     this->position = glm::vec3(0.0f);
     this->direction = glm::vec3(0.0f, 0.0f, -1.0f);
     this->ambient = glm::vec3(random1f(0.01f, 0.05f));

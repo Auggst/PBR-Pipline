@@ -308,6 +308,36 @@ CMakeFiles/main.dir/src/pipeline.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/pipeline.cpp.s"
 	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\C++Pro\vscode\LearnOpenGL\src\pipeline.cpp -o CMakeFiles\main.dir\src\pipeline.cpp.s
 
+CMakeFiles/main.dir/src/scene.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/scene.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/scene.cpp.obj: ../src/scene.cpp
+CMakeFiles/main.dir/src/scene.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\C++Pro\vscode\LearnOpenGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/main.dir/src/scene.cpp.obj"
+	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/scene.cpp.obj -MF CMakeFiles\main.dir\src\scene.cpp.obj.d -o CMakeFiles\main.dir\src\scene.cpp.obj -c D:\C++Pro\vscode\LearnOpenGL\src\scene.cpp
+
+CMakeFiles/main.dir/src/scene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/scene.cpp.i"
+	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\C++Pro\vscode\LearnOpenGL\src\scene.cpp > CMakeFiles\main.dir\src\scene.cpp.i
+
+CMakeFiles/main.dir/src/scene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/scene.cpp.s"
+	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\C++Pro\vscode\LearnOpenGL\src\scene.cpp -o CMakeFiles\main.dir\src\scene.cpp.s
+
+CMakeFiles/main.dir/src/shadow.cpp.obj: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/shadow.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
+CMakeFiles/main.dir/src/shadow.cpp.obj: ../src/shadow.cpp
+CMakeFiles/main.dir/src/shadow.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\C++Pro\vscode\LearnOpenGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/main.dir/src/shadow.cpp.obj"
+	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/shadow.cpp.obj -MF CMakeFiles\main.dir\src\shadow.cpp.obj.d -o CMakeFiles\main.dir\src\shadow.cpp.obj -c D:\C++Pro\vscode\LearnOpenGL\src\shadow.cpp
+
+CMakeFiles/main.dir/src/shadow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/shadow.cpp.i"
+	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\C++Pro\vscode\LearnOpenGL\src\shadow.cpp > CMakeFiles\main.dir\src\shadow.cpp.i
+
+CMakeFiles/main.dir/src/shadow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/shadow.cpp.s"
+	D:\C++Pro\env\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\C++Pro\vscode\LearnOpenGL\src\shadow.cpp -o CMakeFiles\main.dir\src\shadow.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/src/asset.cpp.obj" \
@@ -325,7 +355,9 @@ main_OBJECTS = \
 "CMakeFiles/main.dir/src/mesh.cpp.obj" \
 "CMakeFiles/main.dir/src/model.cpp.obj" \
 "CMakeFiles/main.dir/src/myutils.cpp.obj" \
-"CMakeFiles/main.dir/src/pipeline.cpp.obj"
+"CMakeFiles/main.dir/src/pipeline.cpp.obj" \
+"CMakeFiles/main.dir/src/scene.cpp.obj" \
+"CMakeFiles/main.dir/src/shadow.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
@@ -346,11 +378,13 @@ main.exe: CMakeFiles/main.dir/src/mesh.cpp.obj
 main.exe: CMakeFiles/main.dir/src/model.cpp.obj
 main.exe: CMakeFiles/main.dir/src/myutils.cpp.obj
 main.exe: CMakeFiles/main.dir/src/pipeline.cpp.obj
+main.exe: CMakeFiles/main.dir/src/scene.cpp.obj
+main.exe: CMakeFiles/main.dir/src/shadow.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: CMakeFiles/main.dir/linklibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\C++Pro\vscode\LearnOpenGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\C++Pro\vscode\LearnOpenGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

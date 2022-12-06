@@ -37,6 +37,17 @@ unsigned int loadSkybox(std::vector<std::string> &faces);
 
 // utility function for random float number
 // ---------------------------------------------------
-float random1f(float minf, float maxf); 
+float random1f(float minf, float maxf);
 
+// 初始化深度FBO的功能函数
+// ---------------------------------------------------
+void InitDepthFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height);
+
+// 绑定纹理
+// ---------------------------------------------------
+void BindDepthTex(unsigned int &fbo, unsigned int &tex, GLsizei width, GLsizei height);
+
+// 计算切线与副切线
+// ---------------------------------------------------
+void CalTanANDBitan(float *vertices, int numbers, float *tangent);
 #endif

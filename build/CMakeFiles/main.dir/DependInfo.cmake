@@ -24,6 +24,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/C++Pro/vscode/LearnOpenGL/src/model.cpp" "CMakeFiles/main.dir/src/model.cpp.obj" "gcc" "CMakeFiles/main.dir/src/model.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/myutils.cpp" "CMakeFiles/main.dir/src/myutils.cpp.obj" "gcc" "CMakeFiles/main.dir/src/myutils.cpp.obj.d"
   "D:/C++Pro/vscode/LearnOpenGL/src/pipeline.cpp" "CMakeFiles/main.dir/src/pipeline.cpp.obj" "gcc" "CMakeFiles/main.dir/src/pipeline.cpp.obj.d"
+  "D:/C++Pro/vscode/LearnOpenGL/src/scene.cpp" "CMakeFiles/main.dir/src/scene.cpp.obj" "gcc" "CMakeFiles/main.dir/src/scene.cpp.obj.d"
+  "D:/C++Pro/vscode/LearnOpenGL/src/shadow.cpp" "CMakeFiles/main.dir/src/shadow.cpp.obj" "gcc" "CMakeFiles/main.dir/src/shadow.cpp.obj.d"
   )
 
 # Targets to which this target links.

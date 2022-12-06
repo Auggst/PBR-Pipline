@@ -12,6 +12,8 @@ struct Vertex {
     glm::vec3 Position;
     glm::vec3 Normal;
     glm::vec2 TexCoords;
+    glm::vec3 Tangent;
+    glm::vec3 Bitangent;
 };
 
 struct Texture {
@@ -51,8 +53,6 @@ class Model {
    void processNode(aiNode *node, const aiScene *scene);
    Mesh processMesh(aiMesh *mesh, const aiScene *scene);
    vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType texType, string typeName);
-
-   vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType texType, string typeName, const aiScene *scene);
 
    /* 模型数据 */
    vector<Mesh> meshes;

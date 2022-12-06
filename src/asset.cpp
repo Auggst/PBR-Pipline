@@ -53,4 +53,5 @@ void Asset::Init()
     this->vec_Quad.emplace_back(Quad());
     this->vec_Cube.emplace_back(Cube());
     this->vec_Sphere.emplace_back(Sphere());
+    this->vec_Floor.emplace_back(Floor());
 }

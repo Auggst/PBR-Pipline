@@ -22,7 +22,7 @@ ForwardShading::ForwardShading() : Pipeline(Pipeline_TYPE::FORWARDSHADING)
 void ForwardShading::Init() {
     /* 初始化FBO和RT */
     my_color[3] = 1.0f;
-    InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
+    InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
 
@@ -42,6 +42,11 @@ void ForwardShading::Init() {
     Cube *temp_Cube = &(moon->assetManager.vec_Cube[0]);
     this->cube = std::shared_ptr<Cube>(temp_Cube);
     temp_Cube = nullptr;
+
+    Floor *temp_floor = &(moon->assetManager.vec_Floor[0]);
+    this->floor = std::shared_ptr<Floor>(temp_floor);
+    temp_floor = nullptr;
+
     Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
     this->models = std::shared_ptr<Model>(nanosuit);
     nanosuit = nullptr;
@@ -50,6 +55,21 @@ void ForwardShading::Init() {
     this->env_cubemap = moon->assetManager.um_skyboxes.find("BlueSky")->second;
 
     /* 着色器加载 */
+    if (moon->assetManager.um_shaders.find("Floor") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/floor.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/floor.fs";
+        Shader temp_Model(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("Floor", temp_Model);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("Floor")->second);
+    this->mpFloor_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
+    this->mpFloor_SH->use();
+    this->mpFloor_SH->setInt("diffuseMap", 0);
+    this->mpFloor_SH->setInt("normalMap", 1);
+    this->mpFloor_SH->setBool("normalMapping", true);
+
     if (moon->assetManager.um_shaders.find("Model") == moon->assetManager.um_shaders.end())
     {
         std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
@@ -57,7 +77,7 @@ void ForwardShading::Init() {
         Shader temp_Model(vsPath.c_str(), fsPath.c_str());
         moon->assetManager.um_shaders.emplace("Model", temp_Model);
     }
-    Shader *temp_SH = &(moon->assetManager.um_shaders.find("Model")->second);
+    temp_SH = &(moon->assetManager.um_shaders.find("Model")->second);
     this->mpModel_SH = std::shared_ptr<Shader>(temp_SH);
     temp_SH = nullptr;
     this->mpModel_SH->use();
@@ -65,7 +85,7 @@ void ForwardShading::Init() {
 
     if (moon->assetManager.um_shaders.find("LightModelTex") == moon->assetManager.um_shaders.end())
     {
-        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.vs";
         std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/lightTex.fs";
         Shader temp_LM(vsPath.c_str(), fsPath.c_str());
         moon->assetManager.um_shaders.emplace("LightModelTex", temp_LM);
@@ -117,10 +137,10 @@ void ForwardShading::Render() {
     this->mpLight_SH->setMat4("view", view);
     this->mpLight_SH->setMat4("projection", projection);
     const float pi = 3.1415926;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 1; i++) {
         model = glm::mat4(0.5);
-        float coff_pi = pi * i;
-        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), -10.0f);
+        // float coff_pi = pi * i;
+        glm::vec3 newPos = glm::vec3(0.0f, 15.0f, 0.0f);
         model = glm::translate(model, newPos);
         this->mpLight_SH->setMat4("model", model);
         glActiveTexture(GL_TEXTURE0);
@@ -146,25 +166,30 @@ void ForwardShading::Render() {
     for (int i = 0; i < 4; i++) {
         model = glm::mat4(1.0);
         float coff_pi = pi * i;
-        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), -10.0f);
+        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), 10.0f);
 
         /* 方向光加载 */
         directionLight->direction = glm::vec3(0.0f) - newPos;
         directionLight->diffuse = diff;
         directionLight->SendToShader(this->mpModel_SH, i);
+        directionLight->SendToShader(this->mpFloor_SH, i);
 
         /* 点光源加载 */
-        pointLight->position = glm::vec3(0.0f, 20.0f, 0.0f);
+        pointLight->position = glm::vec3(0.0f, 15.0f, 0.0f);
         pointLight->diffuse = diff;
         pointLight->SendToShader(this->mpModel_SH, i);
-
+        pointLight->SendToShader(this->mpFloor_SH, i);
     }
 
     /* 聚光灯加载 */
     spotLight->position = moon->cam->Position;
-    spotLight->position = moon->cam->Front;
-    spotLight->diffuse = glm::vec3(1.0f, 0.0f, 0.0f);
-    spotLight->specular = glm::vec3(0.0f, 0.0f, 1.0f);
+    spotLight->direction = moon->cam->Front;
+    spotLight->ambient = glm::vec3(0.001f);
+    spotLight->diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
+    spotLight->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    spotLight->kc = 1.0f;
+    spotLight->kl = 0.09f;
+    spotLight->kq = 0.0032f;
     spotLight->SendToShader(mpModel_SH, 0);
 
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
@@ -173,7 +198,16 @@ void ForwardShading::Render() {
         this->models->Draw(*(this->mpModel_SH));
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
     }
-    
+
+    // 地板渲染
+    model = glm::mat4(1.0);
+    this->mpFloor_SH->use();
+    this->mpFloor_SH->setMat4("view", view);
+    this->mpFloor_SH->setMat4("projection", projection);
+    this->mpFloor_SH->setMat4("model", model);
+    this->mpFloor_SH->setVec3("viewPos", moon->cam->Position);
+    spotLight->SendToShader(mpFloor_SH, 0);
+    this->floor->Draw();
 
     // 天空盒渲染
     glDepthFunc(GL_LEQUAL);
@@ -232,8 +266,8 @@ static std::vector<glm::vec3> lightCol;
 
 void DeferredShading::Init() {
     /* 初始化FBO 和 RT */
-    InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
-    InitBaseGBuffer(this->gBuffer, 512, 512);
+    InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
+    InitBaseGBuffer(this->gBuffer, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
 
@@ -346,7 +380,7 @@ void DeferredShading::Init() {
 
 void DeferredShading::Render() {
 
-    glViewport(0, 0, 512, 512);
+    glViewport(0, 0, 720, 720);
     // 1. 几何阶段
     glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -399,7 +433,7 @@ void DeferredShading::Render() {
     // 2.5 将几何的深度缓冲复制到fbo中
     glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer.gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->fbo);
-    glBlitFramebuffer(0, 0, 512, 512, 0, 0, 512, 512, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBlitFramebuffer(0, 0, 720, 720, 0, 0, 720, 720, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 
 
@@ -461,12 +495,12 @@ PBR::PBR() : Pipeline(Pipeline_TYPE::PBRSHADING)
 {
     this->nums = 0;
     // TODO:设置默认着色器
-    this->HDR_SH = nullptr;
-    this->IBL_SH = nullptr;
-    this->Prefilter_SH = nullptr;
-    this->BRDF_SH = nullptr;
-    this->Skybox_SH = nullptr;
-    this->PBR_SH = nullptr;
+    this->mpHDR_SH = nullptr;
+    this->mpIBL_SH = nullptr;
+    this->mpPrefilter_SH = nullptr;
+    this->mpBRDF_SH = nullptr;
+    this->mpSkybox_SH = nullptr;
+    this->mpPBR_SH = nullptr;
 }
 
 void PBR::Init() {
@@ -476,10 +510,15 @@ void PBR::Init() {
     this->nums += 1;
     this->spacing = 10;
 
-    InitFBO(this->fbo, this->rbo, this->res_tex, 512, 512);
+    InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
-    this->hdr_tex = loadHDR("D:\\C++Pro\\vscode\\LearnOpenGL\\texture\\HS-Cave-Room\\Mt-Washington-Cave-Room_Ref.hdr");
-    genCubeMap(this->env_cubemap, 512, 512);
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+    if (moon->assetManager.um_tex.find("RoomHDR") == moon->assetManager.um_tex.end()) {
+        std::string HDR_Path = "D:/C++Pro/vscode/LearnOpenGL/texture/HS-Cave-Room/Mt-Washington-Cave-Room_Ref.hdr";
+        moon->assetManager.um_tex.emplace("RoomHDR", loadHDR(HDR_Path.c_str()));
+    }
+    this->hdr_tex = moon->assetManager.um_tex.find("RoomHDR")->second;
+    genCubeMap(this->env_cubemap, 720, 720);
     genCubeMap(this->irradiance_cubemap, 32, 32);
 
     //设置投影和视角矩阵
@@ -500,50 +539,68 @@ void PBR::Init() {
     PrefilterInit(captureProjection, captureViews);
     BRDFInit();
 
-    std::string vs_fn;
-    std::string fs_fn;
+    if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("SkyBox", temp_Skybox);
+    }
+    Shader* temp_SH = &(moon->assetManager.um_shaders.find("SkyBox")->second);
+    this->mpSkybox_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setInt("environmentMap", 0);
 
-    vs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Skybox.vs";
-    fs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Skybox.fs";
-    this->Skybox_SH = std::make_shared<Shader>(vs_fn.c_str(), fs_fn.c_str());
-    this->Skybox_SH->use();
-    this->Skybox_SH->setInt("environmentMap", 0);
-
-
-    vs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\VertexShader.vs";
-    fs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\FragmentShader.fs";
-    this->PBR_SH = std::make_shared<Shader>(vs_fn.c_str(), fs_fn.c_str());
-    this->PBR_SH->use();
-    this->PBR_SH->setInt("albedoMap", 0);
-    this->PBR_SH->setInt("normalMap", 1);
-    // this->PBR_SH->setInt("metallicMap", 2);
-    // this->PBR_SH->setInt("roughnessMap", 3);
-    this->PBR_SH->setInt("aoMap", 4);
-    this->PBR_SH->setInt("irradianceMap", 5);
-    this->PBR_SH->setInt("prefilterMap", 6);
-    this->PBR_SH->setInt("brdfLUT", 7);
+    if (moon->assetManager.um_shaders.find("PBR") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/VertexShader.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/FragmentShader.Fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("PBR", temp_Skybox);
+    }
+    temp_SH = &(moon->assetManager.um_shaders.find("PBR")->second);
+    this->mpPBR_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
+    this->mpPBR_SH->use();
+    this->mpPBR_SH->setInt("albedoMap", 0);
+    this->mpPBR_SH->setInt("normalMap", 1);
+    // this->mpPBR_SH->setInt("metallicMap", 2);
+    // this->mpPBR_SH->setInt("roughnessMap", 3);
+    this->mpPBR_SH->setInt("aoMap", 4);
+    this->mpPBR_SH->setInt("irradianceMap", 5);
+    this->mpPBR_SH->setInt("prefilterMap", 6);
+    this->mpPBR_SH->setInt("brdfLUT", 7);
 
     // 模型加载
-    std::string modelPath = "D:/C++Pro/data/nanosuit/nanosuit.obj";
-    this->models = std::make_shared<Model>(modelPath);
+    Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
+    this->models = std::shared_ptr<Model>(nanosuit);
 }
 
 void PBR::HDRInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews)
 {
-    std::string vs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\HDR2CUBE.vs";
-    std::string fs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\HDR2CUBE.fs";
-    this->HDR_SH = std::make_shared<Shader>(vs_fn.c_str(), fs_fn.c_str());
-    this->HDR_SH->use();
-    this->HDR_SH->setInt("equirectangularMap", 0);
-    this->HDR_SH->setMat4("projection", captureProjection);
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+    if (moon->assetManager.um_shaders.find("HDR") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/HDR2CUBE.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/HDR2CUBE.Fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("HDR", temp_Skybox);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("HDR")->second);
+    this->mpHDR_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
+    this->mpHDR_SH->use();
+    this->mpHDR_SH->setInt("equirectangularMap", 0);
+    this->mpHDR_SH->setMat4("projection", captureProjection);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->hdr_tex);
 
-    glViewport(0, 0, 512, 512);
+    glViewport(0, 0, 720, 720);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     for (unsigned int i = 0; i < 6; i++)
     {
-        this->HDR_SH->setMat4("view", captureViews[i]);
+        this->mpHDR_SH->setMat4("view", captureViews[i]);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, this->env_cubemap, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         this->cube_screen.Draw();
@@ -556,14 +613,22 @@ void PBR::HDRInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureV
 
 void PBR::IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews)
 {
-
-    std::string vs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\HDR2CUBE.vs";
-    std::string fs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\HDR2IBL.fs";
-    this->IBL_SH = std::make_shared<Shader>(vs_fn.c_str(), fs_fn.c_str());
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+    if (moon->assetManager.um_shaders.find("IBL") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/HDR2CUBE.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/HDR2IBL.Fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("IBL", temp_Skybox);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("IBL")->second);
+    this->mpIBL_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
+    this->mpIBL_SH->use();
     // PBR: 辐照度贴图
-    this->IBL_SH->use();
-    this->IBL_SH->setInt("environmentMap", 0);
-    this->IBL_SH->setMat4("projection", captureProjection);
+    this->mpIBL_SH->use();
+    this->mpIBL_SH->setInt("environmentMap", 0);
+    this->mpIBL_SH->setMat4("projection", captureProjection);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
 
@@ -571,7 +636,7 @@ void PBR::IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureV
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     for (unsigned int i = 0; i < 6; i++)
     {
-        this->IBL_SH->setMat4("view", captureViews[i]);
+        this->mpIBL_SH->setMat4("view", captureViews[i]);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, this->irradiance_cubemap, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         this->cube_screen.Draw();
@@ -581,9 +646,17 @@ void PBR::IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureV
 
 void PBR::PrefilterInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews)
 {
-    std::string vs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\HDR2CUBE.vs";
-    std::string fs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\Prefilter.fs";
-    this->Prefilter_SH = std::make_shared<Shader>(vs_fn.c_str(), fs_fn.c_str());
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+    if (moon->assetManager.um_shaders.find("PreFilter") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/HDR2CUBE.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/Prefilter.Fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("PreFilter", temp_Skybox);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("PreFilter")->second);
+    this->mpPrefilter_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
 
     // PBR: 预滤波立方体贴图
     // --------------------------------------
@@ -592,9 +665,9 @@ void PBR::PrefilterInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &ca
 
     // PBR: 拟蒙特卡洛生成环境光得预滤波贴图
     // --------------------------------------
-    this->Prefilter_SH->use();
-    this->Prefilter_SH->setInt("environmentMap", 0);
-    this->Prefilter_SH->setMat4("projection", captureProjection);
+    this->mpPrefilter_SH->use();
+    this->mpPrefilter_SH->setInt("environmentMap", 0);
+    this->mpPrefilter_SH->setMat4("projection", captureProjection);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
@@ -609,10 +682,10 @@ void PBR::PrefilterInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &ca
         glViewport(0, 0, mipWidth, mipHeight);
 
         float roughness = (float)mip / (float)(maxMipLevels - 1);
-        this->Prefilter_SH->setFloat("roughness", roughness);
+        this->mpPrefilter_SH->setFloat("roughness", roughness);
         for (unsigned int i = 0; i < 6; i++)
         {
-            this->Prefilter_SH->setMat4("view", captureViews[i]);
+            this->mpPrefilter_SH->setMat4("view", captureViews[i]);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, this->prefilter_cubemap, mip);
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -623,16 +696,23 @@ void PBR::PrefilterInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &ca
 }
 
 void PBR::BRDFInit() {
-    std::string vs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\brdf.vs";
-    std::string fs_fn = "D:\\C++Pro\\vscode\\LearnOpenGL\\src\\shader\\brdf.fs";
-    this->BRDF_SH = std::make_shared<Shader>(vs_fn.c_str(), fs_fn.c_str());
-
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+    if (moon->assetManager.um_shaders.find("BRDF") == moon->assetManager.um_shaders.end())
+    {
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/brdf.vs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/PBR/brdf.Fs";
+        Shader temp_Skybox(vsPath.c_str(), fsPath.c_str());
+        moon->assetManager.um_shaders.emplace("BRDF", temp_Skybox);
+    }
+    Shader *temp_SH = &(moon->assetManager.um_shaders.find("BRDF")->second);
+    this->mpBRDF_SH = std::shared_ptr<Shader>(temp_SH);
+    temp_SH = nullptr;
     // PBR: 生成2D LUT
     // -----------------------------------------
     glGenTextures(1, &(this->brdf_tex));
 
     glBindTexture(GL_TEXTURE_2D, this->brdf_tex);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RG16F, 512, 512, 0, GL_RG, GL_FLOAT, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RG16F, 720, 720, 0, GL_RG, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -640,11 +720,11 @@ void PBR::BRDFInit() {
 
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glBindRenderbuffer(GL_RENDERBUFFER, this->rbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 720, 720);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->brdf_tex, 0);
 
-    glViewport(0, 0, 512, 512);
-    this->BRDF_SH->use();
+    glViewport(0, 0, 720, 720);
+    this->mpBRDF_SH->use();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     this->quad_screen.Draw();
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -665,10 +745,10 @@ void PBR::Render()
     glm::mat4 view = moon->cam->GetViewMatrix();
     glm::mat4 projection = glm::perspective(glm::radians(moon->cam->Zoom), (float)moon->width / (float)moon->height, 0.1f, 100.0f);
     
-    this->PBR_SH->use();
-    this->PBR_SH->setMat4("view", view);
-    this->PBR_SH->setMat4("projection", projection);
-    this->PBR_SH->setVec3("camPos", moon->cam->Position);
+    this->mpPBR_SH->use();
+    this->mpPBR_SH->setMat4("view", view);
+    this->mpPBR_SH->setMat4("projection", projection);
+    this->mpPBR_SH->setVec3("camPos", moon->cam->Position);
     glActiveTexture(GL_TEXTURE5);
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->irradiance_cubemap);
     glActiveTexture(GL_TEXTURE6);
@@ -680,11 +760,11 @@ void PBR::Render()
     //渲染材质球
     for (unsigned i = 0; i < this->nums; i++) {
         model = glm::translate(model, glm::vec3((float)(i - (this->nums / 2)) * spacing, (float)(i - (this->nums / 2)) * spacing, -2.0));
-        this->PBR_SH->setMat4("model", model);
-        this->PBR_SH->setFloat("metal", this->spheres->mental);
-        this->PBR_SH->setFloat("rough", this->spheres->rough);
+        this->mpPBR_SH->setMat4("model", model);
+        this->mpPBR_SH->setFloat("metal", this->spheres->mental);
+        this->mpPBR_SH->setFloat("rough", this->spheres->rough);
         //this->spheres->Draw();
-        this->models->Draw(*(this->PBR_SH));
+        this->models->Draw(*(this->mpPBR_SH));
     }
 
     //TODO:实例化优化
@@ -693,20 +773,20 @@ void PBR::Render()
     for (auto i = 0; i < 4; i++) {
         float coff_pi = pi * i;
         glm::vec3 newPos = glm::vec3(10.0f * cos(-pi * 0.5 + coff_pi), 10.0f * (i < 2 ? 1.0 : -1.0), 10.0f);
-        this->PBR_SH->setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
-        this->PBR_SH->setVec3("lightColors[" + std::to_string(i) + "]", glm::vec3(300.f));
+        this->mpPBR_SH->setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
+        this->mpPBR_SH->setVec3("lightColors[" + std::to_string(i) + "]", glm::vec3(300.f));
 
         model = glm::mat4(1.0f);
         model = glm::translate(model, newPos);
         model = glm::scale(model, glm::vec3(0.5f));
-        this->PBR_SH->setMat4("model", model);
+        this->mpPBR_SH->setMat4("model", model);
         this->spheres->Draw();
     }
 
     glDepthFunc(GL_LEQUAL);
-    this->Skybox_SH->use();
-    this->Skybox_SH->setMat4("view", view);
-    this->Skybox_SH->setMat4("projection", projection);
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setMat4("view", view);
+    this->mpSkybox_SH->setMat4("projection", projection);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
     this->cube_screen.Draw();

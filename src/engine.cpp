@@ -2,7 +2,7 @@
 
 std::shared_ptr<Engine> Engine::moon;
 
-static float lastX = 1280.0f / 2.0;
+static float lastX = 1320.0f / 2.0;
 static float lastY = 720.0f / 2.0;
 static bool firstMouse = true;
 
@@ -11,7 +11,7 @@ static float deltaTime = 0.0f;
 static float lastFrame = 0.0f;
 
 Engine::Engine() {
-  this->width = 1280;
+  this->width = 1320;
   this->height = 720;
   this->window_name = "Moon";
   this->window = nullptr;
@@ -137,7 +137,7 @@ void Engine::RenderGUI() {
   {
     ImGui::Begin(u8"Moon引擎全局设置");
     ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-    ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+    ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
     //主窗口
     ImGui::Text(u8"用于调整全局设置");
     ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), u8"相机参数:");
@@ -152,14 +152,14 @@ void Engine::RenderGUI() {
       {
         ImGui::Begin(u8"渲染窗口");
         ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
         ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
       }
       {
         ImGui::Begin(u8"延迟渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
         //主窗口
         ImGui::Text(u8"用于调整延迟渲染管线对应参数");
         ImGui::End();
@@ -169,14 +169,14 @@ void Engine::RenderGUI() {
       {
         ImGui::Begin(u8"渲染窗口");
         ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
       }
       {
         ImGui::Begin(u8"前向渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
         //主窗口
         ImGui::Text(u8"用于调整前向渲染管线对应参数");
         // 编辑颜色 (stored as ~4 floats)
@@ -188,15 +188,15 @@ void Engine::RenderGUI() {
       {
         ImGui::Begin(u8"渲染窗口");
         ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(600, 600), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
+        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
       }
       // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
       {
-        ImGui::Begin(u8"PBR渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
+        ImGui::Begin(u8"PBR渲染管线参数设置"); 
+        ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
+        ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
         //主窗口
         ImGui::Text(u8"用于调整PBR渲染管线对应参数");
         // if (this->spheres != nullptr)

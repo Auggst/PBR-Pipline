@@ -139,3 +139,95 @@ float random1f(float minf, float maxf) {
     std::uniform_real_distribution<> distrib(minf, maxf);
     return distrib(eng);
 }
+
+// 初始化深度FBO的功能函数
+void InitDepthFBO(unsigned int &fbo, unsigned int &rbo, unsigned int &tex, GLsizei width, GLsizei height) {
+    genFramebuffer(fbo, rbo, width, height);
+
+    glGenTextures(1, &(tex));
+
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+// 绑定深度纹理
+void BindDepthTex(unsigned int &fbo, unsigned int &tex, GLsizei width, GLsizei height) {
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glGenTextures(1, &(tex));
+
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+// 计算每个三角形的切线和副切线
+std::vector<glm::vec3> CalTan(std::vector<glm::vec3> &pos,std::vector<glm::vec2> &uv) {
+    std::vector<glm::vec3> result;
+    glm::vec3 edge1 = pos[1] - pos[0];
+    glm::vec3 edge2 = pos[2] - pos[0];
+    glm::vec2 deltaUV1 = uv[1] - uv[0];
+    glm::vec2 deltaUV2 = uv[2] - uv[0];
+    GLfloat f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+    glm::vec3 tangent1;
+    tangent1.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+    tangent1.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+    tangent1.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+    tangent1 = glm::normalize(tangent1);
+    result.emplace_back(tangent1);
+
+    glm::vec3 bitangent1;
+    bitangent1.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+    bitangent1.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+    bitangent1.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+    bitangent1 = glm::normalize(bitangent1);
+    result.emplace_back(bitangent1);
+    return result;
+}
+
+// 计算切线与副切线
+void CalTanANDBitan(float *vertices, int numbers, float *tangent) {
+    std::vector<glm::vec3> pos(3);
+    std::vector<glm::vec2> uv(3);
+    for (int i = 0; i < numbers; i++) {
+        pos[i % 3] = glm::vec3(*(vertices + 0 + i * 8), *(vertices + 1 + i * 8), *(vertices + 2 + i * 8));
+        uv[i % 3] = glm::vec2(*(vertices + 6 + i * 8), *(vertices + 7 + i * 8));
+        if ((i + 1) % 3 == 0) {
+            std::vector<glm::vec3> temp = CalTan(pos, uv);
+            *(tangent + 0 + (i - 2) * 6) = temp[0].x;
+            *(tangent + 1 + (i - 2) * 6) = temp[0].y;
+            *(tangent + 2 + (i - 2) * 6) = temp[0].z;
+            *(tangent + 3 + (i - 2) * 6) = temp[1].x;
+            *(tangent + 4 + (i - 2) * 6) = temp[1].y;
+            *(tangent + 5 + (i - 2) * 6) = temp[1].z;
+            *(tangent + 6 + (i - 2) * 6) = temp[0].x;
+            *(tangent + 7 + (i - 2) * 6) = temp[0].y;
+            *(tangent + 8 + (i - 2) * 6) = temp[0].z;
+            *(tangent + 9 + (i - 2) * 6) = temp[1].x;
+            *(tangent + 10 + (i - 2) * 6) = temp[1].y;
+            *(tangent + 11 + (i - 2) * 6) = temp[1].z;
+            *(tangent + 12 + (i - 2) * 6) = temp[0].x;
+            *(tangent + 13 + (i - 2) * 6) = temp[0].y;
+            *(tangent + 14 + (i - 2) * 6) = temp[0].z;
+            *(tangent + 15 + (i - 2) * 6) = temp[1].x;
+            *(tangent + 16 + (i - 2) * 6) = temp[1].y;
+            *(tangent + 17 + (i - 2) * 6) = temp[1].z;
+        }
+    }
+}
+

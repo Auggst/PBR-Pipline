@@ -3,8 +3,7 @@
 #include <learnopengl/model.h>
 #include <learnopengl/myutils.h>
 
-Quad::Quad()
-{
+Quad::Quad() : Renderable(MESH_TYPE::QUAD) {
     float quadVertices[] = {
         // positions          // texture Coords
         -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
@@ -35,7 +34,7 @@ void Quad::Draw() {
     glBindVertexArray(0);
 }
 
-Sphere::Sphere() {
+Sphere::Sphere() : Renderable(MESH_TYPE::SPHERE) {
     glGenVertexArrays(1, &(this->VAO));
 
     unsigned int vbo, ebo;
@@ -128,8 +127,8 @@ Sphere::Sphere() {
     this->rough_tex = loadTexture("D:\\C++Pro\\vscode\\LearnOpenGL\\texture\\rusted-steel-unity\\rustediron2_roughness.png");
     this->ao_tex = loadTexture("D:\\C++Pro\\vscode\\LearnOpenGL\\texture\\rusted-steel-unity\\rusted-steel_ao.png");
 
-    this->mental = 0.0f;
-    this->rough = 0.0f;
+    this->mental = 0.5f;
+    this->rough = 0.5f;
 }
 
 void Sphere::Draw() {
@@ -148,7 +147,7 @@ void Sphere::Draw() {
     glBindVertexArray(0);
 }
 
-Cube::Cube() {
+Cube::Cube() : Renderable(MESH_TYPE::CUBE) {
 
     float vertices[] = {
         // back face
@@ -214,6 +213,112 @@ Cube::Cube() {
 
 void Cube::Draw() {
     // render Cube
+    glBindVertexArray(this->VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+}
+
+Floor::Floor() : Renderable(MESH_TYPE::FLOOR) {
+    float vertices[] = {
+        // back face
+        -50.0f, -50.0f, -50.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+        50.0f, 0.0f, -50.0f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,   // top-right
+        50.0f, -50.0f, -50.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f,  // bottom-right
+        50.0f, 0.0f, -50.0f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,   // top-right
+        -50.0f, -50.0f, -50.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+        -50.0f, 0.0f, -50.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,  // top-left
+
+        // front face
+        -50.0f, -50.0f, 50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
+        50.0f, -50.0f, 50.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  // bottom-right
+        50.0f, 0.0f, 50.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,   // top-right
+        50.0f, 0.0f, 50.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,   // top-right
+        -50.0f, 0.0f, 50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  // top-left
+        -50.0f, -50.0f, 50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
+        // left face
+        -50.0f, 0.0f, 50.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // top-right
+        -50.0f, 0.0f, -50.0f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // top-left
+        -50.0f, -50.0f, -50.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
+        -50.0f, -50.0f, -50.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
+        -50.0f, -50.0f, 50.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
+        -50.0f, 0.0f, 50.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // top-right
+
+        // right face
+        50.0f, 0.0f, 50.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,     // top-left
+        50.0f, -50.0f, -50.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,   // bottom-right
+        50.0f, 0.0f, -50.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,    // top-right
+        50.0f, -50.0f, -50.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,   // bottom-right
+        50.0f, 0.0f, 50.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,     // top-left
+        50.0f, -50.0f, 50.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,    // bottom-left
+
+        // bottom face
+        -50.0f, -50.0f, -50.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
+        50.0f, -50.0f, -50.0f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f,  // top-left
+        50.0f, -50.0f, 50.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,   // bottom-left
+        50.0f, -50.0f, 50.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,   // bottom-left
+        -50.0f, -50.0f, 50.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
+        -50.0f, -50.0f, -50.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
+
+        // top face
+        -50.0f, 0.0f, -50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top-left
+        50.0f, 0.0f, 50.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // bottom-right
+        50.0f, 0.0f, -50.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,  // top-right
+        50.0f, 0.0f, 50.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // bottom-right
+        -50.0f, 0.0f, -50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top-left
+        -50.0f, 0.0f, 50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f   // bottom-left
+    };
+
+    float tangent[36 * 6] = {0.0};
+    CalTanANDBitan(vertices, 36, tangent);
+
+    unsigned int vbo, tvbo;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &vbo);
+    glGenBuffers(1, &tvbo);
+    /*
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(DATA_VAO), &(data[0]), GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(DATA_VAO), (void *)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(DATA_VAO), (void *)offsetof(DATA_VAO, DATA_VAO::Normal));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(DATA_VAO), (void *)offsetof(DATA_VAO, DATA_VAO::TexCoords));
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(DATA_VAO), (void *)offsetof(DATA_VAO, DATA_VAO::Tangent));
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(DATA_VAO), (void *)offsetof(DATA_VAO, DATA_VAO::Bitangent));
+    */
+    // fill buffer
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    // link vertex attributes
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
+
+    glBindBuffer(GL_ARRAY_BUFFER, tvbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(tangent), &(tangent[0]), GL_STATIC_DRAW);
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+    glBindVertexArray(0);
+
+    this->tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/brickwall.jpg");
+    this->normal_tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/brickwall_normal.jpg");
+}
+
+void Floor::Draw() {
+    // render Floor
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, this->tex);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, this->normal_tex);
     glBindVertexArray(this->VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);

@@ -6,9 +6,16 @@
 #include <learnopengl/myutils.h>
 #include <learnopengl/shader_s.h>
 
+enum LIGHT_TYPE {
+  DIRECTION, POINTLIGHT, SPOTLIGHT
+};
 
 class AbstractLight {
+ public:
+   AbstractLight(LIGHT_TYPE _type) {this->type = _type;}
    virtual void SendToShader(std::shared_ptr<Shader> sh, int index) = 0;
+ public:
+   LIGHT_TYPE type;
 };
 
 class DirectionLight : public AbstractLight {
