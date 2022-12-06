@@ -13,6 +13,7 @@ enum LIGHT_TYPE {
 class AbstractLight {
  public:
    AbstractLight(LIGHT_TYPE _type) {this->type = _type;}
+   virtual ~AbstractLight();
    virtual void SendToShader(std::shared_ptr<Shader> sh, int index) = 0;
  public:
    LIGHT_TYPE type;
@@ -21,6 +22,7 @@ class AbstractLight {
 class DirectionLight : public AbstractLight {
  public:
    DirectionLight();
+   ~DirectionLight();
    void SendToShader(std::shared_ptr<Shader> sh, int index);
  public:
    glm::vec3 direction;
@@ -32,6 +34,7 @@ class DirectionLight : public AbstractLight {
 class PointLight : public AbstractLight {
  public:
    PointLight();
+   ~PointLight();
    void SendToShader(std::shared_ptr<Shader> sh, int index);
  public:
    glm::vec3 position;
@@ -47,6 +50,7 @@ class PointLight : public AbstractLight {
 class SpotLight : public AbstractLight {
  public:
    SpotLight();
+   ~SpotLight();
    void SendToShader(std::shared_ptr<Shader> sh, int index);
  public:
    glm::vec3 position;

@@ -1,10 +1,18 @@
 #include <learnopengl/light.h>
 
+AbstractLight::~AbstractLight() {
+
+}
+
 DirectionLight::DirectionLight() : AbstractLight(LIGHT_TYPE::DIRECTION) {
     this->direction = glm::vec3(0.0f, 0.0f, -1.0f);
     this->ambient = glm::vec3(random1f(0.0f, 0.001));
     this->diffuse = glm::vec3(random1f(0.1f, 0.5), random1f(0.1f, 0.5), random1f(0.1f, 0.5));
     this->specular = glm::vec3(random1f(0.5f, 1.0), random1f(0.5f, 1.0), random1f(0.5f, 1.0));
+}
+
+DirectionLight::~DirectionLight() {
+
 }
 
 void DirectionLight::SendToShader(std::shared_ptr<Shader> sh, int index) {
@@ -23,6 +31,10 @@ PointLight::PointLight() : AbstractLight(LIGHT_TYPE::POINTLIGHT) {
     this->kc = 1.0f;
     this->kl = 0.09f;
     this->kq = 0.032f;
+}
+
+PointLight::~PointLight() {
+
 }
 
 void PointLight::SendToShader(std::shared_ptr<Shader> sh, int index) {
@@ -45,6 +57,10 @@ SpotLight::SpotLight() : AbstractLight(LIGHT_TYPE::SPOTLIGHT), kc(1.0f), kl(0.09
     this->specular = glm::vec3(random1f(0.5, 1.0));
     this->cutOff = glm::cos(glm::radians(12.5f));
     this->outerCutOff = glm::cos(glm::radians(17.5f));
+}
+
+SpotLight::~SpotLight() {
+    
 }
 
 void SpotLight::SendToShader(std::shared_ptr<Shader> sh, int index) {

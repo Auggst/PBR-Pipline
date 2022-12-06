@@ -18,23 +18,23 @@ Shadow::~Shadow() {
 
 void Shadow::Init() {
     std::shared_ptr<Engine> moon = Engine::getInstance();
-    if (moon->assetManager.um_tex.find("SM") == moon->assetManager.um_tex.end()) {
-        moon->assetManager.um_tex.emplace("SM", *(this->sm_tex));
-    }
-    this->sm_tex = &(moon->assetManager.um_tex.find("SM")->second);
-    // InitFBO(this->FBO, this->RBO, *(this->sm_tex), this->width, this->height);
-    InitDepthFBO(this->FBO, this->RBO, *(this->sm_tex), this->width, this->height);
+    // if (moon->assetManager.um_tex.find("SM") == moon->assetManager.um_tex.end()) {
+    //     moon->assetManager.um_tex.emplace("SM", *(this->sm_tex));
+    // }
+    // this->sm_tex = &(moon->assetManager.um_tex.find("SM")->second);
+    // // InitFBO(this->FBO, this->RBO, *(this->sm_tex), this->width, this->height);
+    // InitDepthFBO(this->FBO, this->RBO, *(this->sm_tex), this->width, this->height);
 
-    if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
-    {
-        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Shadow/shadow.vs";
-        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Shadow/without.fs";
-        Shader temp_SM(vsPath.c_str(), fsPath.c_str());
-        moon->assetManager.um_shaders.emplace("ShadowMap", temp_SM);
-    }
-    Shader *temp_SH = &(moon->assetManager.um_shaders.find("ShadowMap")->second);
-    this->mpSM_SH = std::shared_ptr<Shader>(temp_SH);
-    temp_SH = nullptr;
+    // if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
+    // {
+    //     std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Shadow/shadow.vs";
+    //     std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Shadow/without.fs";
+    //     Shader temp_SM(vsPath.c_str(), fsPath.c_str());
+    //     moon->assetManager.um_shaders.emplace("ShadowMap", temp_SM);
+    // }
+    // Shader *temp_SH = &(moon->assetManager.um_shaders.find("ShadowMap")->second);
+    // this->mpSM_SH = std::shared_ptr<Shader>(temp_SH);
+    // temp_SH = nullptr;
 }
 
 void Shadow::RenderSM(PointLight &light) {

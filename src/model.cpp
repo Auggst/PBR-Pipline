@@ -3,6 +3,10 @@
 #include <learnopengl/model.h>
 #include <learnopengl/myutils.h>
 
+Renderable::~Renderable() {
+
+}
+
 Quad::Quad() : Renderable(MESH_TYPE::QUAD) {
     float quadVertices[] = {
         // positions          // texture Coords
@@ -26,6 +30,10 @@ Quad::Quad() : Renderable(MESH_TYPE::QUAD) {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+}
+
+Quad::~Quad() {
+
 }
 
 void Quad::Draw() {
@@ -131,6 +139,10 @@ Sphere::Sphere() : Renderable(MESH_TYPE::SPHERE) {
     this->rough = 0.5f;
 }
 
+Sphere::~Sphere() {
+
+}
+
 void Sphere::Draw() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->albedo_tex);
@@ -209,6 +221,10 @@ Cube::Cube() : Renderable(MESH_TYPE::CUBE) {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+}
+
+Cube::~Cube() {
+
 }
 
 void Cube::Draw() {
@@ -311,6 +327,10 @@ Floor::Floor() : Renderable(MESH_TYPE::FLOOR) {
 
     this->tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/brickwall.jpg");
     this->normal_tex = loadTexture("D:/C++Pro/vscode/LearnOpenGL/texture/brickwall_normal.jpg");
+}
+
+Floor::~Floor() {
+    
 }
 
 void Floor::Draw() {

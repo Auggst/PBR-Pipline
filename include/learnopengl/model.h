@@ -11,6 +11,7 @@ enum MESH_TYPE {
 class Renderable {
  public:
    Renderable(MESH_TYPE _type) {this->type = _type;}
+   virtual ~Renderable();
    inline MESH_TYPE getType() {return this->type;}
    virtual void Draw() = 0;
  private: 
@@ -20,7 +21,7 @@ class Renderable {
 class Quad : public Renderable {
  public:
     Quad();
-
+    ~Quad();
     void Draw();
  public:
     unsigned int VAO, VBO;
@@ -29,7 +30,7 @@ class Quad : public Renderable {
 class Sphere : public Renderable {
  public:
     Sphere();
-
+    ~Sphere();
     void Draw();
 
  public:
@@ -40,7 +41,7 @@ class Sphere : public Renderable {
 class Cube : public Renderable {
  public:
     Cube();
-
+    ~Cube();
     void Draw();
  public:
     unsigned int VAO;
@@ -50,6 +51,7 @@ class Floor : public Renderable
 {
 public:
    Floor();
+   ~Floor();
    void Draw();
  public:
    unsigned int VAO, tex, normal_tex;

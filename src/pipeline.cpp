@@ -20,40 +20,45 @@ ForwardShading::ForwardShading() : Pipeline(Pipeline_TYPE::FORWARDSHADING)
 }
 
 void ForwardShading::Init() {
+    std::cout << "初始化开始！" << std::endl;
     /* 初始化FBO和RT */
     my_color[3] = 1.0f;
     InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
 
+    std::cout << "灯光加载开始！" << std::endl;
     /* 创建灯光和模型 */
     // 灯光加载
-    DirectionLight *temp_dl = &(moon->assetManager.vec_DL[0]);
-    this->directionLight = std::shared_ptr<DirectionLight>(temp_dl);
-    temp_dl = nullptr;
-    PointLight *temp_pl = &(moon->assetManager.vec_PL[0]);
-    this->pointLight = std::shared_ptr<PointLight>(temp_pl);
-    temp_pl = nullptr;
-    SpotLight *temp_sl = &(moon->assetManager.vec_SL[0]);
-    this->spotLight = std::shared_ptr<SpotLight>(temp_sl);
-    temp_sl = nullptr;
+    AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
+    this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
+    tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
+    this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
+    tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
+    this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
+    tempAL = nullptr;
 
+    std::cout << "模型加载开始！" << std::endl;
     // 模型加载
-    Cube *temp_Cube = &(moon->assetManager.vec_Cube[0]);
-    this->cube = std::shared_ptr<Cube>(temp_Cube);
-    temp_Cube = nullptr;
+    std::cout << "Cube加载开始！" << std::endl;
+    Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
+    this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
 
-    Floor *temp_floor = &(moon->assetManager.vec_Floor[0]);
-    this->floor = std::shared_ptr<Floor>(temp_floor);
-    temp_floor = nullptr;
+    std::cout << "Floor加载开始！" << std::endl;
+    tempRender = moon->assetManager.um_meshes.find("Floor")->second;
+    this->floor = std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender));
+    tempRender = nullptr;
 
-    Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
+    std::cout << "Nanosuit加载开始！" << std::endl;
+    Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
     this->models = std::shared_ptr<Model>(nanosuit);
     nanosuit = nullptr;
 
+    std::cout << "天空盒加载开始！" << std::endl;
     // 天空盒加载
-    this->env_cubemap = moon->assetManager.um_skyboxes.find("BlueSky")->second;
+    this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
+    std::cout << "着色器加载开始！" << std::endl;
     /* 着色器加载 */
     if (moon->assetManager.um_shaders.find("Floor") == moon->assetManager.um_shaders.end())
     {
@@ -95,14 +100,15 @@ void ForwardShading::Init() {
     temp_SH = nullptr;
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
-    
+
+    std::cout << "贴图加载开始！" << std::endl;
     // 加载贴图
-    if (moon->assetManager.um_tex.find("container") == moon->assetManager.um_tex.end())
+    if (moon->assetManager.um_textures.find("Container") == moon->assetManager.um_textures.end())
     {
         std::string texPath = "D:/C++Pro/vscode/LearnOpenGL/texture/container2.png";
-        moon->assetManager.um_tex.emplace(std::make_pair(std::string("container"), loadTexture(texPath.c_str())));
+        moon->assetManager.um_textures.emplace(std::make_pair(std::string("Container"), loadTexture(texPath.c_str())));
     }
-    this->light_tex = moon->assetManager.um_tex.find("container")->second;
+    this->light_tex = moon->assetManager.um_textures.find("Container")->second;
 
     if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
     {
@@ -119,6 +125,7 @@ void ForwardShading::Init() {
 }
 
 void ForwardShading::Render() {
+
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
@@ -273,25 +280,26 @@ void DeferredShading::Init() {
 
     /* 创建灯光和模型 */
     // 灯光加载
-    DirectionLight* temp_dl = &(moon->assetManager.vec_DL[0]);
-    this->directionLight = std::shared_ptr<DirectionLight>(temp_dl);
-    temp_dl = nullptr;
-    PointLight* temp_pl = &(moon->assetManager.vec_PL[0]);
-    this->pointLight = std::shared_ptr<PointLight>(temp_pl);
-    temp_pl = nullptr;
-    SpotLight* temp_sl = &(moon->assetManager.vec_SL[0]);
-    this->spotLight = std::shared_ptr<SpotLight>(temp_sl);
-    temp_sl = nullptr;
+    AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
+    this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
+    tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
+    this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
+    tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
+    this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
+    tempAL = nullptr;
 
     // 模型加载
-    Cube* temp_Cube = &(moon->assetManager.vec_Cube[0]);
-    this->cube = std::shared_ptr<Cube>(temp_Cube);
-    temp_Cube = nullptr;
-    Quad* temp_Quad = &(moon->assetManager.vec_Quad[0]);
-    this->quad = std::shared_ptr<Quad>(temp_Quad);
-    temp_Quad = nullptr;
+    // 模型加载
+    Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
+    this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
+
+    tempRender = moon->assetManager.um_meshes.find("ScreenQuad")->second;
+    this->quad = std::dynamic_pointer_cast<Quad>(std::shared_ptr<Renderable>(tempRender));
+    tempRender = nullptr;
+
     Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
     this->models = std::shared_ptr<Model>(nanosuit);
+    nanosuit = nullptr;
 
     // 光照为位置偏移
     objectPos.push_back(glm::vec3(-3.0, -3.0, -3.0));
@@ -324,7 +332,7 @@ void DeferredShading::Init() {
     }
 
     // 天空盒加载
-    this->env_cubemap = moon->assetManager.um_skyboxes.find("BlueSky")->second;
+    this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
     /* 着色器加载 */
     if (moon->assetManager.um_shaders.find("Geometry_DS") == moon->assetManager.um_shaders.end()) {
@@ -513,11 +521,12 @@ void PBR::Init() {
     InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
-    if (moon->assetManager.um_tex.find("RoomHDR") == moon->assetManager.um_tex.end()) {
+    if (moon->assetManager.um_textures.find("RoomHDR") == moon->assetManager.um_textures.end())
+    {
         std::string HDR_Path = "D:/C++Pro/vscode/LearnOpenGL/texture/HS-Cave-Room/Mt-Washington-Cave-Room_Ref.hdr";
-        moon->assetManager.um_tex.emplace("RoomHDR", loadHDR(HDR_Path.c_str()));
+        moon->assetManager.um_textures.emplace("RoomHDR", loadHDR(HDR_Path.c_str()));
     }
-    this->hdr_tex = moon->assetManager.um_tex.find("RoomHDR")->second;
+    this->hdr_tex = moon->assetManager.um_textures.find("RoomHDR")->second;
     genCubeMap(this->env_cubemap, 720, 720);
     genCubeMap(this->irradiance_cubemap, 32, 32);
 
