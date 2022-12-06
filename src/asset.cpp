@@ -23,8 +23,7 @@ Asset::~Asset() {
     std::cout << "全局资源析构结束!" << std::endl;
 }
 
-void Asset::Init()
-{
+void Asset::Init() {
     // Shader加载
     std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
     std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.fs";
@@ -61,3 +60,5 @@ void Asset::Init()
     this->um_meshes.emplace("Sphere", new Sphere());
     this->um_meshes.emplace("Floor", new Floor());
 }
+
+

@@ -20,14 +20,12 @@ ForwardShading::ForwardShading() : Pipeline(Pipeline_TYPE::FORWARDSHADING)
 }
 
 void ForwardShading::Init() {
-    std::cout << "初始化开始！" << std::endl;
     /* 初始化FBO和RT */
     my_color[3] = 1.0f;
     InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
 
-    std::cout << "灯光加载开始！" << std::endl;
     /* 创建灯光和模型 */
     // 灯光加载
     AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
@@ -38,27 +36,21 @@ void ForwardShading::Init() {
     this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
     tempAL = nullptr;
 
-    std::cout << "模型加载开始！" << std::endl;
     // 模型加载
-    std::cout << "Cube加载开始！" << std::endl;
     Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
     this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
 
-    std::cout << "Floor加载开始！" << std::endl;
     tempRender = moon->assetManager.um_meshes.find("Floor")->second;
     this->floor = std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender));
     tempRender = nullptr;
 
-    std::cout << "Nanosuit加载开始！" << std::endl;
     Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
     this->models = std::shared_ptr<Model>(nanosuit);
     nanosuit = nullptr;
 
-    std::cout << "天空盒加载开始！" << std::endl;
     // 天空盒加载
     this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
-    std::cout << "着色器加载开始！" << std::endl;
     /* 着色器加载 */
     if (moon->assetManager.um_shaders.find("Floor") == moon->assetManager.um_shaders.end())
     {
