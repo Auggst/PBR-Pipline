@@ -83,7 +83,7 @@ void ForwardShading::Init() {
     if (moon->assetManager.um_shaders.find("LightModelTex") == moon->assetManager.um_shaders.end())
     {
         std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.vs";
-        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/lightTex.fs";
+        std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
         Shader temp_LM(vsPath.c_str(), fsPath.c_str());
         moon->assetManager.um_shaders.emplace("LightModelTex", temp_LM);
     }
@@ -93,7 +93,6 @@ void ForwardShading::Init() {
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
 
-    std::cout << "贴图加载开始！" << std::endl;
     // 加载贴图
     if (moon->assetManager.um_textures.find("Container") == moon->assetManager.um_textures.end())
     {
@@ -216,6 +215,95 @@ void ForwardShading::Render() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
     this->cube->Draw();
+    glDepthFunc(GL_LESS);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void ForwardShading::RenderScene(const Scene& scene) {
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
+
+    // Rendering
+    glClearColor(my_color[0], my_color[1], my_color[2], my_color[3]);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = scene.vec_cams[0]->GetViewMatrix();
+    glm::mat4 projection = glm::perspective(glm::radians(scene.vec_cams[0]->Zoom), (float)moon->width / (float)moon->height, 0.1f, 100.0f);
+
+    // 光照模型渲染
+    this->mpLight_SH->use();
+    this->mpLight_SH->setMat4("view", view);
+    this->mpLight_SH->setMat4("projection", projection);
+    int lightNr = scene.vec_ptLights.size();
+    for (int i = 0; i < lightNr; i++) {
+        model = glm::mat4(1.0);
+        model = glm::translate(model, scene.vec_ptLights[i]->position);
+        this->mpLight_SH->setMat4("model", model);
+        this->mpLight_SH->setVec3("lightColor", scene.vec_ptLights[i]->diffuse);
+        scene.vec_cubes[0]->Draw();
+    }
+
+    /* 光照数据加载 */
+    // 方向光
+    lightNr = scene.vec_dlLights.size();
+    for (int i = 0; i < lightNr; i++) {
+        scene.vec_dlLights[i]->SendToShader(this->mpFloor_SH, i);
+        scene.vec_dlLights[i]->SendToShader(this->mpModel_SH, i);
+    }
+
+    // 点光源
+    lightNr = scene.vec_ptLights.size();
+    for (int i = 0; i < lightNr; i++) {
+        scene.vec_ptLights[i]->SendToShader(this->mpFloor_SH, i);
+        scene.vec_ptLights[i]->SendToShader(this->mpModel_SH, i);
+    }
+    
+    // 聚光灯
+    lightNr = scene.vec_stLights.size();
+    for (int i = 0; i < lightNr; i++) {
+        scene.vec_stLights[i]->SendToShader(this->mpFloor_SH, i);
+        scene.vec_stLights[i]->SendToShader(this->mpModel_SH, i);
+    }
+
+    // 模型渲染
+    this->mpModel_SH->use();
+    this->mpModel_SH->setMat4("view", view);
+    this->mpModel_SH->setMat4("projection", projection);
+    this->mpModel_SH->setVec3("viewPos", scene.vec_cams[0]->Position);
+
+    model = glm::mat4(1.0);
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
+    for (int i = 0; i < 2; i++)
+    {
+        this->mpModel_SH->setMat4("model", glm::scale(model, glm::vec3(0.5f)));
+        this->models->Draw(*(this->mpModel_SH));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
+    }
+
+    // 地板渲染
+    model = glm::mat4(1.0);
+    this->mpFloor_SH->use();
+    this->mpFloor_SH->setMat4("view", view);
+    this->mpFloor_SH->setMat4("projection", projection);
+    this->mpFloor_SH->setMat4("model", model);
+    this->mpFloor_SH->setVec3("viewPos", scene.vec_cams[0]->Position);
+    int meshNr = scene.vec_floores.size();
+    for (int i = 0; i < meshNr; i++) {
+        scene.vec_floores[i]->Draw();
+    }
+
+    // 天空盒渲染
+    glDepthFunc(GL_LEQUAL);
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setMat4("view", view);
+    this->mpSkybox_SH->setMat4("projection", projection);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, scene.skybox);
+    scene.vec_cubes[0]->Draw();
     glDepthFunc(GL_LESS);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -461,6 +549,10 @@ void DeferredShading::Render() {
     glDepthFunc(GL_LESS);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void DeferredShading::RenderScene(const Scene& scene) {
+
 }
 
 void DeferredShading::RenderUI() {
@@ -793,6 +885,10 @@ void PBR::Render()
     this->cube_screen.Draw();
     //glDepthFunc(GL_LESS);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void PBR::RenderScene(const Scene& scene) {
+
 }
 
 void PBR::RenderUI() {

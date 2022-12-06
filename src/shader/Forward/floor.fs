@@ -68,11 +68,11 @@ void main() {
     vec3 color = 0.001 * pow(texture(diffuseMap, fs_in.TexCoords).rgb, vec3(2.2));
 
     // 计算方向光
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 1; i++) {
         color += CalculateDL(dtLight[i], position, normal);
     }
     // 计算点光源
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 1; i++) {
         color += CalculatePL(ptLight[i], position, normal);
     }
     // 计算聚光灯

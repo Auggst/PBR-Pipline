@@ -428,6 +428,7 @@ CMakeFiles/main.dir/src/pipeline.cpp.obj: \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/metadata.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/postprocess.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/light.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/scene.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/engine.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imgui.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imconfig.h \

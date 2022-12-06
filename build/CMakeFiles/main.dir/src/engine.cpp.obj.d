@@ -436,6 +436,7 @@ CMakeFiles/main.dir/src/engine.cpp.obj: \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/metadata.h \
  D:/C++Pro/vscode/LearnOpenGL/include/assimp/postprocess.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/light.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/scene.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/asset.h \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/map \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_tree.h \

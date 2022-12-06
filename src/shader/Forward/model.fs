@@ -71,15 +71,15 @@ void main() {
 
     vec3 color = pow(texture(material.texture_diffuse1, fs_in.TexCoords).rgb, vec3(2.2));
     // 方向光
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 1; i++)
         color = color + CalculateDL(dtLight[i], pos, norm);
 
-    // // 点光源
-    // for (int i = 0; i< 4; i++)
-    //     color = color + CalculatePL(ptLight[i], pos, norm);
+    // 点光源
+    for (int i = 0; i< 1; i++)
+        color = color + CalculatePL(ptLight[i], pos, norm);
 
-    // // 聚光灯
-    // color = color + CalculateSL(spLight[0], pos, norm);
+    // 聚光灯
+    color = color + CalculateSL(spLight[0], pos, norm);
 
     // HDR tonemapping
     color = color / (color + vec3(1.0));

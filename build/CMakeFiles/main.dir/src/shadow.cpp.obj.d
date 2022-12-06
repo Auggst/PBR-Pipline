@@ -429,6 +429,7 @@ CMakeFiles/main.dir/src/shadow.cpp.obj: \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/model.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/camera.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/mesh.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/scene.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/engine.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imgui.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imconfig.h \

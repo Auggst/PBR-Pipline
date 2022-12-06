@@ -879,6 +879,7 @@ CMakeFiles/main.dir/src/engine.cpp.obj: ../src/engine.cpp \
   ../include/assimp/metadata.h \
   ../include/assimp/postprocess.h \
   ../include/learnopengl/light.h \
+  ../include/learnopengl/scene.h \
   ../include/learnopengl/asset.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/map \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_tree.h \
@@ -3112,6 +3113,7 @@ CMakeFiles/main.dir/src/main.cpp.obj: ../src/main.cpp \
   ../include/assimp/metadata.h \
   ../include/assimp/postprocess.h \
   ../include/learnopengl/light.h \
+  ../include/learnopengl/scene.h \
   ../include/learnopengl/asset.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/map \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_tree.h \
@@ -4786,6 +4788,7 @@ CMakeFiles/main.dir/src/pipeline.cpp.obj: ../src/pipeline.cpp \
   ../include/assimp/metadata.h \
   ../include/assimp/postprocess.h \
   ../include/learnopengl/light.h \
+  ../include/learnopengl/scene.h \
   ../include/learnopengl/engine.h \
   ../include/imgui/imgui.h \
   ../include/imgui/imconfig.h \
@@ -5235,6 +5238,7 @@ CMakeFiles/main.dir/src/scene.cpp.obj: ../src/scene.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc \
   ../include/learnopengl/light.h \
+  ../include/learnopengl/camera.h \
   ../include/learnopengl/engine.h \
   ../include/imgui/imgui.h \
   ../include/imgui/imconfig.h \
@@ -5243,7 +5247,6 @@ CMakeFiles/main.dir/src/scene.cpp.obj: ../src/scene.cpp \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
   ../include/imgui/imgui_impl_glfw.h \
   ../include/imgui/imgui_impl_opengl3.h \
-  ../include/learnopengl/camera.h \
   ../include/learnopengl/pipeline.h \
   ../include/learnopengl/asset.h \
   D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/map \
@@ -5688,6 +5691,7 @@ CMakeFiles/main.dir/src/shadow.cpp.obj: ../src/shadow.cpp \
   ../include/learnopengl/model.h \
   ../include/learnopengl/camera.h \
   ../include/learnopengl/mesh.h \
+  ../include/learnopengl/scene.h \
   ../include/learnopengl/engine.h \
   ../include/imgui/imgui.h \
   ../include/imgui/imconfig.h \
@@ -6816,15 +6820,13 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/stdarg.h:
 
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/psdk_inc/_fd_types.h:
-
-D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/lwpintrin.h:
-
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h:
 
 ../include/imgui/imgui_impl_glfw.h:
 
 ../include/imgui/imgui_impl_opengl3.h:
+
+../include/learnopengl/scene.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/minwindef.h:
 
@@ -6879,6 +6881,10 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/movdirintrin.h:
 
 D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/mm3dnow.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/psdk_inc/_fd_types.h:
+
+D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/lwpintrin.h:
 
 ../include/imgui/imstb_truetype.h:
 
@@ -7047,5 +7053,3 @@ D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w
 ../src/pipeline.cpp:
 
 ../src/scene.cpp:
-
-../include/learnopengl/scene.h:

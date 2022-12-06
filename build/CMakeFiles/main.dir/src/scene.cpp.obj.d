@@ -427,6 +427,7 @@ CMakeFiles/main.dir/src/scene.cpp.obj: \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/light.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/camera.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/engine.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imgui.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imconfig.h \
@@ -435,7 +436,6 @@ CMakeFiles/main.dir/src/scene.cpp.obj: \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imgui_impl_glfw.h \
  D:/C++Pro/vscode/LearnOpenGL/include/imgui/imgui_impl_opengl3.h \
- D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/camera.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/pipeline.h \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/asset.h \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/map \

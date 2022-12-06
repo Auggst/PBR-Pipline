@@ -26,6 +26,8 @@ Engine::~Engine() {
 
   //清除缓存
   glfwTerminate();
+
+  this->assetManager.~Asset();
 }
 
 void Engine::CreatePBR() {
@@ -98,7 +100,7 @@ void Engine::InitAsset() {
 void Engine::Init() {
   this->InitOpenGL();
   this->InitGUI();
-  this->assetManager = Asset();
+  this->assetManager = std::move(Asset());
   this->InitAsset();
 }
 
@@ -111,15 +113,22 @@ void Engine::Update() {
   int scrWidth, scrHeight;
   glfwGetFramebufferSize(window, &scrWidth, &scrHeight);
   glViewport(0, 0, scrWidth, scrHeight);
-  while(!glfwWindowShouldClose(this->window)) {
+  Scene scene = Scene();
+  scene.ForwardScene();
+
+  while (!glfwWindowShouldClose(this->window)) {
     float currentFrame = static_cast<float>(glfwGetTime());
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
     // input事件
     processInput(this->window);
 
+    // 处理光照
+    scene.UpdateLight();
+
     // Rendering
-    this->pipeline->Render();
+    this->pipeline->RenderScene(scene);
+    // this->pipeline->Render();
     // this->pipeline->RenderUI();
     RenderGUI();
 

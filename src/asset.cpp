@@ -10,17 +10,21 @@ Asset::Asset() {
 }
 
 Asset::~Asset() {
-    for (auto it : um_lights) {
-        delete (it.second);
-        it.second = nullptr;
-    }
+    if (um_lights.size() > 0 || um_meshes.size() > 0) {
+        for (auto it : um_lights)
+        {
+            delete (it.second);
+            it.second = nullptr;
+        }
 
-    for (auto it : um_meshes) {
-        delete (it.second);
-        it.second = nullptr;
-    }
+        for (auto it : um_meshes)
+        {
+            delete (it.second);
+            it.second = nullptr;
+        }
 
-    std::cout << "全局资源析构结束!" << std::endl;
+        std::cout << "全局资源析构结束!" << std::endl;
+    }
 }
 
 void Asset::Init() {

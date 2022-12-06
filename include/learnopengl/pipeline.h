@@ -10,6 +10,7 @@
 #include <learnopengl/camera.h>
 #include <learnopengl/mesh.h>
 #include <learnopengl/light.h>
+#include <learnopengl/scene.h>
 
 struct GBuffer {
   GLuint gBuffer;
@@ -31,6 +32,7 @@ class Pipeline {
    Pipeline(Pipeline_TYPE _type) {type = _type;}
    virtual void Init() = 0;
    virtual void Render() = 0;
+   virtual void RenderScene(const Scene& scene) = 0;
    virtual void RenderUI() = 0;
    inline Pipeline_TYPE GetID() {return this->type;}
  public:
@@ -43,6 +45,7 @@ class ForwardShading : public Pipeline {
     ForwardShading();
     void Init() override;
     void Render() override;
+    void RenderScene(const Scene &scene) override;
     void RenderUI() override;
     unsigned int getRendered() { return this->res_tex; }
   public:
@@ -65,6 +68,7 @@ class DeferredShading : public Pipeline {
    DeferredShading();
    void Init() override;
    void Render() override;
+   void RenderScene(const Scene &scene) override;
    void RenderUI() override;
    unsigned int getRendered() { return this->res_tex; }
  public:
@@ -92,6 +96,7 @@ class PBR : public Pipeline {
   void PrefilterInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews);
   void BRDFInit();
   void Render() override;
+  void RenderScene(const Scene &scene) override;
   void RenderUI() override;
   unsigned int getRendered() {return this->res_tex;}
   
