@@ -26,30 +26,30 @@ void ForwardShading::Init() {
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
 
-    /* 创建灯光和模型 */
-    // 灯光加载
-    AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
-    this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
-    tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
-    this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
-    tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
-    this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
-    tempAL = nullptr;
+    // /* 创建灯光和模型 */
+    // // 灯光加载
+    // AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
+    // this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
+    // tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
+    // this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
+    // tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
+    // this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
+    // tempAL = nullptr;
 
-    // 模型加载
-    Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
-    this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
+    // // 模型加载
+    // Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
+    // this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
 
-    tempRender = moon->assetManager.um_meshes.find("Floor")->second;
-    this->floor = std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender));
-    tempRender = nullptr;
+    // tempRender = moon->assetManager.um_meshes.find("Floor")->second;
+    // this->floor = std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender));
+    // tempRender = nullptr;
 
-    Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
-    this->models = std::shared_ptr<Model>(nanosuit);
-    nanosuit = nullptr;
+    // Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
+    // this->models = std::shared_ptr<Model>(nanosuit);
+    // nanosuit = nullptr;
 
-    // 天空盒加载
-    this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
+    // // 天空盒加载
+    // this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
     /* 着色器加载 */
     if (moon->assetManager.um_shaders.find("Floor") == moon->assetManager.um_shaders.end())
@@ -93,13 +93,13 @@ void ForwardShading::Init() {
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
 
-    // 加载贴图
-    if (moon->assetManager.um_textures.find("Container") == moon->assetManager.um_textures.end())
-    {
-        std::string texPath = "D:/C++Pro/vscode/LearnOpenGL/texture/container2.png";
-        moon->assetManager.um_textures.emplace(std::make_pair(std::string("Container"), loadTexture(texPath.c_str())));
-    }
-    this->light_tex = moon->assetManager.um_textures.find("Container")->second;
+    // // 加载贴图
+    // if (moon->assetManager.um_textures.find("Container") == moon->assetManager.um_textures.end())
+    // {
+    //     std::string texPath = "D:/C++Pro/vscode/LearnOpenGL/texture/container2.png";
+    //     moon->assetManager.um_textures.emplace(std::make_pair(std::string("Container"), loadTexture(texPath.c_str())));
+    // }
+    // this->light_tex = moon->assetManager.um_textures.find("Container")->second;
 
     if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
     {
@@ -280,7 +280,7 @@ void ForwardShading::RenderScene(const Scene& scene) {
     for (int i = 0; i < 2; i++)
     {
         this->mpModel_SH->setMat4("model", glm::scale(model, glm::vec3(0.5f)));
-        this->models->Draw(*(this->mpModel_SH));
+        scene.vec_models[0]->Draw(*(this->mpModel_SH));
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
     }
 
@@ -358,28 +358,30 @@ void DeferredShading::Init() {
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
 
-    /* 创建灯光和模型 */
-    // 灯光加载
-    AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
-    this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
-    tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
-    this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
-    tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
-    this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
-    tempAL = nullptr;
+    // /* 创建灯光和模型 */
+    // // 灯光加载
+    // AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
+    // this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
+    // tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
+    // this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
+    // tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
+    // this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
+    // tempAL = nullptr;
 
-    // 模型加载
-    // 模型加载
-    Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
-    this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
+    // // 模型加载
+    // Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
+    // this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
 
-    tempRender = moon->assetManager.um_meshes.find("ScreenQuad")->second;
-    this->quad = std::dynamic_pointer_cast<Quad>(std::shared_ptr<Renderable>(tempRender));
-    tempRender = nullptr;
+    // tempRender = moon->assetManager.um_meshes.find("ScreenQuad")->second;
+    // this->quad = std::dynamic_pointer_cast<Quad>(std::shared_ptr<Renderable>(tempRender));
+    // tempRender = nullptr;
 
-    Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
-    this->models = std::shared_ptr<Model>(nanosuit);
-    nanosuit = nullptr;
+    // Model *nanosuit = &(moon->assetManager.um_models.find("nanosuit")->second);
+    // this->models = std::shared_ptr<Model>(nanosuit);
+    // nanosuit = nullptr;
+
+    // // 天空盒加载
+    // this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
     // 光照为位置偏移
     objectPos.push_back(glm::vec3(-3.0, -3.0, -3.0));
@@ -410,9 +412,6 @@ void DeferredShading::Init() {
         GLfloat bCol = distrib(eng);
         lightCol.push_back(glm::vec3(rCol, gCol, bCol));
     }
-
-    // 天空盒加载
-    this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
     /* 着色器加载 */
     if (moon->assetManager.um_shaders.find("Geometry_DS") == moon->assetManager.um_shaders.end()) {
@@ -456,7 +455,7 @@ void DeferredShading::Init() {
 
     if (moon->assetManager.um_shaders.find("LightModel") == moon->assetManager.um_shaders.end())
     {
-        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/model.vs";
+        std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.vs";
         std::string fsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Forward/light.fs";
         Shader temp_LM(vsPath.c_str(), fsPath.c_str());
         moon->assetManager.um_shaders.emplace("LightModel", temp_LM);
@@ -467,7 +466,6 @@ void DeferredShading::Init() {
 }
 
 void DeferredShading::Render() {
-
     glViewport(0, 0, 720, 720);
     // 1. 几何阶段
     glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.gBuffer);
@@ -552,7 +550,89 @@ void DeferredShading::Render() {
 }
 
 void DeferredShading::RenderScene(const Scene& scene) {
+    glViewport(0, 0, 720, 720);
+    // 1. 几何阶段
+    glBindFramebuffer(GL_FRAMEBUFFER, gBuffer.gBuffer);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = scene.vec_cams[0]->GetViewMatrix();
+    glm::mat4 projection = glm::perspective(scene.vec_cams[0]->Zoom, 1.0f, 0.1f, 100.0f);
+    glm::vec3 viewPos = scene.vec_cams[0]->Position;
+
+    this->mpGeometry_SH->use();
+    this->mpGeometry_SH->setMat4("projection", projection);
+    this->mpGeometry_SH->setMat4("view", view);
+    for (size_t i = 0; i < 9; i++)
+    {
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, objectPos[i]);
+        model = glm::scale(model, glm::vec3(0.25f));
+        this->mpGeometry_SH->setMat4("model", model);
+        scene.vec_models[0]->Draw(*(this->mpGeometry_SH));
+    }
+
+    // 2. 光照阶段
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    this->mpLight_SH->use();
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, gBuffer.gPosition);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, gBuffer.gNormal);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, gBuffer.gColor);
+
+    // 光照参数
+    for (size_t i = 0; i < 32; i++)
+    {
+        this->mpLight_SH->setVec3("ptLight[" + std::to_string(i) + "].position", lightPos[i]);
+        this->mpLight_SH->setVec3("ptLight[" + std::to_string(i) + "].diffuse", lightCol[i]);
+        this->mpLight_SH->setVec3("ptLight[" + std::to_string(i) + "].specular", lightCol[i]);
+        const GLfloat kc = 1.0f;
+        const GLfloat kl = 0.7f;
+        const GLfloat kq = 1.8f;
+        this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kc", kc);
+        this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kl", kl);
+        this->mpLight_SH->setFloat("ptLight[" + std::to_string(i) + "].kq", kq);
+    }
+    this->mpLight_SH->setVec3("viewPos", viewPos);
+    scene.vec_quads[0]->Draw();
+
+    // 2.5 将几何的深度缓冲复制到fbo中
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer.gBuffer);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->fbo);
+    glBlitFramebuffer(0, 0, 720, 720, 0, 0, 720, 720, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+
+    // 3.0 前向渲染发光物
+    this->mpModel_SH->use();
+    this->mpModel_SH->setMat4("projection", projection);
+    this->mpModel_SH->setMat4("view", view);
+    for (size_t i = 0; i < lightPos.size(); i++)
+    {
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos[i]);
+        model = glm::scale(model, glm::vec3(0.25f));
+        this->mpModel_SH->setMat4("model", model);
+        this->mpModel_SH->setVec3("lightColor", lightCol[i]);
+        scene.vec_cubes[0]->Draw();
+    }
+
+    // 天空盒渲染
+    glDepthFunc(GL_LEQUAL);
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setMat4("view", view);
+    this->mpSkybox_SH->setMat4("projection", projection);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, scene.skybox);
+    scene.vec_cubes[0]->Draw();
+    glDepthFunc(GL_LESS);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void DeferredShading::RenderUI() {
@@ -605,8 +685,7 @@ void PBR::Init() {
     InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
-    if (moon->assetManager.um_textures.find("RoomHDR") == moon->assetManager.um_textures.end())
-    {
+    if (moon->assetManager.um_textures.find("RoomHDR") == moon->assetManager.um_textures.end()) {
         std::string HDR_Path = "D:/C++Pro/vscode/LearnOpenGL/texture/HS-Cave-Room/Mt-Washington-Cave-Room_Ref.hdr";
         moon->assetManager.um_textures.emplace("RoomHDR", loadHDR(HDR_Path.c_str()));
     }
@@ -670,8 +749,7 @@ void PBR::Init() {
     this->models = std::shared_ptr<Model>(nanosuit);
 }
 
-void PBR::HDRInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews)
-{
+void PBR::HDRInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews) {
     std::shared_ptr<Engine> moon = Engine::getInstance();
     if (moon->assetManager.um_shaders.find("HDR") == moon->assetManager.um_shaders.end())
     {
@@ -704,8 +782,7 @@ void PBR::HDRInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureV
     glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 }
 
-void PBR::IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews)
-{
+void PBR::IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureViews) {
     std::shared_ptr<Engine> moon = Engine::getInstance();
     if (moon->assetManager.um_shaders.find("IBL") == moon->assetManager.um_shaders.end())
     {
@@ -727,8 +804,7 @@ void PBR::IBLInit(glm::mat4 &captureProjection, std::vector<glm::mat4> &captureV
 
     glViewport(0, 0, 32, 32);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
-    for (unsigned int i = 0; i < 6; i++)
-    {
+    for (unsigned int i = 0; i < 6; i++) {
         this->mpIBL_SH->setMat4("view", captureViews[i]);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, this->irradiance_cubemap, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -823,8 +899,7 @@ void PBR::BRDFInit() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void PBR::Render()
-{
+void PBR::Render() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
@@ -888,7 +963,63 @@ void PBR::Render()
 }
 
 void PBR::RenderScene(const Scene& scene) {
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
+    // Rendering
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = scene.vec_cams[0]->GetViewMatrix();
+    glm::mat4 projection = glm::perspective(glm::radians(scene.vec_cams[0]->Zoom), (float)moon->width / (float)moon->height, 0.1f, 100.0f);
+
+    this->mpPBR_SH->use();
+    this->mpPBR_SH->setMat4("view", view);
+    this->mpPBR_SH->setMat4("projection", projection);
+    this->mpPBR_SH->setVec3("camPos", scene.vec_cams[0]->Position);
+    glActiveTexture(GL_TEXTURE5);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, this->irradiance_cubemap);
+    glActiveTexture(GL_TEXTURE6);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, this->prefilter_cubemap);
+    glActiveTexture(GL_TEXTURE7);
+    glBindTexture(GL_TEXTURE_2D, this->brdf_tex);
+
+    //渲染材质球
+    for (unsigned i = 0; i < 1; i++) {
+        model = glm::translate(model, glm::vec3((float)(i - (this->nums / 2)) * spacing, (float)(i - (this->nums / 2)) * spacing, -2.0));
+        this->mpPBR_SH->setMat4("model", model);
+        this->mpPBR_SH->setFloat("metal", scene.vec_spheres[i]->mental);
+        this->mpPBR_SH->setFloat("rough", scene.vec_spheres[i]->rough);
+        scene.vec_models[i]->Draw(*(this->mpPBR_SH));
+    }
+
+    //渲染光源
+    const float pi = 3.1415926;
+    for (auto i = 0; i < 4; i++) {
+        float coff_pi = pi * i;
+        glm::vec3 newPos = glm::vec3(10.0f * cos(-pi * 0.5 + coff_pi), 10.0f * (i < 2 ? 1.0 : -1.0), 10.0f);
+        this->mpPBR_SH->setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
+        this->mpPBR_SH->setVec3("lightColors[" + std::to_string(i) + "]", glm::vec3(300.f));
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, newPos);
+        model = glm::scale(model, glm::vec3(0.5f));
+        this->mpPBR_SH->setMat4("model", model);
+        scene.vec_spheres[0]->Draw();
+    }
+
+    glDepthFunc(GL_LEQUAL);
+    this->mpSkybox_SH->use();
+    this->mpSkybox_SH->setMat4("view", view);
+    this->mpSkybox_SH->setMat4("projection", projection);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
+    scene.vec_cubes[0]->Draw();
+    // glDepthFunc(GL_LESS);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void PBR::RenderUI() {

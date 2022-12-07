@@ -88,3 +88,84 @@ void Scene::UpdateLight() {
         this->vec_stLights[i]->kq = 0.0032f;
     }
 } 
+
+void Scene::DeferredScene() {
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
+    /* 创建相机 */
+    Camera *temp_Cam = &(moon->assetManager.um_cameras.find("Main")->second);
+    vec_cams.emplace_back(std::shared_ptr<Camera>(temp_Cam));
+    temp_Cam = nullptr;
+
+    /* 创建灯光和模型 */
+    // 灯光加载
+    AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
+    vec_dlLights.emplace_back(std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL)));
+
+    tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
+    vec_ptLights.emplace_back(std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL)));
+
+    tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
+    vec_stLights.emplace_back(std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL)));
+    tempAL = nullptr;
+
+    // 模型加载
+    Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
+    vec_cubes.emplace_back(std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender)));
+
+    tempRender = moon->assetManager.um_meshes.find("ScreenQuad")->second;
+    vec_quads.emplace_back(std::dynamic_pointer_cast<Quad>(std::shared_ptr<Renderable>(tempRender)));
+
+    tempRender = moon->assetManager.um_meshes.find("Floor")->second;
+    vec_floores.emplace_back(std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender)));
+    tempRender = nullptr;
+
+    Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
+    vec_models.emplace_back(std::shared_ptr<Model>(nanosuit));
+    nanosuit = nullptr;
+
+    // 天空盒加载
+    this->skybox = moon->assetManager.um_textures.find("BlueSky")->second;
+}
+
+void Scene::PBRScene() {
+    std::shared_ptr<Engine> moon = Engine::getInstance();
+
+    /* 创建相机 */
+    Camera *temp_Cam = &(moon->assetManager.um_cameras.find("Main")->second);
+    vec_cams.emplace_back(std::shared_ptr<Camera>(temp_Cam));
+    temp_Cam = nullptr;
+
+    /* 创建灯光和模型 */
+    // 灯光加载
+    AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
+    vec_dlLights.emplace_back(std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL)));
+
+    tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
+    vec_ptLights.emplace_back(std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL)));
+
+    tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
+    vec_stLights.emplace_back(std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL)));
+    tempAL = nullptr;
+
+    // 模型加载
+    Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
+    vec_cubes.emplace_back(std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender)));
+
+    tempRender = moon->assetManager.um_meshes.find("ScreenQuad")->second;
+    vec_quads.emplace_back(std::dynamic_pointer_cast<Quad>(std::shared_ptr<Renderable>(tempRender)));
+
+    tempRender = moon->assetManager.um_meshes.find("Floor")->second;
+    vec_floores.emplace_back(std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender)));
+
+    tempRender = moon->assetManager.um_meshes.find("Sphere")->second;
+    vec_spheres.emplace_back(std::dynamic_pointer_cast<Sphere>(std::shared_ptr<Renderable>(tempRender)));
+    tempRender = nullptr;
+
+    Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
+    vec_models.emplace_back(std::shared_ptr<Model>(nanosuit));
+    nanosuit = nullptr;
+
+    // 天空盒加载
+    this->skybox = moon->assetManager.um_textures.find("BlueSky")->second;
+}

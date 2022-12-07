@@ -15,8 +15,10 @@ class Scene {
    ~Scene();
    void ForwardScene();
    void UpdateLight();
+   void DeferredScene();
+   void PBRScene();
 
-   public:
+   public :
    // Shader, Model, unsigned int Camera, AbstractLight, Mesh
    unsigned int skybox;
    std::vector<std::shared_ptr<Model>> vec_models;

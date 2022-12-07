@@ -114,7 +114,9 @@ void Engine::Update() {
   glfwGetFramebufferSize(window, &scrWidth, &scrHeight);
   glViewport(0, 0, scrWidth, scrHeight);
   Scene scene = Scene();
-  scene.ForwardScene();
+  // scene.ForwardScene();
+  // scene.DeferredScene();
+  scene.PBRScene();
 
   while (!glfwWindowShouldClose(this->window)) {
     float currentFrame = static_cast<float>(glfwGetTime());
@@ -124,12 +126,11 @@ void Engine::Update() {
     processInput(this->window);
 
     // 处理光照
-    scene.UpdateLight();
+    // scene.UpdateLight();
 
     // Rendering
     this->pipeline->RenderScene(scene);
     // this->pipeline->Render();
-    // this->pipeline->RenderUI();
     RenderGUI();
 
     //检查及调用事件和交换内容
@@ -162,7 +163,7 @@ void Engine::RenderGUI() {
         ImGui::Begin(u8"渲染窗口");
         ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
         ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
       }
       {
@@ -213,7 +214,6 @@ void Engine::RenderGUI() {
         //   ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
         //   ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
         // }
-        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
       }
     }
