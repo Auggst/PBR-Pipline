@@ -438,4 +438,5 @@ CMakeFiles/main.dir/src/asset.cpp.obj: \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/sstream \
  D:/C++Pro/env/x86_64-8.1.0-release-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/sstream.tcc \
  D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/model.h \
- D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/light.h
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/light.h \
+ D:/C++Pro/vscode/LearnOpenGL/include/learnopengl/scene.h

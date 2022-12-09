@@ -33,16 +33,37 @@ Engine::~Engine() {
 void Engine::CreatePBR() {
   this->pipeline = std::make_shared<PBR>();
   this->pipeline->Init();
+  if (this->assetManager.um_scene.find("PBR") == this->assetManager.um_scene.end())
+  {
+    Scene tempSce = Scene();
+    tempSce.PBRScene();
+    this->assetManager.um_scene.emplace("PBR", tempSce);
+  }
+  Scene *pScene = &(this->assetManager.um_scene.find("PBR")->second);
+  this->scene = std::shared_ptr<Scene>(pScene);
+  pScene = nullptr;
 }
 
 void Engine::CreateForwardS() {
   this->pipeline = std::make_shared<ForwardShading>();
   this->pipeline->Init();
+  Scene *pScene = &(this->assetManager.um_scene.find("Forward")->second);
+  this->scene = std::shared_ptr<Scene>(pScene);
+  pScene = nullptr;
 }
 
 void Engine::CreateDeferredS() {
   this->pipeline = std::make_shared<DeferredShading>();
   this->pipeline->Init();
+  if (this->assetManager.um_scene.find("Defer") == this->assetManager.um_scene.end())
+  {
+    Scene tempSce = Scene();
+    tempSce.DeferredScene();
+    this->assetManager.um_scene.emplace("Defer", tempSce);
+  }
+  Scene *pScene = &(this->assetManager.um_scene.find("Defer")->second);
+  this->scene = std::shared_ptr<Scene>(pScene);
+  pScene = nullptr;
 }
 
 void Engine::InitOpenGL()
@@ -113,10 +134,6 @@ void Engine::Update() {
   int scrWidth, scrHeight;
   glfwGetFramebufferSize(window, &scrWidth, &scrHeight);
   glViewport(0, 0, scrWidth, scrHeight);
-  Scene scene = Scene();
-  // scene.ForwardScene();
-  // scene.DeferredScene();
-  scene.PBRScene();
 
   while (!glfwWindowShouldClose(this->window)) {
     float currentFrame = static_cast<float>(glfwGetTime());
@@ -126,11 +143,10 @@ void Engine::Update() {
     processInput(this->window);
 
     // 处理光照
-    // scene.UpdateLight();
+    this->scene->UpdateLight();
 
     // Rendering
-    this->pipeline->RenderScene(scene);
-    // this->pipeline->Render();
+    this->pipeline->RenderScene(*(this->scene));
     RenderGUI();
 
     //检查及调用事件和交换内容
@@ -148,79 +164,152 @@ void Engine::RenderGUI() {
     ImGui::Begin(u8"Moon引擎全局设置");
     ImGui::SetWindowPos(ImVec2(0, 0), ImGuiCond_Always);
     ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
+
     //主窗口
-    ImGui::Text(u8"用于调整全局设置");
-    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), u8"相机参数:");
-    ImGui::InputFloat3(u8"位置", &(moon->cam->Position[0]));
-    ImGui::InputFloat(u8"相机移动速度: ", &(moon->cam->MovementSpeed));
-    ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    const static ImVec4 MAINCOLOR = ImVec4(0.0f, 0.6f, 1.0f, 1.0f);
+    ImGui::TextColored(MAINCOLOR, u8"用于调整全局设置");
+    ImGui::TextColored(MAINCOLOR, u8"当前管线:");
+    int pipeType = this->pipeline->type;
+    ImGui::RadioButton("Forward", &pipeType, 0);
+    ImGui::SameLine();
+    ImGui::RadioButton("Defer", &pipeType, 1);
+    ImGui::SameLine();
+    ImGui::RadioButton("PBR", &pipeType, 2);
+    ImGui::SameLine();
+    ImGui::RadioButton("NPR", &pipeType, 4);
+
+    RenderSceneGUI();
     ImGui::End();
-    // TODO::抽象管线UI
+
     if (this->pipeline == nullptr) {}
-    else if (this->pipeline->type == Pipeline_TYPE::DEFERREDSHADING) {
-      //渲染场景的窗口
-      {
-        ImGui::Begin(u8"渲染窗口");
-        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
-      }
-      {
-        ImGui::Begin(u8"延迟渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整延迟渲染管线对应参数");
-        ImGui::End();
-      }
-    }
-    else if (this->pipeline->type == Pipeline_TYPE::FORWARDSHADING) {
-      {
-        ImGui::Begin(u8"渲染窗口");
-        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
-      }
-      {
-        ImGui::Begin(u8"前向渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整前向渲染管线对应参数");
-        // 编辑颜色 (stored as ~4 floats)
-        // ImGui::ColorEdit4("Color", my_color);
-        ImGui::End();
-      }
-    }
-    else if (this->pipeline->type == Pipeline_TYPE::PBRSHADING) {
-      {
-        ImGui::Begin(u8"渲染窗口");
-        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
-      }
-      // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-      {
-        ImGui::Begin(u8"PBR渲染管线参数设置"); 
-        ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整PBR渲染管线对应参数");
-        // if (this->spheres != nullptr)
-        // {
-        //   ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
-        //   ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
-        // }
-        ImGui::End();
-      }
-    }
+    else {
+      PipelineGUI(this->pipeline->type);
+    } 
   }
+
+  ImGui::ShowDemoWindow();
 
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void Engine::RenderSceneGUI() {
+  /* 黄色用于场景参数，(1.0f, 1.0f, 0.0f, 1.0f) */
+  const static ImVec4 color = ImVec4(1.0f, 1.0f, 0.0f, 1.0f);
+  // 相机参数调整
+  ImGui::TextColored(color, u8"相机参数:");
+  ImGui::InputFloat3(u8"位置", &(moon->cam->Position[0]));
+  ImGui::InputFloat(u8"相机移动速度: ", &(moon->cam->MovementSpeed));
+  ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+  // 模型参数调整
+  if (this->scene->vec_models.size() > 0) {
+    ImGui::TextColored(color, u8"模型参数:");
+    for (size_t i = 0; i < this->scene->vec_models.size(); i++) {
+      std::string modelID = u8"模型" + std::to_string(i) + ":";
+      ImGui::TextColored(color, modelID.c_str());
+      // ImGui::InputFloat3(u8"位置", &(this->scene->vec_models[i]));
+    }
+  }
+
+  /* 灯光参数调整 */
+  // 方向光
+  if (this->scene->vec_dlLights.size() > 0) {
+    ImGui::TextColored(color, u8"方向光参数:");
+    for (size_t i = 0; i < this->scene->vec_dlLights.size(); i++)
+    {
+      std::string modelID = u8"方向光" + std::to_string(i) + ":";
+      ImGui::TextColored(color, modelID.c_str());
+      ImGui::InputFloat3(u8"方向: ", &(this->scene->vec_dlLights[i]->direction[0]));
+      ImGui::ColorEdit4(u8"漫反射颜色: ", &(this->scene->vec_dlLights[i]->diffuse[0]));
+      ImGui::ColorEdit4(u8"镜面反射颜色0: ", &(this->scene->vec_dlLights[i]->specular[0]));
+    }
+  }
+
+  // 点光源
+  if (this->scene->vec_ptLights.size() > 0) {
+    ImGui::TextColored(color, u8"点光源参数:");
+    for (size_t i = 0; i < this->scene->vec_ptLights.size(); i++)
+    {
+      std::string modelID = u8"点光源" + std::to_string(i) + ":";
+      ImGui::TextColored(color, modelID.c_str());
+      ImGui::InputFloat3(u8"位置: ", &(this->scene->vec_ptLights[i]->position[0]));
+      ImGui::ColorEdit4(u8"漫反射颜色: ", &(this->scene->vec_ptLights[i]->diffuse[0]));
+      ImGui::ColorEdit4(u8"镜面反射颜色1: ", &(this->scene->vec_ptLights[i]->specular[0]));
+    }
+  }
+
+  // 聚光灯
+  if (this->scene->vec_stLights.size() > 0) {
+    ImGui::TextColored(color, u8"聚光灯参数:");
+    for (size_t i = 0; i < this->scene->vec_stLights.size(); i++)
+    {
+      std::string modelID = u8"聚光灯" + std::to_string(i) + ":";
+      ImGui::TextColored(color, modelID.c_str());
+      ImGui::ColorEdit4(u8"漫反射颜色: ", &(this->scene->vec_stLights[i]->diffuse[0]));
+      ImGui::ColorEdit4(u8"镜面反射颜色2: ", &(this->scene->vec_stLights[i]->specular[0]));
+    }
+  }
+}
+
+void Engine::PipelineGUI(const Pipeline_TYPE& type) {
+  if (type == Pipeline_TYPE::FORWARDSHADING) {
+    {
+      ImGui::Begin(u8"渲染窗口");
+      ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+      ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
+      ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
+      ImGui::End();
+    }
+    {
+      ImGui::Begin(u8"延迟渲染管线参数设置");
+      ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
+      ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
+      //主窗口
+      ImGui::Text(u8"用于调整延迟渲染管线对应参数");
+      ImGui::End();
+    }
+  } else if (type == Pipeline_TYPE::DEFERREDSHADING) {
+    {
+      ImGui::Begin(u8"渲染窗口");
+      ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+      ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
+      ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
+      ImGui::End();
+    }
+    {
+      ImGui::Begin(u8"前向渲染管线参数设置");
+      ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
+      ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
+      //主窗口
+      ImGui::Text(u8"用于调整前向渲染管线对应参数");
+      // 编辑颜色 (stored as ~4 floats)
+      // ImGui::ColorEdit4("Color", my_color);
+      ImGui::End();
+    }
+  } else if (type == Pipeline_TYPE::PBRSHADING) {
+    {
+      ImGui::Begin(u8"渲染窗口");
+      ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
+      ImGui::SetWindowSize(ImVec2(720, 720), ImGuiCond_Always);
+      ImGui::Image((void *)(intptr_t)(this->pipeline->res_tex), ImVec2(720, 720), ImVec2(0, 1), ImVec2(1, 0));
+      ImGui::End();
+    }
+    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+    {
+      ImGui::Begin(u8"PBR渲染管线参数设置");
+      ImGui::SetWindowPos(ImVec2(1020, 0), ImGuiCond_Always);
+      ImGui::SetWindowSize(ImVec2(300, 720), ImGuiCond_Always);
+      //主窗口
+      ImGui::Text(u8"用于调整PBR渲染管线对应参数");
+      // if (this->spheres != nullptr)
+      // {
+      //   ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
+      //   ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
+      // }
+      ImGui::End();
+    }
+  }
 }
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)

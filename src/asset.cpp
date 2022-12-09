@@ -63,6 +63,11 @@ void Asset::Init() {
     this->um_meshes.emplace("Cube", new Cube());
     this->um_meshes.emplace("Sphere", new Sphere());
     this->um_meshes.emplace("Floor", new Floor());
+
+    // Scene加载
+    Scene scene = Scene();
+    scene.ForwardScene();
+    this->um_scene.emplace(std::make_pair("Forward", scene));
 }
 
 

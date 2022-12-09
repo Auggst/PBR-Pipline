@@ -35,12 +35,15 @@ class Engine {
    void Init();
    void Update();
    void RenderGUI();
+   void RenderSceneGUI();
+   void PipelineGUI(const Pipeline_TYPE& type);
  public:
    int width, height;
    std::string window_name;
    GLFWwindow *window;
    std::shared_ptr<Pipeline> pipeline;
    Asset assetManager;
+   std::shared_ptr<Scene> scene;
    std::shared_ptr<Camera> cam;
  private:
    static std::shared_ptr<Engine> moon;

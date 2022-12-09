@@ -14,42 +14,13 @@ ForwardShading::ForwardShading() : Pipeline(Pipeline_TYPE::FORWARDSHADING)
     this->mpModel_SH = nullptr;
     this->mpLight_SH = nullptr;
     this->mpSkybox_SH = nullptr;
-    for (int i = 0; i < 4; i++) {
-        my_color[i] = 0.0f;
-    }
 }
 
 void ForwardShading::Init() {
     /* 初始化FBO和RT */
-    my_color[3] = 1.0f;
     InitFBO(this->fbo, this->rbo, this->res_tex, 720, 720);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
-
-    // /* 创建灯光和模型 */
-    // // 灯光加载
-    // AbstractLight *tempAL = moon->assetManager.um_lights.find("DirectionLight1")->second;
-    // this->directionLight = std::dynamic_pointer_cast<DirectionLight>(std::shared_ptr<AbstractLight>(tempAL));
-    // tempAL = moon->assetManager.um_lights.find("PointLight1")->second;
-    // this->pointLight = std::dynamic_pointer_cast<PointLight>(std::shared_ptr<AbstractLight>(tempAL));
-    // tempAL = moon->assetManager.um_lights.find("SpotLight1")->second;
-    // this->spotLight = std::dynamic_pointer_cast<SpotLight>(std::shared_ptr<AbstractLight>(tempAL));
-    // tempAL = nullptr;
-
-    // // 模型加载
-    // Renderable *tempRender = moon->assetManager.um_meshes.find("Cube")->second;
-    // this->cube = std::dynamic_pointer_cast<Cube>(std::shared_ptr<Renderable>(tempRender));
-
-    // tempRender = moon->assetManager.um_meshes.find("Floor")->second;
-    // this->floor = std::dynamic_pointer_cast<Floor>(std::shared_ptr<Renderable>(tempRender));
-    // tempRender = nullptr;
-
-    // Model *nanosuit = &(moon->assetManager.um_models.find("Nanosuit")->second);
-    // this->models = std::shared_ptr<Model>(nanosuit);
-    // nanosuit = nullptr;
-
-    // // 天空盒加载
-    // this->env_cubemap = moon->assetManager.um_textures.find("BlueSky")->second;
 
     /* 着色器加载 */
     if (moon->assetManager.um_shaders.find("Floor") == moon->assetManager.um_shaders.end())
@@ -93,14 +64,6 @@ void ForwardShading::Init() {
     this->mpLight_SH->use();
     this->mpLight_SH->setInt("diffuse", 0);
 
-    // // 加载贴图
-    // if (moon->assetManager.um_textures.find("Container") == moon->assetManager.um_textures.end())
-    // {
-    //     std::string texPath = "D:/C++Pro/vscode/LearnOpenGL/texture/container2.png";
-    //     moon->assetManager.um_textures.emplace(std::make_pair(std::string("Container"), loadTexture(texPath.c_str())));
-    // }
-    // this->light_tex = moon->assetManager.um_textures.find("Container")->second;
-
     if (moon->assetManager.um_shaders.find("SkyBox") == moon->assetManager.um_shaders.end())
     {
         std::string vsPath = "D:/C++Pro/vscode/LearnOpenGL/src/shader/Skybox/Skybox.vs";
@@ -115,117 +78,12 @@ void ForwardShading::Init() {
     this->mpSkybox_SH->setInt("environmentMap", 0);
 }
 
-void ForwardShading::Render() {
-
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
-
-    // Rendering
-    glClearColor(my_color[0], my_color[1], my_color[2], my_color[3]);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    std::shared_ptr<Engine> moon = Engine::getInstance();
-
-    glm::mat4 model = glm::mat4(1.0f);
-    glm::mat4 view = moon->cam->GetViewMatrix();
-    glm::mat4 projection = glm::perspective(glm::radians(moon->cam->Zoom), (float)moon->width / (float)moon->height, 0.1f, 100.0f);
-
-    // 光照模型渲染
-    this->mpLight_SH->use();
-    this->mpLight_SH->setMat4("view", view);
-    this->mpLight_SH->setMat4("projection", projection);
-    const float pi = 3.1415926;
-    for (int i = 0; i < 1; i++) {
-        model = glm::mat4(0.5);
-        // float coff_pi = pi * i;
-        glm::vec3 newPos = glm::vec3(0.0f, 15.0f, 0.0f);
-        model = glm::translate(model, newPos);
-        this->mpLight_SH->setMat4("model", model);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->light_tex);
-        this->cube->Draw();
-    }
-
-    // 模型渲染
-    this->mpModel_SH->use();
-    this->mpModel_SH->setMat4("view", view);
-    this->mpModel_SH->setMat4("projection", projection);
-    this->mpModel_SH->setVec3("viewPos", moon->cam->Position);
-
-    // 光照参数
-    float timeVal = glfwGetTime();
-    float greenVal = (sinf(timeVal) / 2) + 0.5f;    // 约束到[0, 1]
-    float redVal = (cosf(timeVal) / 2) + 0.5f;
-    float blueVal = (cosf(timeVal * pi) / 2) + 0.5f;
-    glm::vec3 am(0.05f, 0.01f, 0.01f);
-    glm::vec3 diff(redVal, greenVal, blueVal);
-    glm::vec3 spec(0.5f, 0.5f, 0.5f);
-
-    for (int i = 0; i < 4; i++) {
-        model = glm::mat4(1.0);
-        float coff_pi = pi * i;
-        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), 10.0f);
-
-        /* 方向光加载 */
-        directionLight->direction = glm::vec3(0.0f) - newPos;
-        directionLight->diffuse = diff;
-        directionLight->SendToShader(this->mpModel_SH, i);
-        directionLight->SendToShader(this->mpFloor_SH, i);
-
-        /* 点光源加载 */
-        pointLight->position = glm::vec3(0.0f, 15.0f, 0.0f);
-        pointLight->diffuse = diff;
-        pointLight->SendToShader(this->mpModel_SH, i);
-        pointLight->SendToShader(this->mpFloor_SH, i);
-    }
-
-    /* 聚光灯加载 */
-    spotLight->position = moon->cam->Position;
-    spotLight->direction = moon->cam->Front;
-    spotLight->ambient = glm::vec3(0.001f);
-    spotLight->diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
-    spotLight->specular = glm::vec3(1.0f, 1.0f, 1.0f);
-    spotLight->kc = 1.0f;
-    spotLight->kl = 0.09f;
-    spotLight->kq = 0.0032f;
-    spotLight->SendToShader(mpModel_SH, 0);
-
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
-    for (int i = 0; i < 2; i++) {
-        this->mpModel_SH->setMat4("model", glm::scale(model, glm::vec3(0.5f)));
-        this->models->Draw(*(this->mpModel_SH));
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
-    }
-
-    // 地板渲染
-    model = glm::mat4(1.0);
-    this->mpFloor_SH->use();
-    this->mpFloor_SH->setMat4("view", view);
-    this->mpFloor_SH->setMat4("projection", projection);
-    this->mpFloor_SH->setMat4("model", model);
-    this->mpFloor_SH->setVec3("viewPos", moon->cam->Position);
-    spotLight->SendToShader(mpFloor_SH, 0);
-    this->floor->Draw();
-
-    // 天空盒渲染
-    glDepthFunc(GL_LEQUAL);
-    this->mpSkybox_SH->use();
-    this->mpSkybox_SH->setMat4("view", view);
-    this->mpSkybox_SH->setMat4("projection", projection);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, this->env_cubemap);
-    this->cube->Draw();
-    glDepthFunc(GL_LESS);
-
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
 void ForwardShading::RenderScene(const Scene& scene) {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->res_tex, 0);
 
     // Rendering
-    glClearColor(my_color[0], my_color[1], my_color[2], my_color[3]);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     std::shared_ptr<Engine> moon = Engine::getInstance();
@@ -307,34 +165,6 @@ void ForwardShading::RenderScene(const Scene& scene) {
     glDepthFunc(GL_LESS);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-void ForwardShading::RenderUI() {
-    /* Swap front and back buffers */
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-
-    //渲染场景的窗口
-    {
-        ImGui::Begin(u8"渲染窗口");
-        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
-    }
-    {
-        ImGui::Begin(u8"前向渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整前向渲染管线对应参数");
-        // 编辑颜色 (stored as ~4 floats)
-        ImGui::ColorEdit4("Color", my_color);
-        ImGui::End();
-    }
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 /* 延迟着色 */
@@ -633,32 +463,6 @@ void DeferredShading::RenderScene(const Scene& scene) {
     glDepthFunc(GL_LESS);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-void DeferredShading::RenderUI() {
-    /* Swap front and back buffers */
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-
-    //渲染场景的窗口
-    {
-        ImGui::Begin(u8"渲染窗口");
-        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(512, 512), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
-    }
-    {
-        ImGui::Begin(u8"延迟渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整延迟渲染管线对应参数");
-        ImGui::End();
-    }
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 /* 基于物理的着色 */
@@ -1022,36 +826,22 @@ void PBR::RenderScene(const Scene& scene) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void PBR::RenderUI() {
-    /* Swap front and back buffers */
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-    //渲染场景的窗口
-    {
-        ImGui::Begin(u8"渲染窗口");
-        ImGui::SetWindowPos(ImVec2(300, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Always);
-        ImGui::Image((void *)(intptr_t)this->res_tex, ImVec2(600, 600), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
-    }
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-    {
-        ImGui::Begin(u8"PBR渲染管线参数设置");
-        ImGui::SetWindowPos(ImVec2(900, 0), ImGuiCond_Always);
-        ImGui::SetWindowSize(ImVec2(300, 600), ImGuiCond_Always);
-        //主窗口
-        ImGui::Text(u8"用于调整PBR渲染管线对应参数");
-        if (this->spheres != nullptr)
-        {
-            ImGui::SliderFloat("mental", &(this->spheres->mental), 0.0f, 1.0f);
-            ImGui::SliderFloat("rough", &(this->spheres->rough), 0.0f, 1.0f);
-        }
-        ImGui::Text(u8"帧率 %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+/* 非真实感渲染 */
+// -----------------------------------------------------
+NPR::NPR() : Pipeline(Pipeline_TYPE::NPRSHADING) {
+
+}
+
+void NPR::Init() {
+
+}
+
+void NPR::Render() {
+
+}
+
+void NPR::RenderScene(const Scene& scene) {
+
 }
 
 /* 全局功能函数 */
@@ -1120,3 +910,4 @@ void InitBaseGBuffer(GBuffer &gbuffer, GLsizei width, GLsizei height) {
         std::cout << "Framebuffer not complete!" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
+

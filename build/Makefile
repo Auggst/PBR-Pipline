@@ -536,30 +536,6 @@ src/scene.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/scene.cpp.s
 .PHONY : src/scene.cpp.s
 
-src/shadow.obj: src/shadow.cpp.obj
-.PHONY : src/shadow.obj
-
-# target to build an object file
-src/shadow.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/shadow.cpp.obj
-.PHONY : src/shadow.cpp.obj
-
-src/shadow.i: src/shadow.cpp.i
-.PHONY : src/shadow.i
-
-# target to preprocess a source file
-src/shadow.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/shadow.cpp.i
-.PHONY : src/shadow.cpp.i
-
-src/shadow.s: src/shadow.cpp.s
-.PHONY : src/shadow.s
-
-# target to generate assembly for a file
-src/shadow.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/shadow.cpp.s
-.PHONY : src/shadow.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -620,9 +596,6 @@ help:
 	@echo ... src/scene.obj
 	@echo ... src/scene.i
 	@echo ... src/scene.s
-	@echo ... src/shadow.obj
-	@echo ... src/shadow.i
-	@echo ... src/shadow.s
 .PHONY : help
 
 

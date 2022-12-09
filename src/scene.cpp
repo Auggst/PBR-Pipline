@@ -59,19 +59,10 @@ void Scene::UpdateLight() {
     glm::vec3 diff(redVal, greenVal, blueVal);
     glm::vec3 spec(0.5f, 0.5f, 0.5f);
 
-    // 方向光
-    int lightNr = this->vec_dlLights.size();
-    for (int i = 0; i < lightNr; i++) {
-        float coff_pi = pi * i;
-        glm::vec3 newPos = glm::vec3(-2.0f * cosf(coff_pi), 4.0f * cosf(std::clamp(coff_pi - pi, 0.0f, pi)), 10.0f);
-        this->vec_dlLights[i]->direction = glm::vec3(0.0f) - newPos;
-        this->vec_dlLights[i]->diffuse = diff;
-    }
-
     // 点光源
-    lightNr = this->vec_ptLights.size();
+    int lightNr = this->vec_ptLights.size();
     for (int i = 0; i < lightNr; i++) {
-        this->vec_ptLights[i]->position = glm::vec3(0.0f, 15.0f, 0.0f);
+        //this->vec_ptLights[i]->position = glm::vec3(0.0f, 15.0f, 0.0f);
         this->vec_ptLights[i]->diffuse = diff;
     }
 
@@ -82,7 +73,6 @@ void Scene::UpdateLight() {
         this->vec_stLights[i]->direction = this->vec_cams[0]->Front;
         this->vec_stLights[i]->ambient = glm::vec3(0.001f);
         this->vec_stLights[i]->diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
-        this->vec_stLights[i]->specular = glm::vec3(1.0f, 1.0f, 1.0f);
         this->vec_stLights[i]->kc = 1.0f;
         this->vec_stLights[i]->kl = 0.09f;
         this->vec_stLights[i]->kq = 0.0032f;

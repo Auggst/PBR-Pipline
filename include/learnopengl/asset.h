@@ -12,6 +12,7 @@
 #include <learnopengl/model.h>
 #include <learnopengl/light.h>
 #include <learnopengl/shader_s.h>
+#include <learnopengl/scene.h>
 
 class Asset{
  public:
@@ -33,6 +34,7 @@ class Asset{
    um_cameras;
    std::unordered_map<std::string, AbstractLight*> um_lights;
    std::unordered_map<std::string, Renderable*> um_meshes;
+   std::unordered_map<std::string, Scene> um_scene;
 };
 
 #endif

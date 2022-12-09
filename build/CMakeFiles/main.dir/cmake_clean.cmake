@@ -33,8 +33,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/pipeline.cpp.obj.d"
   "CMakeFiles/main.dir/src/scene.cpp.obj"
   "CMakeFiles/main.dir/src/scene.cpp.obj.d"
-  "CMakeFiles/main.dir/src/shadow.cpp.obj"
-  "CMakeFiles/main.dir/src/shadow.cpp.obj.d"
   "libmain.dll.a"
   "main.exe"
   "main.exe.manifest"
